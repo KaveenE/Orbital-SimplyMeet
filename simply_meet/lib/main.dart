@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:simply_meet/screens/LoginScreen.dart';
 import 'package:simply_meet/screens/WelcomeScreen.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -34,9 +34,8 @@ class MyApp extends StatelessWidget {
       ),
       home: WelcomeScreen(),
       routes: {
-        
+        LoginScreen.routeName: (_) => LoginScreen(),
       },
     );
   }
 }
-

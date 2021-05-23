@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-class WelcomeBackground extends StatelessWidget {
+class Body extends StatelessWidget {
   final Widget child;
+  final Decoration containerDecoration;
+  final List<Positioned>
 
-  WelcomeBackground({this.child});
+
+  Body({this.child, this.containerDecoration, this.list...});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,6 @@ class WelcomeBackground extends StatelessWidget {
     return Container(
       height: screenSize.height,
       width: double.infinity,
-
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -24,7 +26,6 @@ class WelcomeBackground extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
       ),
-      
       child: Stack(
         alignment: Alignment.center,
         children: [

@@ -1,36 +1,53 @@
 import 'package:flutter/material.dart';
 
 class WelcomeBody extends StatelessWidget {
+  final Widget child;
+
+  WelcomeBody({this.child});
+
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     final myTheme = Theme.of(context);
-    print(myTheme.primaryColor.opacity);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    final screenSize = MediaQuery.of(context).size;
 
-      children: [
-        Text(
-          "Welcome to SimplyMeet",
-          style: myTheme.textTheme.headline6.copyWith(
-            fontSize: 25,
-            color: myTheme.primaryColor,
-          ),
-          textAlign: TextAlign.end,
+    return Container(
+      height: screenSize.height,
+      width: double.infinity,
+
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.purpleAccent.shade100,
+            Colors.purple[50],
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        SizedBox(height: screenSize.height * 0.03),
-        Image.asset("assets/images/finalLogoWithTitle.png",
-            width: screenSize.width * 0.8),
-        //SizedBox(height: screenSize.height *  ),
-        IconButton(
-          iconSize: screenSize.width * 0.25,
-          icon: Icon(
-            Icons.navigate_next_rounded,
-            color: myTheme.primaryColor,
+      ),
+      
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            child: Image.asset(
+              "assets/images/randomSide.png",
+              width: screenSize.width * 0.2,
+            ),
+            top: -screenSize.height * 0.05,
+            right: 0,
           ),
-          onPressed: () {},
-        ),
-      ],
+          Positioned(
+            child: Image.asset(
+              "assets/images/bottomLeft.png",
+              width: screenSize.width * 0.3,
+            ),
+            bottom: 0,
+            left: -screenSize.width * 0.05,
+          ),
+          
+          this.child,
+        ],
+      ),
     );
   }
 }
