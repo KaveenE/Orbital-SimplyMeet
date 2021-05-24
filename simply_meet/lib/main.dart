@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/screens/LoginScreen.dart';
-import 'package:simply_meet/screens/WelcomeScreen.dart';
+//import 'package:dcdg/dcdg.dart';
+
+import './screens/Welcome/WelcomeScreen.dart';
+import 'screens/login_signUp/LoginSignUpScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,11 +32,15 @@ class MyApp extends StatelessWidget {
               bodyText1: TextStyle(
                 color: Colors.grey[850],
               ),
+              button: TextStyle(
+                color: Colors.grey[850],
+                fontFamily: "RobotoCondensed",
+              )
             ),
       ),
       home: WelcomeScreen(),
       routes: {
-        LoginScreen.routeName: (_) => LoginScreen(),
+        LoginSignUpScreen.routeName: (_) => LoginSignUpScreen(),
       },
     );
   }

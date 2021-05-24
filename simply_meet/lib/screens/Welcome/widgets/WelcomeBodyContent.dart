@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:simply_meet/screens/login_signUp/LoginSignUpScreen.dart';
 
-import '../screens/LoginScreen.dart';
+
+
 
 class WelcomeBodyContent extends StatelessWidget {
   @override
@@ -13,7 +15,7 @@ class WelcomeBodyContent extends StatelessWidget {
 
       children: [
         Text(
-          "Welcome to SimplyMeet",
+          "WELCOME",
           style: myTheme.textTheme.headline6.copyWith(
             fontSize: 25,
             color: myTheme.primaryColor,
@@ -30,7 +32,7 @@ class WelcomeBodyContent extends StatelessWidget {
             Icons.navigate_next_rounded,
             color: myTheme.primaryColor,
           ),
-          onPressed: () => Navigator.of(context).pushNamed(LoginScreen.routeName),
+          onPressed: () => Navigator.of(context).pushNamed(LoginSignUpScreen.routeName),
         ),
       ],
     );
