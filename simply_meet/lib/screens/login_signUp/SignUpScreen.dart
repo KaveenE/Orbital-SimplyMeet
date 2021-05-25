@@ -32,6 +32,7 @@ class SignUpScreen extends StatelessWidget {
             ),
             bottom: -screenSize.height * 0.01,
             right: 0,
+            width: screenSize.width * 0.15,
           ),
         ],
         containerDecoration: BoxDecoration(
