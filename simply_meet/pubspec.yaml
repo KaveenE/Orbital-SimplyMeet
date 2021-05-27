@@ -62,8 +62,8 @@ flutter:
     - assets/animations/BoyWithLaptop.json
     - assets/animations/GirlWorking.json
     - assets/animations/TwoPeopleTalking.json
-    - assets/animations/GirlWorking.json
     - assets/animations/GirlOnPhone.json
+    - assets/animations/TwoPeopleWorking.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

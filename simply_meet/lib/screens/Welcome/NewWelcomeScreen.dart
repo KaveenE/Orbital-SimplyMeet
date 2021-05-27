@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simply_meet/constants.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simply_meet/screens/login_signUp/LoginSignUpScreen.dart';
+import 'package:simply_meet/screens/login_signUp/NewLoginScreen.dart';
 // import 'package:simply_meet/widgets/Body.dart';
 // import 'widgets/WelcomeBodyContent.dart';
 
@@ -73,7 +74,7 @@ class _NewWelcomeScreenState extends State<NewWelcomeScreen> {
                             child: TextButton(
                               onPressed: () => Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return LoginSignUpScreen();
+                                return NewLoginScreen();
                               })),
                               child: Text('Skip',
                                   style: TextStyle(
@@ -196,7 +197,7 @@ class _NewWelcomeScreenState extends State<NewWelcomeScreen> {
               child: GestureDetector(
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                  return LoginSignUpScreen();
+                  return NewLoginScreen();
                 })),
                 child: Center(
                   child: Padding(
