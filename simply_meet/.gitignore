@@ -44,3 +44,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Kaveen's Files
+/lib/Screens/Login_SignUp/helperWidgets/*
+/lib/Screens/Login_SignUp/Widgets/LoginBodyContent.dart
+/lib/Screens/Login_SignUp/Widgets/SignUpBodyContent.dart
+/lib/Screens/Login_SignUp/LoginScreen.dart
+/lib/Screens/Login_SignUp/LoginSignUpScreen.dart
+/lib/Screens/Login_SignUp/SignUpScreen.dart
+/lib/Screens/Welcome/Widgets/WelcomeBodyContent.dart
+/lib/Screens/Welcome/WelcomeScreen.dart
+/lib/Widgets/*
