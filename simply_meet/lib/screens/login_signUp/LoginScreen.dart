@@ -35,16 +35,16 @@ class LoginScreen extends StatelessWidget {
             right: 0,
           ),
         ],
-        containerDecoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.purpleAccent.shade100,
-              Colors.purple[50],
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        // containerDecoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //     colors: [
+        //       Colors.purpleAccent.shade100,
+        //       Colors.purple[50],
+        //     ],
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //   ),
+        // ),
       ),
     );
   }

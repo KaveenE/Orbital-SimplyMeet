@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   dcdg: ^3.1.0
+  lottie: ^1.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -57,6 +58,12 @@ flutter:
     - assets/images/randSide2.png
     - assets/images/loginImageFinal.png
     - assets/images/signupImageFinal.png
+    # Added by Nivi
+    - assets/animations/BoyWithLaptop.json
+    - assets/animations/GirlWorking.json
+    - assets/animations/TwoPeopleTalking.json
+    - assets/animations/GirlWorking.json
+    - assets/animations/GirlOnPhone.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

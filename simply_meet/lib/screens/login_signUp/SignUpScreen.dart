@@ -35,16 +35,16 @@ class SignUpScreen extends StatelessWidget {
             width: screenSize.width * 0.15,
           ),
         ],
-        containerDecoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.purpleAccent.shade100,
-              Colors.purple[50],
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        // containerDecoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //     colors: [
+        //       Colors.purpleAccent.shade100,
+        //       Colors.purple[50],
+        //     ],
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //   ),
+        // ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:simply_meet/screens/login_signUp/NewLoginScreen.dart';
 import 'package:simply_meet/screens/login_signUp/SignUpScreen.dart';
-
 import '../login_signUp/LoginScreen.dart';
 
 class LoginSignUpScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return isLogin
-        ? LoginScreen(toggleLoginSignUp: toggleLoginSignUp)
+        ? NewLoginScreen(toggleLoginSignUp: toggleLoginSignUp)
         : SignUpScreen(toggleLoginSignUp: toggleLoginSignUp);
   }
 }

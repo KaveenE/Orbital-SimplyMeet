@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simply_meet/screens/Welcome/NewWelcomeScreen.dart';
 //import 'package:dcdg/dcdg.dart';
 
 import './screens/Welcome/WelcomeScreen.dart';
@@ -21,24 +22,23 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color.fromRGBO(255, 254, 229, 1),
         fontFamily: "Raleway",
         textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: TextStyle(
-                fontSize: 20,
-                fontFamily: "RobotoCondensed",
-                fontWeight: FontWeight.bold,
-              ),
-              bodyText2: TextStyle(
-                color: Colors.grey[850],
-              ),
-              bodyText1: TextStyle(
-                color: Colors.grey[850],
-              ),
-              button: TextStyle(
-                color: Colors.grey[850],
-                fontFamily: "RobotoCondensed",
-              )
+            headline6: TextStyle(
+              fontSize: 20,
+              fontFamily: "RobotoCondensed",
+              fontWeight: FontWeight.bold,
             ),
+            bodyText2: TextStyle(
+              color: Colors.grey[850],
+            ),
+            bodyText1: TextStyle(
+              color: Colors.grey[850],
+            ),
+            button: TextStyle(
+              color: Colors.grey[850],
+              fontFamily: "RobotoCondensed",
+            )),
       ),
-      home: WelcomeScreen(),
+      home: NewWelcomeScreen(),
       routes: {
         LoginSignUpScreen.routeName: (_) => LoginSignUpScreen(),
       },
