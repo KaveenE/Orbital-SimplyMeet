@@ -16,14 +16,12 @@ class LoginButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            primary: myTheme.primaryColor,
-            padding: EdgeInsets.symmetric(vertical: 10),
-            textStyle: TextStyle(
-                fontSize: 17,
-                fontFamily: "Raleway",
-                fontWeight: FontWeight.w800)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          primary: myTheme.primaryColor,
+          padding: EdgeInsets.symmetric(vertical: 10),
+          textStyle: myTheme.textTheme.button,
+        ),
         onPressed: () {},
         child: Text("Login"),
       ),

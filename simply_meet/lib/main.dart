@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/screens/Welcome/NewWelcomeScreen.dart';
-import 'package:simply_meet/screens/Login_SignUp/LoginSignUpScreen.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:simply_meet/screens/Welcome/WelcomeScreen.dart';
+import 'package:simply_meet/screens/login_signUp/NewLoginScreen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(new MyApp());
+  });
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final minimalPurple = Color(0xff584191);
+  static const MINIMAL_PURPLE = Color(0xff584191);
 
   @override
   Widget build(BuildContext context) {
@@ -15,30 +24,33 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SimplyMeet',
       theme: ThemeData(
-          primaryColor: minimalPurple,
-          scaffoldBackgroundColor: minimalPurple,
-          backgroundColor: minimalPurple,
-          fontFamily: "Raleway",
-          textTheme: ThemeData.light().textTheme.copyWith(
-                headline2: TextStyle(
-                  color: Colors.white70,
-                  fontFamily: 'Raleway-Bold',
-                  fontSize: 30,
-                ),
-                bodyText1: TextStyle(
-                  color: Colors.white70,
-                  fontFamily: 'Raleway',
-                  fontSize: 15,
-                ),
-                button: TextStyle(
-                    fontSize: 17,
-                    fontFamily: "Raleway",
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white),
-              )),
-      home: NewWelcomeScreen(),
+        primaryColor: MINIMAL_PURPLE  ,
+        accentColor: Colors.white70,
+        scaffoldBackgroundColor: MINIMAL_PURPLE,
+        backgroundColor: MINIMAL_PURPLE,
+        fontFamily: GoogleFonts.raleway().fontFamily,
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline2: GoogleFonts.raleway(
+                color: Colors.white70,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+              bodyText1: GoogleFonts.raleway(
+                color: Colors.white70,
+                fontSize: 15,
+              ),
+              
+              button: GoogleFonts.raleway(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                fontSize: 17,
+              ),
+            ),
+            
+      ),
       routes: {
-        LoginSignUpScreen.routeName: (_) => LoginSignUpScreen(),
+        '/': (_) => WelcomeScreen(),
+        NewLoginScreen.routeName: (_) => NewLoginScreen(),
       },
     );
   }
@@ -89,3 +101,80 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
+/*
+import 'package:flutter/material.dart';
+
+class MyApp extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'SimplyMeet',
+      home: MyPageView(),
+    );
+  }
+}
+
+class MyPageView extends StatefulWidget {
+  const MyPageView();
+
+  @override
+  _MyPageViewState createState() => _MyPageViewState();
+}
+
+class _MyPageViewState extends State<MyPageView> {
+  final PageController _pageController = PageController();
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          children: <Widget>[
+            Container(
+              color: Colors.red,
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_pageController.hasClients) {
+                      _pageController.animateToPage(
+                        1,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                  child: const Text('Next'),
+                ),
+              ),
+            ),
+            Container(
+              color: Colors.blue,
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_pageController.hasClients) {
+                      _pageController.animateToPage(
+                        0,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                  child: const Text('Previous'),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+*/

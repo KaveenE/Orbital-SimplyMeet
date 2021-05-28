@@ -1,70 +1,166 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/widgets/Body.dart';
-import 'widgets/WelcomeBodyContent.dart';
 
-/*
-    TLDR: I really need your help for the aEsTheTics.
+import 'package:simply_meet/screens/login_signUp/NewLoginScreen.dart';
 
-    There's actually like 1000s of way of using them to customize, 
-    since they got numerous fields to initilize + BoxDecoration is only
-    1 of the many subtypes of Decoration class so there's legit 1000s of way.
+import 'WelcomeScreenPage1.dart';
+import 'WelcomeScreenPage2.dart';
+import 'WelcomeScreenPage3.dart';
 
-    What I'm doing is  the standard way,ie lame af. Therefore, I'm leaving this in your capable (unfortunately I can't bold this 
-    to emphasize my sarcasm so you'll never know that I'm sarcastic. A pity indeed.) hands to showcase a realm of UI that no flutter
-    developer has even imagined.
+//import 'package:simply_meet/screens/Login_signUp/LoginSignUpScreen.dart';
 
-    With that said, if want to customize only with LinearGradient(yea there's other gradients) + dont wanna spend too much time,
-    consider just playing with the colors list (can add more than 2 colors yo) and the begin and end coordinates (look at API).
+class WelcomeScreen extends StatefulWidget {
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
 
-    For Positioned widgets, watch the video by Google + just read API bah 
-    or if your lazy just modify the numbers on what I wrote for the Positioned widgets.
-    */
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  final int _numPages = 3;
+  final PageController _pageController = PageController(initialPage: 0);
+  int _currentPage = 0;
 
-class WelcomeScreen extends StatelessWidget {
+  List<Widget> _buildPageIndicator(Size screenSize) {
+    final width = screenSize.width * 0.06;
+
+    return List.generate(
+      _numPages,
+      (idx) => idx == _currentPage
+          ? PageIndicator(isActive: true, myWidth: width)
+          : const PageIndicator(isActive: false),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // nivi, if u want to extract the primaryColor, accentColor, primaryColorDark
-    // do myTheme.<propertyName>
-    // Also you can go to the main file and play with the global theme data
     final myTheme = Theme.of(context);
     final screenSize = MediaQuery.of(context).size;
-
-    final Decoration containerDecoration = BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Colors.purpleAccent.shade100,
-          Colors.purple[50],
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-    );
-
-    final List<Positioned> positionedWidgets = [
-      Positioned(
-        child: Image.asset(
-          "assets/images/topRight.png",
-          width: screenSize.width * 0.2,
-        ),
-        top: 0,
-        right: -screenSize.width * 0.03,
-      ),
-      Positioned(
-        child: Image.asset(
-          "assets/images/bottomLeft.png",
-          width: screenSize.width * 0.3,
-        ),
-        bottom: -screenSize.height * 0.01,
-        left: -screenSize.width * 0.05,
-      ),
-    ];
-
+    print("Rebuilt?");
     return Scaffold(
-      body: Body(
-        //containerDecoration: containerDecoration,
-        positionedWidgets: positionedWidgets,
-        child: WelcomeBodyContent(),
+      backgroundColor: myTheme.scaffoldBackgroundColor,
+      body: Container(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 25.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topRight,
+                child: const SkipButton(),
+              ),
+              
+              SizedBox(height: screenSize.height * 0.09),
+              Center(
+                child: Text(
+                  "Welcome to SimplyMeet",
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+              ),
+              
+              SizedBox(height: screenSize.height * 0.05),
+              Expanded(
+                child: PageView(
+                  physics: ClampingScrollPhysics(),
+                  controller: _pageController,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                  children: <Widget>[
+                    WelcomeScreen1(),
+                    WelcomeScreen2(),
+                    WelcomeScreen3(),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _buildPageIndicator(screenSize),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomSheet: _currentPage == _numPages - 1
+          ? Container(
+              height: screenSize.height * 0.07,
+              width: double.infinity,
+              child: const GetStartedButton(),
+            )
+          : Text(''),
+    );
+  }
+}
+
+class GetStartedButton extends StatelessWidget {
+  const GetStartedButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final myTheme = Theme.of(context);
+
+    return InkWell(
+      splashColor: myTheme.primaryColor,
+      onTap: () => Navigator.pushNamed(context, NewLoginScreen.routeName),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text(
+            'Get started',
+            style: TextStyle(
+              color: myTheme.primaryColor,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
+  }
+}
+
+class SkipButton extends StatelessWidget {
+  const SkipButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(
+        'Skip',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+      onPressed: () => Navigator.pushNamed(context, NewLoginScreen.routeName),
+    );
+  }
+}
+
+class PageIndicator extends StatelessWidget {
+  final bool isActive;
+  final double myWidth;
+
+  const PageIndicator({
+    this.myWidth,
+    @required this.isActive,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final defaultWidth = screenSize.width * 0.04;
+
+    return AnimatedContainer(
+        duration: Duration(milliseconds: 150),
+        margin: EdgeInsets.symmetric(horizontal: 8.0),
+        height: 8.0,
+        width: isActive ? myWidth : defaultWidth,
+        decoration: BoxDecoration(
+          color: isActive ? Colors.white : Color(0xff7B51D3),
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ));
   }
 }

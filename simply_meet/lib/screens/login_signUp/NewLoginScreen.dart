@@ -6,6 +6,8 @@ import 'package:simply_meet/screens/Login_SignUp/Widgets/EmailTextField.dart';
 import 'package:simply_meet/screens/Login_SignUp/Widgets/LoginButton.dart';
 
 class NewLoginScreen extends StatefulWidget {
+  static const routeName = '/loginScreen';
+
   @override
   _NewLoginScreenState createState() => _NewLoginScreenState();
 }
@@ -33,22 +35,26 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
           child: Column(
             children: <Widget>[
               Expanded(
-                  flex: 9,
-                  child: Container(
-                      child: Opacity(
-                          opacity: 0.7,
-                          child: Lottie.asset(
-                              "assets/animations/GirlOnPhone.json",
-                              width: screenSize.height * 0.43)))),
+                flex: 9,
+                child: Container(
+                  child: Opacity(
+                    opacity: 0.7,
+                    child: Lottie.asset("assets/animations/GirlOnPhone.json",
+                        width: screenSize.height * 0.43),
+                  ),
+                ),
+              ),
               Expanded(
                   flex: 8,
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(35),
-                            topRight: Radius.circular(35))),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(35),
+                        topRight: Radius.circular(35),
+                      ),
+                    ),
                     child: Padding(
                       padding: EdgeInsets.all(screenSize.height * 0.04),
                       child: Form(

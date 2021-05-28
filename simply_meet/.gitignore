@@ -55,3 +55,4 @@ app.*.map.json
 /lib/Screens/Welcome/Widgets/WelcomeBodyContent.dart
 /lib/Screens/Welcome/WelcomeScreen.dart
 /lib/Widgets/*
+lib/deleteKaveen/
