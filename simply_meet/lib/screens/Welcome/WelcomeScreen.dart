@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:simply_meet/screens/login_signUp/NewLoginScreen.dart';
+import 'package:simply_meet/screens/login_signUp/LoginScreen.dart';
 
 import 'WelcomeScreenPage1.dart';
 import 'WelcomeScreenPage2.dart';

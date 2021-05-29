@@ -1,51 +1,154 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:lottie/lottie.dart';
+import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderEmail.dart';
+import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderPassword.dart';
+import 'package:simply_meet/screens/login_signUp/widgets/SignUpLoginButton.dart';
+import 'package:simply_meet/screens/login_signUp/widgets/WordsBelowSignUpLogin.dart';
 
-import '../../widgets/Body.dart';
-import './widgets/LoginBodyContent.dart';
+class NewLoginScreen extends StatefulWidget {
+  static const routeName = '/loginScreen';
 
-class LoginScreen extends StatelessWidget {
-  static const routeName = "/loginScreen";
-  final Function toggleLoginSignUp;
+  @override
+  _NewLoginScreenState createState() => _NewLoginScreenState();
+}
 
-  const LoginScreen({@required this.toggleLoginSignUp});
+class _NewLoginScreenState extends State<NewLoginScreen> {
+  bool _hidePassword = true;
+  GlobalKey<FormBuilderState> _globalFormKey = GlobalKey<FormBuilderState>();
+
+  @override
+  initState() {
+    super.initState();
+    _hidePassword = true;
+    _globalFormKey = GlobalKey<FormBuilderState>();
+  }
+
+  void togglePasswordVisibility() {
+    setState(() {
+      _hidePassword = !_hidePassword;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final myTheme = Theme.of(context);
+    final screenSize = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          color: myTheme.primaryColor,
+          height: screenSize.height,
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                flex: 8,
+                child: Opacity(
+                  opacity: 0.7,
+                  child: Lottie.asset("assets/animations/GirlOnPhone.json",
+                      /*width: screenSize.height * 0.43*/ fit: BoxFit.cover),
+                ),
+              ),
+              Expanded(
+                  flex: 9,
+                  child: DraggableScrollableSheet(
+                    initialChildSize: 0.8,
+                    builder: (ctx, scrollController) {
+                      return Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(screenSize.height * 0.04),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(35),
+                            topRight: Radius.circular(35),
+                          ),
+                        ),
+                        child: FormBuilder(
+                          key: _globalFormKey,
+                          child: SingleChildScrollView(
+                            controller: scrollController,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                LoginArea(
+                                  _globalFormKey,
+                                  hidePassword: _hidePassword,
+                                  togglePasswordVisibility:
+                                      togglePasswordVisibility,
+                                ),
+                                SizedBox(height: screenSize.height * 0.014),
+                                WordsBelowSignUpLogin(
+                                  text1: "Don't have an account? ",
+                                  text2: "Sign up",
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+
+                  ),
+                ),
+              
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LoginArea extends StatelessWidget {
+  final GlobalKey<FormBuilderState> _globalFormKey;
+  final bool hidePassword;
+  final VoidCallback togglePasswordVisibility;
+  const LoginArea(
+    this._globalFormKey, {
+    @required this.hidePassword,
+    @required this.togglePasswordVisibility,
+  });
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Body(
-        child: LoginBodyContent(
-          toggleLoginSignUp: toggleLoginSignUp,
+    final myTheme = Theme.of(context);
+    return Column(
+      children: [
+        Text(
+          'This is a placeholder for a slider',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: myTheme.primaryColor,
+          ),
         ),
-        positionedWidgets: [
-          Positioned(
-            child: Image.asset(
-              "assets/images/randSide2.png",
-              width: screenSize.width * 0.2,
-            ),
-            top: -screenSize.height * 0.01,
-            left: -screenSize.width * 0.01,
+        SizedBox(height: screenSize.height * 0.03),
+        FormBuilderEmail(),
+        SizedBox(height: screenSize.height * 0.027),
+        FormBuilderPassword(
+          hidePassword: hidePassword,
+          onPress: togglePasswordVisibility,
+          identifierForField: "password",
+        ),
+        SizedBox(height: screenSize.height * 0.014),
+        Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            "Forgot your password?",
+            style: myTheme.textTheme.subtitle2,
           ),
-          Positioned(
-            child: Image.asset(
-              "assets/images/randomSide.png",
-              width: screenSize.width * 0.2,
-            ),
-            bottom: -screenSize.height * 0.01,
-            right: 0,
-          ),
-        ],
-        // containerDecoration: BoxDecoration(
-        //   gradient: LinearGradient(
-        //     colors: [
-        //       Colors.purpleAccent.shade100,
-        //       Colors.purple[50],
-        //     ],
-        //     begin: Alignment.topLeft,
-        //     end: Alignment.bottomRight,
-        //   ),
-        // ),
-      ),
+        ),
+        SizedBox(height: screenSize.height * 0.02),
+        SignUpLoginButton(
+          _globalFormKey,
+          title: "Login",
+        ),
+      ],
     );
   }
 }

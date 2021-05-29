@@ -26,6 +26,8 @@ dependencies:
   dcdg: ^3.1.0
   lottie: ^1.0.1
   google_fonts: ^2.1.0
+  flutter_form_builder: ^6.0.1
+  flutter_switch: ^0.3.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,7 +37,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_switch: ^0.3.1
+  
   
 
 # For information on the generic Dart part of this file, see the
