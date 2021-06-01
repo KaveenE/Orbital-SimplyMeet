@@ -26,32 +26,32 @@ class MyApp extends StatelessWidget {
       title: 'SimplyMeet',
       theme: ThemeData(
         primaryColor: MINIMAL_PURPLE,
-        accentColor: Colors.white70,
         scaffoldBackgroundColor: MINIMAL_PURPLE,
         backgroundColor: MINIMAL_PURPLE,
         fontFamily: GoogleFonts.raleway().fontFamily,
         textTheme: ThemeData.light().textTheme.copyWith(
-            headline2: GoogleFonts.raleway(
-              color: Colors.white70,
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
+              headline2: GoogleFonts.raleway(
+                color: Colors.white70,
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+              ),
+              bodyText1: GoogleFonts.raleway(
+                color: Colors.white70,
+                fontSize: 15,
+              ),
+              button: GoogleFonts.raleway(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontSize: 17,
+              ),
+              subtitle1: GoogleFonts.raleway(
+                color: Colors.grey.shade800,
+              ),
+              subtitle2: GoogleFonts.raleway(
+                color: Colors.grey.shade800,
+                decoration: TextDecoration.underline,
+              ),
             ),
-            bodyText1: GoogleFonts.raleway(
-              color: Colors.white70,
-              fontSize: 15,
-            ),
-            button: GoogleFonts.raleway(
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-              fontSize: 17,
-            ),
-            subtitle2: GoogleFonts.raleway(
-              color: Colors.grey.shade800,
-              decoration: TextDecoration.underline,
-            ),
-            subtitle1: GoogleFonts.raleway(
-              color: Colors.grey.shade800,
-            )),
       ),
       routes: {
         '/': (_) => WelcomeScreen(),
@@ -61,4 +61,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

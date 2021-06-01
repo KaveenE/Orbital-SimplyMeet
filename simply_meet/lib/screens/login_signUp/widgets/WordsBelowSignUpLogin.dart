@@ -1,14 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../SignUpScreen.dart';
+//import '../SignUpScreen.dart';
 
 class WordsBelowSignUpLogin extends StatelessWidget {
   final String text1;
   final String text2;
+  final String route;
+
   const WordsBelowSignUpLogin({
     @required this.text1,
     @required this.text2,
+    @required this.route,
   });
 
   @override
@@ -26,7 +28,7 @@ class WordsBelowSignUpLogin extends StatelessWidget {
             recognizer: TapGestureRecognizer()
               ..onTap = () => Navigator.pushNamed(
                     context,
-                    NewSignUpScreen.routeName,
+                    route,
                   ),
           ),
         ],

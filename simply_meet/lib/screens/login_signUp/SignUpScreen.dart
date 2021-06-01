@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:lottie/lottie.dart';
+import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
+import 'package:simply_meet/Screens/Login_SignUp/widgets/WordsBelowSignUpLogin.dart';
 
 import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderEmail.dart';
 import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderPassword.dart';
@@ -50,44 +52,42 @@ class _NewSignUpScreenState extends State<NewSignUpScreen> {
                     opacity: 0.7,
                     child: Lottie.asset(
                         "assets/animations/TwoPeopleWorking.json",
-                        fit: BoxFit.contain),
+                        width: screenSize.height * 0.52),
                   ),
                 ),
               ),
               Expanded(
-                flex: 4,
-                child: DraggableScrollableSheet(
-                  initialChildSize: 1,
-                  builder: (ctx, scrollController) {
-                    return Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(screenSize.height * 0.04),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(35),
-                          topRight: Radius.circular(35),
+                flex: 3,
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(screenSize.height * 0.04),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                    ),
+                  ),
+                  child: FormBuilder(
+                    key: _globalFormKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SignupArea(
+                          _globalFormKey,
+                          hidePassword: _hidePassword,
+                          togglePasswordVisibility: togglePasswordVisibility,
                         ),
-                      ),
-                      child: FormBuilder(
-                        key: _globalFormKey,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SignupArea(
-                                _globalFormKey,
-                                hidePassword: _hidePassword,
-                                togglePasswordVisibility:
-                                    togglePasswordVisibility,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                        SizedBox(height: screenSize.height * 0.014),
+                        WordsBelowSignUpLogin(
+                          text1: "Already have an account? ",
+                          text2: "Login",
+                          route: NewLoginScreen.routeName,
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],

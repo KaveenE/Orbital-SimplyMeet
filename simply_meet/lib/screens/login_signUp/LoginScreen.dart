@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:lottie/lottie.dart';
+import 'package:simply_meet/Screens/Login_SignUp/SignUpScreen.dart';
 import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderEmail.dart';
 import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderPassword.dart';
 import 'package:simply_meet/screens/login_signUp/widgets/SignUpLoginButton.dart';
@@ -43,58 +44,48 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
           child: Column(
             children: <Widget>[
               Expanded(
-                flex: 8,
+                flex: 9,
                 child: Opacity(
                   opacity: 0.7,
                   child: Lottie.asset("assets/animations/GirlOnPhone.json",
-                      /*width: screenSize.height * 0.43*/ fit: BoxFit.cover),
+                      width: screenSize.height * 0.45),
                 ),
               ),
               Expanded(
-                  flex: 9,
-                  child: DraggableScrollableSheet(
-                    initialChildSize: 0.8,
-                    builder: (ctx, scrollController) {
-                      return Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.all(screenSize.height * 0.04),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(35),
-                            topRight: Radius.circular(35),
-                          ),
+                flex: 8,
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(screenSize.height * 0.04),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                    ),
+                  ),
+                  child: FormBuilder(
+                    key: _globalFormKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        LoginArea(
+                          _globalFormKey,
+                          hidePassword: _hidePassword,
+                          togglePasswordVisibility: togglePasswordVisibility,
                         ),
-                        child: FormBuilder(
-                          key: _globalFormKey,
-                          child: SingleChildScrollView(
-                            controller: scrollController,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                LoginArea(
-                                  _globalFormKey,
-                                  hidePassword: _hidePassword,
-                                  togglePasswordVisibility:
-                                      togglePasswordVisibility,
-                                ),
-                                SizedBox(height: screenSize.height * 0.014),
-                                WordsBelowSignUpLogin(
-                                  text1: "Don't have an account? ",
-                                  text2: "Sign up",
-                                ),
-                              ],
-                            ),
-                          ),
+                        SizedBox(height: screenSize.height * 0.014),
+                        WordsBelowSignUpLogin(
+                          text1: "Don't have an account? ",
+                          text2: "Sign up",
+                          route: NewSignUpScreen.routeName,
                         ),
-                      );
-                    },
-
+                      ],
+                    ),
                   ),
                 ),
-              
+              ),
             ],
           ),
         ),

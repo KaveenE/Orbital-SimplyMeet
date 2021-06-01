@@ -12,13 +12,13 @@ class FormBuilderEmail extends StatelessWidget {
     return FormBuilderTextField(
       name: "email",
       keyboardType: TextInputType.emailAddress,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(context,
-            errorText: "Email Address cannot be empty"),
-        FormBuilderValidators.email(context,
-            errorText: "Not a valid email address")
-      ]),
+      // autovalidateMode: AutovalidateMode.onUserInteraction,
+      // validator: FormBuilderValidators.compose([
+      //   FormBuilderValidators.required(context,
+      //       errorText: "Email Address cannot be empty"),
+      //   FormBuilderValidators.email(context,
+      //       errorText: "Not a valid email address")
+      // ]),
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(screenSize.width * 0.06),
@@ -29,13 +29,10 @@ class FormBuilderEmail extends StatelessWidget {
         hintText: "Email Address",
         contentPadding: EdgeInsets.only(left: screenSize.width * 0.06),
         prefixIcon: Icon(
-          Icons.email_outlined,
+          Icons.alternate_email,
           color: Colors.grey.shade700,
         ),
       ),
     );
   }
 }
-
-
-

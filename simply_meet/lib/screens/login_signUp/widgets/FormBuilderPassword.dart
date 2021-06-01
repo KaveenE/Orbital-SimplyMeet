@@ -20,27 +20,26 @@ class FormBuilderPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    final FormFieldValidator<String> passwordRequirement =
-        FormBuilderValidators.match(context,
-            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
-            errorText:
-                "Password must be at least 8 characters with mixture of\n1) Uppercase and lowercase letters\n2) Numbers\n3) Special case symbols except < and >");
+    // final FormFieldValidator<String> passwordRequirement =
+    //     FormBuilderValidators.match(context,
+    //         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
+    //         errorText:
+    //             "Password must be at least 8 characters with mixture of\n1) Uppercase and lowercase letters\n2) Numbers\n3) Special case symbols except < and >");
 
     return FormBuilderTextField(
       name: identifierForField,
       keyboardType: TextInputType.text,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: FormBuilderValidators.compose([
-        passwordRequirement,
-        (reenteredPassword) {
-          if (globalFormKey!= null && reenteredPassword !=
-              globalFormKey.currentState.fields[identifierForField].value) {
-            return "Password entries are not the same";
-          }
-
-          return null;
-        }
-      ]),
+      // validator: FormBuilderValidators.compose([
+      //   passwordRequirement,
+      //   (reenteredPassword) {
+      //     if (globalFormKey!= null && reenteredPassword !=
+      //         globalFormKey.currentState.fields[identifierForField].value) {
+      //       return "Password entries are not the same";
+      //     }
+      //     return null;
+      //   }
+      // ]),
       obscureText: hidePassword,
       decoration: InputDecoration(
         border: OutlineInputBorder(

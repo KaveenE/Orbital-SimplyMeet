@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:simply_meet/screens/login_signUp/LoginScreen.dart';
-
 import 'WelcomeScreenPage1.dart';
 import 'WelcomeScreenPage2.dart';
 import 'WelcomeScreenPage3.dart';
-
 //import 'package:simply_meet/screens/Login_signUp/LoginSignUpScreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -33,7 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final myTheme = Theme.of(context);
     final screenSize = MediaQuery.of(context).size;
-    print("Rebuilt?");
+
     return Scaffold(
       backgroundColor: myTheme.scaffoldBackgroundColor,
       body: Container(
@@ -46,7 +43,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 alignment: Alignment.topRight,
                 child: const SkipButton(),
               ),
-              
               SizedBox(height: screenSize.height * 0.09),
               Center(
                 child: Text(
@@ -54,9 +50,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   style: Theme.of(context).textTheme.headline2,
                 ),
               ),
-              
               SizedBox(height: screenSize.height * 0.05),
-              Expanded(
+              Container(
+                height: screenSize.height * 0.6,
                 child: PageView(
                   physics: ClampingScrollPhysics(),
                   controller: _pageController,
@@ -108,7 +104,7 @@ class GetStartedButton extends StatelessWidget {
             'Get started',
             style: TextStyle(
               color: myTheme.primaryColor,
-              fontSize: 20,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -129,9 +125,8 @@ class SkipButton extends StatelessWidget {
       child: Text(
         'Skip',
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.white70,
           fontSize: 20,
-          fontWeight: FontWeight.normal,
         ),
       ),
       onPressed: () => Navigator.pushNamed(context, NewLoginScreen.routeName),
