@@ -7,9 +7,9 @@ class WelcomeScreenPageBody extends StatelessWidget {
   final String title2;
 
   const WelcomeScreenPageBody({
-    @required this.imageURL,
-    @required this.title1,
-    @required this.title2,
+    required this.imageURL,
+    required this.title1,
+    required this.title2,
   });
 
   @override

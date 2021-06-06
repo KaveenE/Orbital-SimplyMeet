@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class FormBuilderEmail extends StatelessWidget {
   const FormBuilderEmail({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -5,6 +5,7 @@ import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
 import 'package:simply_meet/Screens/Login_SignUp/SignUpScreen.dart';
 // import 'package:simply_meet/screens/Login_SignUp/LoginSignupScreen.dart';
 import 'package:simply_meet/screens/Welcome/WelcomeScreen.dart';
+import 'package:simply_meet/screens/login_signUp/LoginSignupScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SimplyMeet',
       theme: ThemeData(
+  
         primaryColor: MINIMAL_PURPLE,
         scaffoldBackgroundColor: MINIMAL_PURPLE,
         backgroundColor: MINIMAL_PURPLE,
@@ -58,6 +60,7 @@ class MyApp extends StatelessWidget {
         '/': (_) => WelcomeScreen(),
         NewLoginScreen.routeName: (_) => NewLoginScreen(),
         NewSignUpScreen.routeName: (_) => NewSignUpScreen(),
+        LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
         // LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
       },
     );

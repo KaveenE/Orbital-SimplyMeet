@@ -11,8 +11,8 @@ class LoginArea extends StatelessWidget {
 
   const LoginArea(
     this._globalFormKey, {
-    @required this.hidePassword,
-    @required this.togglePasswordVisibility,
+    required this.hidePassword,
+    required this.togglePasswordVisibility,
   });
 
   @override
@@ -25,7 +25,7 @@ class LoginArea extends StatelessWidget {
           Spacer(flex: 4),
           Text(
             "Login Page",
-            style: myTheme.textTheme.headline2
+            style: myTheme.textTheme.headline2!
                 .copyWith(color: myTheme.primaryColor),
           ),
           Spacer(flex: 3),
@@ -53,7 +53,7 @@ class LoginArea extends StatelessWidget {
           Text("Don't have an account?", style: myTheme.textTheme.subtitle1),
           Text(
             ">> Swipe left to sign up now! >>",
-            style: myTheme.textTheme.subtitle2
+            style: myTheme.textTheme.subtitle2!
                 .copyWith(decoration: TextDecoration.none),
           ),
         ],

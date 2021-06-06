@@ -8,9 +8,9 @@ class WordsBelowSignUpLogin extends StatelessWidget {
   final String route;
 
   const WordsBelowSignUpLogin({
-    @required this.text1,
-    @required this.text2,
-    @required this.route,
+    required this.text1,
+    required this.text2,
+    required this.route,
   });
 
   @override

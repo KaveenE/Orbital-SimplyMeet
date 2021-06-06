@@ -9,7 +9,7 @@ class SignUpLoginButton extends StatelessWidget {
 
   const SignUpLoginButton(
     this._globalFormKey, {
-    @required this.title,
+    required this.title,
   });
 
   @override
@@ -28,13 +28,13 @@ class SignUpLoginButton extends StatelessWidget {
         
         onPressed: () {
           //Actually, you'd often call a server or save the information in a database. We'll do that soon...
-          if (_globalFormKey.currentState.validate()) {
-            _globalFormKey.currentState.save();
+          if (_globalFormKey.currentState!.validate()) {
+            _globalFormKey.currentState!.save();
           }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                  title.startsWith("lo") ? "Logging in..." + _globalFormKey.currentState.value.toString() : "Signing up..." + _globalFormKey.currentState.value.toString()),
+                  title.startsWith("lo") ? "Logging in..." + _globalFormKey.currentState!.value.toString() : "Signing up..." + _globalFormKey.currentState!.value.toString()),
             ),
           );
         },

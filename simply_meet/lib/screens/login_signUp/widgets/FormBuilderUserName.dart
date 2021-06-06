@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class FormBuilderUserName extends StatelessWidget {
   const FormBuilderUserName({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

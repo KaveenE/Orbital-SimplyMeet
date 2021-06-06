@@ -138,11 +138,11 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
 class PageIndicator extends StatelessWidget {
   final bool isActive;
-  final double myWidth;
+  final double? myWidth;
 
   const PageIndicator({
     this.myWidth,
-    @required this.isActive,
+    required this.isActive,
   });
 
   @override
@@ -151,13 +151,14 @@ class PageIndicator extends StatelessWidget {
     final defaultWidth = screenSize.width * 0.04;
 
     return AnimatedContainer(
-        duration: Duration(milliseconds: 150),
-        margin: EdgeInsets.symmetric(horizontal: 8.0),
-        height: 8.0,
-        width: isActive ? myWidth : defaultWidth,
-        decoration: BoxDecoration(
-          color: isActive ? Colors.grey : Colors.grey.shade300,
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ));
+      duration: Duration(milliseconds: 150),
+      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      height: 8.0,
+      width: isActive ? myWidth : defaultWidth,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.grey : Colors.grey.shade300,
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+    );
   }
 }

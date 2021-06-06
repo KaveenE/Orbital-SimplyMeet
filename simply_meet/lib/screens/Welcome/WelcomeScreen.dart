@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
+import 'package:simply_meet/screens/login_signUp/LoginSignupScreen.dart';
 import 'WelcomeScreenPage1.dart';
 import 'WelcomeScreenPage2.dart';
 import 'WelcomeScreenPage3.dart';
@@ -95,7 +96,7 @@ class GetStartedButton extends StatelessWidget {
 
     return InkWell(
       splashColor: myTheme.primaryColor,
-      onTap: () => Navigator.pushNamed(context, NewLoginScreen.routeName),
+      onTap: () => Navigator.pushNamed(context, LoginSignupScreen.routeName),
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(bottom: 10),
@@ -115,7 +116,7 @@ class GetStartedButton extends StatelessWidget {
 
 class SkipButton extends StatelessWidget {
   const SkipButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -135,11 +136,11 @@ class SkipButton extends StatelessWidget {
 
 class PageIndicator extends StatelessWidget {
   final bool isActive;
-  final double myWidth;
+  final double? myWidth;
 
   const PageIndicator({
     this.myWidth,
-    @required this.isActive,
+    required this.isActive,
   });
 
   @override

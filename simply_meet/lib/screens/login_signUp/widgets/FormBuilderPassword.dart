@@ -6,12 +6,12 @@ class FormBuilderPassword extends StatelessWidget {
   final void Function() onPress;
   final String hintText;
   final String identifierForField;
-  final GlobalKey<FormBuilderState> globalFormKey;
+  final GlobalKey<FormBuilderState>? globalFormKey;
 
   const FormBuilderPassword({
-    @required this.onPress,
-    @required this.hidePassword,
-    @required this.identifierForField,
+    required this.onPress,
+    required this.hidePassword,
+    required this.identifierForField,
     this.hintText = "Password",
     this.globalFormKey,
   });

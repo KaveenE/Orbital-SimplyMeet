@@ -97,8 +97,8 @@ class SignupArea extends StatelessWidget {
   final VoidCallback togglePasswordVisibility;
   const SignupArea(
     this._globalFormKey, {
-    @required this.hidePassword,
-    @required this.togglePasswordVisibility,
+    required this.hidePassword,
+    required this.togglePasswordVisibility,
   });
 
   @override

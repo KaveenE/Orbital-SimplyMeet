@@ -56,7 +56,7 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                   padding: EdgeInsets.all(screenSize.height * 0.04),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(35),
                       topRight: Radius.circular(35),
                     ),
@@ -95,8 +95,8 @@ class LoginArea extends StatelessWidget {
 
   const LoginArea(
     this._globalFormKey, {
-    @required this.hidePassword,
-    @required this.togglePasswordVisibility,
+    required this.hidePassword,
+    required this.togglePasswordVisibility,
   });
 
   @override
@@ -106,7 +106,7 @@ class LoginArea extends StatelessWidget {
     return Expanded(
       child: Column(
         children: <Widget>[
-          Spacer(),
+          const Spacer(),
           FormBuilderEmail(),
           Spacer(),
           FormBuilderPassword(
@@ -114,7 +114,7 @@ class LoginArea extends StatelessWidget {
             onPress: togglePasswordVisibility,
             identifierForField: "password",
           ),
-          Spacer(),
+          const Spacer(),
           Align(
             alignment: Alignment.centerRight,
             child: Text(
@@ -122,18 +122,18 @@ class LoginArea extends StatelessWidget {
               style: myTheme.textTheme.subtitle2,
             ),
           ),
-          Spacer(),
+             Spacer(),
           SignUpLoginButton(
             _globalFormKey,
             title: "Login",
           ),
-          Spacer(),
+          const Spacer(),
           WordsBelowSignUpLogin(
             text1: "Don't have an account? ",
             text2: "Sign up",
             route: NewSignUpScreen.routeName,
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );
