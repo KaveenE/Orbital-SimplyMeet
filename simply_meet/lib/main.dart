@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
+import 'package:simply_meet/Screens/Login_SignUp/SignUpScreen.dart';
+// import 'package:simply_meet/screens/Login_SignUp/LoginSignupScreen.dart';
 import 'package:simply_meet/screens/Welcome/WelcomeScreen.dart';
-import 'package:simply_meet/screens/login_signUp/LoginScreen.dart';
-import 'package:simply_meet/screens/login_signUp/SignUpScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,12 +32,12 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.raleway().fontFamily,
         textTheme: ThemeData.light().textTheme.copyWith(
               headline2: GoogleFonts.raleway(
-                color: Colors.white70,
+                color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.w600,
               ),
               bodyText1: GoogleFonts.raleway(
-                color: Colors.white70,
+                color: Colors.white,
                 fontSize: 15,
               ),
               button: GoogleFonts.raleway(
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         '/': (_) => WelcomeScreen(),
         NewLoginScreen.routeName: (_) => NewLoginScreen(),
         NewSignUpScreen.routeName: (_) => NewSignUpScreen(),
+        // LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
       },
     );
   }

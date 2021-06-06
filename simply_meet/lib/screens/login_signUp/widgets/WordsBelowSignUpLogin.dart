@@ -26,7 +26,7 @@ class WordsBelowSignUpLogin extends StatelessWidget {
             text: text2,
             style: myTheme.textTheme.subtitle2,
             recognizer: TapGestureRecognizer()
-              ..onTap = () => Navigator.pushNamed(
+              ..onTap = () => Navigator.pushReplacementNamed(
                     context,
                     route,
                   ),

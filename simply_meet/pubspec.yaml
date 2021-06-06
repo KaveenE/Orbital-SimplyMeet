@@ -65,6 +65,7 @@ flutter:
     - assets/animations/GirlWorking.json
     - assets/animations/TwoPeopleTalking.json
     - assets/animations/GirlOnPhone.json
+    - assets/animations/Login.json
     - assets/animations/TwoPeopleWorking.json
 
 

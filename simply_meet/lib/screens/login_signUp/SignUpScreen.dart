@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
+import 'package:simply_meet/Screens/Login_SignUp/Widgets/SignUpLoginButton.dart';
 import 'package:simply_meet/Screens/Login_SignUp/widgets/WordsBelowSignUpLogin.dart';
-
 import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderEmail.dart';
 import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderPassword.dart';
 import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderUsername.dart';
-
-import 'widgets/SignUpLoginButton.dart';
 
 class NewSignUpScreen extends StatefulWidget {
   static const routeName = "/signUpScreen";
@@ -46,7 +44,7 @@ class _NewSignUpScreenState extends State<NewSignUpScreen> {
           child: Column(
             children: <Widget>[
               Expanded(
-                flex: 2,
+                flex: 5,
                 child: Container(
                   child: Opacity(
                     opacity: 0.7,
@@ -57,7 +55,7 @@ class _NewSignUpScreenState extends State<NewSignUpScreen> {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 6,
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(screenSize.height * 0.04),
@@ -72,19 +70,14 @@ class _NewSignUpScreenState extends State<NewSignUpScreen> {
                     key: _globalFormKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                         SignupArea(
                           _globalFormKey,
                           hidePassword: _hidePassword,
                           togglePasswordVisibility: togglePasswordVisibility,
                         ),
-                        SizedBox(height: screenSize.height * 0.014),
-                        WordsBelowSignUpLogin(
-                          text1: "Already have an account? ",
-                          text2: "Login",
-                          route: NewLoginScreen.routeName,
-                        )
                       ],
                     ),
                   ),
@@ -110,40 +103,40 @@ class SignupArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final myTheme = Theme.of(context);
-    return Column(
-      children: [
-        Text(
-          'This is a placeholder for a slider',
-          style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: myTheme.primaryColor),
-        ),
-        SizedBox(height: screenSize.height * 0.03),
-        FormBuilderUserName(),
-        SizedBox(height: screenSize.height * 0.023),
-        FormBuilderEmail(),
-        SizedBox(height: screenSize.height * 0.023),
-        FormBuilderPassword(
-          onPress: togglePasswordVisibility,
-          hidePassword: hidePassword,
-          identifierForField: "password",
-        ),
-        SizedBox(height: screenSize.height * 0.023),
-        FormBuilderPassword(
-          onPress: togglePasswordVisibility,
-          hidePassword: hidePassword,
-          hintText: "Confirm Password",
-          identifierForField: "confirmPassword",
-        ),
-        SizedBox(height: screenSize.height * 0.023),
-        SignUpLoginButton(
-          _globalFormKey,
-          title: "Sign Up",
-        ),
-      ],
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          Spacer(),
+          FormBuilderUserName(),
+          Spacer(),
+          FormBuilderEmail(),
+          Spacer(),
+          FormBuilderPassword(
+            onPress: togglePasswordVisibility,
+            hidePassword: hidePassword,
+            identifierForField: "password",
+          ),
+          Spacer(),
+          FormBuilderPassword(
+            onPress: togglePasswordVisibility,
+            hidePassword: hidePassword,
+            hintText: "Confirm Password",
+            identifierForField: "confirmPassword",
+          ),
+          Spacer(flex: 2),
+          SignUpLoginButton(
+            _globalFormKey,
+            title: "Sign Up",
+          ),
+          Spacer(),
+          WordsBelowSignUpLogin(
+            text1: "Already have an account? ",
+            text2: "Login",
+            route: NewLoginScreen.routeName,
+          ),
+          // Spacer(),
+        ],
+      ),
     );
   }
 }

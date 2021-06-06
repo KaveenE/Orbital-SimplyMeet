@@ -33,26 +33,24 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final myTheme = Theme.of(context);
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          color: myTheme.primaryColor,
           height: screenSize.height,
           child: Column(
             children: <Widget>[
               Expanded(
-                flex: 9,
+                flex: 3,
                 child: Opacity(
                   opacity: 0.7,
                   child: Lottie.asset("assets/animations/GirlOnPhone.json",
-                      width: screenSize.height * 0.45),
+                      width: screenSize.height * 0.5),
                 ),
               ),
               Expanded(
-                flex: 8,
+                flex: 2,
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(screenSize.height * 0.04),
@@ -70,17 +68,13 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
+                        // Spacer(),
                         LoginArea(
                           _globalFormKey,
                           hidePassword: _hidePassword,
                           togglePasswordVisibility: togglePasswordVisibility,
                         ),
-                        SizedBox(height: screenSize.height * 0.014),
-                        WordsBelowSignUpLogin(
-                          text1: "Don't have an account? ",
-                          text2: "Sign up",
-                          route: NewSignUpScreen.routeName,
-                        ),
+                        // Spacer(),
                       ],
                     ),
                   ),
@@ -98,6 +92,7 @@ class LoginArea extends StatelessWidget {
   final GlobalKey<FormBuilderState> _globalFormKey;
   final bool hidePassword;
   final VoidCallback togglePasswordVisibility;
+
   const LoginArea(
     this._globalFormKey, {
     @required this.hidePassword,
@@ -106,40 +101,41 @@ class LoginArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     final myTheme = Theme.of(context);
-    return Column(
-      children: [
-        Text(
-          'This is a placeholder for a slider',
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: myTheme.primaryColor,
+
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          Spacer(),
+          FormBuilderEmail(),
+          Spacer(),
+          FormBuilderPassword(
+            hidePassword: hidePassword,
+            onPress: togglePasswordVisibility,
+            identifierForField: "password",
           ),
-        ),
-        SizedBox(height: screenSize.height * 0.03),
-        FormBuilderEmail(),
-        SizedBox(height: screenSize.height * 0.027),
-        FormBuilderPassword(
-          hidePassword: hidePassword,
-          onPress: togglePasswordVisibility,
-          identifierForField: "password",
-        ),
-        SizedBox(height: screenSize.height * 0.014),
-        Align(
-          alignment: Alignment.centerRight,
-          child: Text(
-            "Forgot your password?",
-            style: myTheme.textTheme.subtitle2,
+          Spacer(),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              "Forgot your password?",
+              style: myTheme.textTheme.subtitle2,
+            ),
           ),
-        ),
-        SizedBox(height: screenSize.height * 0.02),
-        SignUpLoginButton(
-          _globalFormKey,
-          title: "Login",
-        ),
-      ],
+          Spacer(),
+          SignUpLoginButton(
+            _globalFormKey,
+            title: "Login",
+          ),
+          Spacer(),
+          WordsBelowSignUpLogin(
+            text1: "Don't have an account? ",
+            text2: "Sign up",
+            route: NewSignUpScreen.routeName,
+          ),
+          Spacer(),
+        ],
+      ),
     );
   }
 }

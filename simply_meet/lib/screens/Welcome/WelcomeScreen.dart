@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/screens/login_signUp/LoginScreen.dart';
+import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
 import 'WelcomeScreenPage1.dart';
 import 'WelcomeScreenPage2.dart';
 import 'WelcomeScreenPage3.dart';
@@ -34,46 +34,45 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: myTheme.scaffoldBackgroundColor,
       body: Container(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 25.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.topRight,
-                child: const SkipButton(),
+        padding: EdgeInsets.symmetric(vertical: 25.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.topRight,
+              child: const SkipButton(),
+            ),
+            Spacer(),
+            Center(
+              child: Text(
+                "Welcome to SimplyMeet",
+                style: Theme.of(context).textTheme.headline2,
               ),
-              SizedBox(height: screenSize.height * 0.09),
-              Center(
-                child: Text(
-                  "Welcome to SimplyMeet",
-                  style: Theme.of(context).textTheme.headline2,
-                ),
+            ),
+            Spacer(),
+            Container(
+              height: screenSize.height * 0.6,
+              child: PageView(
+                physics: ClampingScrollPhysics(),
+                controller: _pageController,
+                onPageChanged: (int page) {
+                  setState(() {
+                    _currentPage = page;
+                  });
+                },
+                children: <Widget>[
+                  WelcomeScreen1(),
+                  WelcomeScreen2(),
+                  WelcomeScreen3(),
+                ],
               ),
-              SizedBox(height: screenSize.height * 0.05),
-              Container(
-                height: screenSize.height * 0.6,
-                child: PageView(
-                  physics: ClampingScrollPhysics(),
-                  controller: _pageController,
-                  onPageChanged: (int page) {
-                    setState(() {
-                      _currentPage = page;
-                    });
-                  },
-                  children: <Widget>[
-                    WelcomeScreen1(),
-                    WelcomeScreen2(),
-                    WelcomeScreen3(),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _buildPageIndicator(screenSize),
-              ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _buildPageIndicator(screenSize),
+            ),
+            Spacer(),
+          ],
         ),
       ),
       bottomSheet: _currentPage == _numPages - 1
@@ -125,7 +124,7 @@ class SkipButton extends StatelessWidget {
       child: Text(
         'Skip',
         style: TextStyle(
-          color: Colors.white70,
+          color: Colors.white,
           fontSize: 20,
         ),
       ),
