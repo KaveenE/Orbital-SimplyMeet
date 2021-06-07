@@ -45,8 +45,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Kaveen's Trash
-lib/deleteKaveen/
-
-#Nivi's most probably gonna go to trash
-unmodifiedNiviNotUsing/
+#Delete After Looking Thru if needed
+lib/stuffToDeleteAfterYouLookThru

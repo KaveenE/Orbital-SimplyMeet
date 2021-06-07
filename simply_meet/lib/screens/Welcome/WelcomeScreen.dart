@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:simply_meet/screens/Welcome/widgets/WelcomeScreenPage.dart';
 
 import 'package:simply_meet/screens/login_signUp/LoginSignupScreen.dart';
-import 'WelcomeScreenPage1.dart';
-import 'WelcomeScreenPage2.dart';
-import 'WelcomeScreenPage3.dart';
+
 //import 'package:simply_meet/screens/Login_signUp/LoginSignUpScreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -53,7 +52,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Spacer(),
             Container(
               height: screenSize.height * 0.6,
-              child: PageView(
+              child: PageView.builder(
                 physics: ClampingScrollPhysics(),
                 controller: _pageController,
                 onPageChanged: (int page) {
@@ -61,11 +60,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     _currentPage = page;
                   });
                 },
-                children: <Widget>[
-                  WelcomeScreen1(),
-                  WelcomeScreen2(),
-                  WelcomeScreen3(),
-                ],
+                itemCount: _numPages,
+                itemBuilder: (_, index) {
+                  final currMap = listOfMapsToPass[index];
+
+                  return WelcomeScreenPage(
+                    imageURL: currMap["imageURL"]!,
+                    title1: currMap["title1"]!,
+                    title2: currMap["title2"]!,
+                  );
+                },
               ),
             ),
             Row(
@@ -161,3 +165,22 @@ class PageIndicator extends StatelessWidget {
     );
   }
 }
+
+List<Map<String, String>> listOfMapsToPass = [
+  {
+    "imageURL": "assets/animations/BoyWithLaptop.json",
+    "title1": "Generate timings",
+    "title2": "Find optimal time for project meetings without a hassle",
+  },
+  {
+    "imageURL": "assets/animations/GirlWorking.json",
+    "title1": "Schedule events",
+    "title2": "Keep track of your timetable as well as events in your calendar",
+  },
+  {
+    "imageURL": "assets/animations/TwoPeopleTalking.json",
+    "title1": "Privacy guaranteed",
+    "title2":
+        "You can choose to keep certain events private so you can keep your private life seperate from school life!",
+  },
+];
