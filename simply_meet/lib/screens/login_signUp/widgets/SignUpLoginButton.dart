@@ -25,16 +25,21 @@ class SignUpLoginButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10),
           textStyle: myTheme.textTheme.button,
         ),
-        
         onPressed: () {
           //Actually, you'd often call a server or save the information in a database. We'll do that soon...
           if (_globalFormKey.currentState!.validate()) {
             _globalFormKey.currentState!.save();
           }
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                  title.startsWith("lo") ? "Logging in..." + _globalFormKey.currentState!.value.toString() : "Signing up..." + _globalFormKey.currentState!.value.toString()),
+                title.startsWith("lo")
+                    ? "Logging in..." +
+                        _globalFormKey.currentState!.value.toString()
+                    : "Signing up..." +
+                        _globalFormKey.currentState!.value.toString(),
+              ),
             ),
           );
         },

@@ -45,6 +45,7 @@ class SignUpArea extends StatelessWidget {
             hidePassword: hidePassword,
             hintText: "Confirm Password",
             identifierForField: "confirmPassword",
+            globalFormKey: _globalFormKey,
           ),
           Spacer(),
           SignUpLoginButton(

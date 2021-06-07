@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
+
 import 'package:simply_meet/screens/login_signUp/LoginSignupScreen.dart';
 import 'WelcomeScreenPage1.dart';
 import 'WelcomeScreenPage2.dart';
@@ -129,7 +129,8 @@ class SkipButton extends StatelessWidget {
           fontSize: 20,
         ),
       ),
-      onPressed: () => Navigator.pushNamed(context, LoginSignupScreen.routeName),
+      onPressed: () =>
+          Navigator.pushNamed(context, LoginSignupScreen.routeName),
     );
   }
 }
@@ -149,13 +150,14 @@ class PageIndicator extends StatelessWidget {
     final defaultWidth = screenSize.width * 0.04;
 
     return AnimatedContainer(
-        duration: Duration(milliseconds: 150),
-        margin: EdgeInsets.symmetric(horizontal: 8.0),
-        height: 8.0,
-        width: isActive ? myWidth : defaultWidth,
-        decoration: BoxDecoration(
-          color: isActive ? Colors.white : Color(0xff7B51D3),
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ));
+      duration: Duration(milliseconds: 150),
+      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      height: 8.0,
+      width: isActive ? myWidth : defaultWidth,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.white : Color(0xff7B51D3),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+    );
   }
 }

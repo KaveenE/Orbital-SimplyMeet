@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simply_meet/Screens/Login_SignUp/Widgets/LoginArea.dart';
 import 'package:simply_meet/Screens/Login_SignUp/Widgets/SignUpArea.dart';
+import 'package:simply_meet/screens/login_signUp/widgets/FormBuilderWrapper.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   static const routeName = '/loginSignupScreen';
@@ -12,17 +13,20 @@ class LoginSignupScreen extends StatefulWidget {
 }
 
 class _LoginSignupScreenState extends State<LoginSignupScreen> {
-  int _currentPage = 0;
+  late int _currentPage = 0;
   late bool _hidePassword;
-  late List<GlobalKey<FormBuilderState>> _globalFormKeyList;
+  late final List<GlobalKey<FormBuilderState>> _globalFormKeyList;
+
   @override
   initState() {
     super.initState();
+    _currentPage = 0;
     _hidePassword = true;
     _globalFormKeyList = List<GlobalKey<FormBuilderState>>.generate(
-        _numPages,
-        (index) =>
-            GlobalKey<FormBuilderState>(debugLabel: 'GlobalFormKey #$index '));
+      _numPages,
+      (index) =>
+          GlobalKey<FormBuilderState>(debugLabel: 'GlobalFormKey #$index '),
+    );
   }
 
   void togglePasswordVisibility() {
@@ -45,12 +49,31 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     );
   }
 
+  List<List<Widget>> get _childrenInColumnTochoose {
+    return [
+      [
+        LoginArea(
+          _globalFormKeyList[0],
+          hidePassword: _hidePassword,
+          togglePasswordVisibility: togglePasswordVisibility,
+        ),
+      ],
+      [
+        SignUpArea(
+          _globalFormKeyList[1],
+          hidePassword: _hidePassword,
+          togglePasswordVisibility: togglePasswordVisibility,
+        ),
+      ],
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final myTheme = Theme.of(context);
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      
       body: SingleChildScrollView(
         child: SizedBox(
           height: screenSize.height,
@@ -83,7 +106,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                         children: _buildPageIndicator(screenSize),
                       ),
                       Expanded(
-                        child: PageView(
+                        child: PageView.builder(
                           physics: ClampingScrollPhysics(),
                           controller: _pageController,
                           onPageChanged: (int page) {
@@ -91,40 +114,11 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               _currentPage = page;
                             });
                           },
-                          children: <Widget>[
-                            FormBuilder(
-                              key: _globalFormKeyList[0],
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  LoginArea(
-                                    _globalFormKeyList[0],
-                                    hidePassword: _hidePassword,
-                                    togglePasswordVisibility:
-                                        togglePasswordVisibility,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            FormBuilder(
-                              key: _globalFormKeyList[1],
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  SignUpArea(
-                                    _globalFormKeyList[1],
-                                    hidePassword: _hidePassword,
-                                    togglePasswordVisibility:
-                                        togglePasswordVisibility,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                          itemCount: _numPages,
+                          itemBuilder: (_, idx) => FormBuilderWrapper(
+                            key: _globalFormKeyList[idx],
+                            childrenInColumn: _childrenInColumnTochoose[idx],
+                          ),
                         ),
                       ),
                     ],
@@ -138,6 +132,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     );
   }
 }
+
+
+  
 
 class PageIndicator extends StatelessWidget {
   final bool isActive;
