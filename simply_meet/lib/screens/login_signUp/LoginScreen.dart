@@ -25,6 +25,7 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
     _globalFormKey = GlobalKey<FormBuilderState>();
   }
 
+
   void togglePasswordVisibility() {
     setState(() {
       _hidePassword = !_hidePassword;

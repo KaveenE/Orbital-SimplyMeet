@@ -25,7 +25,7 @@ class SignUpArea extends StatelessWidget {
         children: <Widget>[
           Spacer(flex: 2),
           Text(
-            "Sign Up Page",
+            "SIGN UP",
             style: myTheme.textTheme.headline2!
                 .copyWith(color: myTheme.primaryColor),
           ),

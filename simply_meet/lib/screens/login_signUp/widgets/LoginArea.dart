@@ -24,7 +24,7 @@ class LoginArea extends StatelessWidget {
         children: <Widget>[
           Spacer(flex: 4),
           Text(
-            "Login Page",
+            "LOGIN",
             style: myTheme.textTheme.headline2!
                 .copyWith(color: myTheme.primaryColor),
           ),

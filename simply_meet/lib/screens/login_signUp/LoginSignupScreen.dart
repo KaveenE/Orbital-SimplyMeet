@@ -13,13 +13,16 @@ class LoginSignupScreen extends StatefulWidget {
 
 class _LoginSignupScreenState extends State<LoginSignupScreen> {
   int _currentPage = 0;
-  bool _hidePassword = true;
-  GlobalKey<FormBuilderState> _globalFormKey = GlobalKey<FormBuilderState>();
+  late bool _hidePassword;
+  late List<GlobalKey<FormBuilderState>> _globalFormKeyList;
   @override
   initState() {
     super.initState();
     _hidePassword = true;
-    _globalFormKey = GlobalKey<FormBuilderState>();
+    _globalFormKeyList = List<GlobalKey<FormBuilderState>>.generate(
+        _numPages,
+        (index) =>
+            GlobalKey<FormBuilderState>(debugLabel: 'GlobalFormKey #$index '));
   }
 
   void togglePasswordVisibility() {
@@ -30,6 +33,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
   final int _numPages = 2;
   final PageController _pageController = PageController(initialPage: 0);
+
   List<Widget> _buildPageIndicator(Size screenSize) {
     final width = screenSize.width * 0.06;
 
@@ -48,7 +52,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: screenSize.height,
           child: Column(
             children: <Widget>[
@@ -78,8 +82,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: _buildPageIndicator(screenSize),
                       ),
-                      Container(
-                        height: screenSize.height * 0.5,
+                      Expanded(
                         child: PageView(
                           physics: ClampingScrollPhysics(),
                           controller: _pageController,
@@ -90,14 +93,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                           },
                           children: <Widget>[
                             FormBuilder(
-                              key: _globalFormKey,
+                              key: _globalFormKeyList[0],
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   LoginArea(
-                                    _globalFormKey,
+                                    _globalFormKeyList[0],
                                     hidePassword: _hidePassword,
                                     togglePasswordVisibility:
                                         togglePasswordVisibility,
@@ -106,14 +109,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               ),
                             ),
                             FormBuilder(
-                              key: _globalFormKey,
+                              key: _globalFormKeyList[1],
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   SignUpArea(
-                                    _globalFormKey,
+                                    _globalFormKeyList[1],
                                     hidePassword: _hidePassword,
                                     togglePasswordVisibility:
                                         togglePasswordVisibility,
