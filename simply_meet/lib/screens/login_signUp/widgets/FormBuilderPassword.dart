@@ -34,7 +34,7 @@ class FormBuilderPassword extends StatelessWidget {
       //   passwordRequirement,
       //   (reenteredPassword) {
       //     if (globalFormKey!= null && reenteredPassword !=
-      //         globalFormKey.currentState.fields[identifierForField].value) {
+      //         globalFormKey!.currentState!.fields[identifierForField]!.value) {
       //       return "Password entries are not the same";
       //     }
       //     return null;
