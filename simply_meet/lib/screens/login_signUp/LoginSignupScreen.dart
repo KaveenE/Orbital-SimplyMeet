@@ -73,7 +73,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: SizedBox(
           height: screenSize.height,
@@ -89,41 +88,42 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
               ),
               Expanded(
                 flex: 3,
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(screenSize.height * 0.04),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35),
-                      topRight: Radius.circular(35),
-                    ),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: _buildPageIndicator(screenSize),
+                child:  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(screenSize.height * 0.04),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(35),
+                        topRight: Radius.circular(35),
                       ),
-                      Expanded(
-                        child: PageView.builder(
-                          physics: ClampingScrollPhysics(),
-                          controller: _pageController,
-                          onPageChanged: (int page) {
-                            setState(() {
-                              _currentPage = page;
-                            });
-                          },
-                          itemCount: _numPages,
-                          itemBuilder: (_, idx) => FormBuilderWrapper(
-                            key: _globalFormKeyList[idx],
-                            childrenInColumn: _childrenInColumnTochoose[idx],
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _buildPageIndicator(screenSize),
+                        ),
+                        Expanded(
+                          child: PageView.builder(
+                            physics: ClampingScrollPhysics(),
+                            controller: _pageController,
+                            onPageChanged: (int page) {
+                              setState(() {
+                                _currentPage = page;
+                              });
+                            },
+                            itemCount: _numPages,
+                            itemBuilder: (_, idx) => FormBuilderWrapper(
+                              key: _globalFormKeyList[idx],
+                              childrenInColumn: _childrenInColumnTochoose[idx],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+               
               ),
             ],
           ),
@@ -132,9 +132,6 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     );
   }
 }
-
-
-  
 
 class PageIndicator extends StatelessWidget {
   final bool isActive;
@@ -162,4 +159,3 @@ class PageIndicator extends StatelessWidget {
     );
   }
 }
-

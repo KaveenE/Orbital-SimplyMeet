@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-//import '../SignUpScreen.dart';
+
 
 class WordsBelowSignUpLogin extends StatelessWidget {
   final String text1;

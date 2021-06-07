@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simply_meet/screens/Welcome/widgets/WelcomeScreenPage.dart';
-
 import 'package:simply_meet/screens/login_signUp/LoginSignupScreen.dart';
 
-//import 'package:simply_meet/screens/Login_signUp/LoginSignUpScreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

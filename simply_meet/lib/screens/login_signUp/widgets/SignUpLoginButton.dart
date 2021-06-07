@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-// Combine Login & Singup Button
 
 class SignUpLoginButton extends StatelessWidget {
   final String title;

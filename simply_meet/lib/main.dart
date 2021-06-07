@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simply_meet/Screens/Login_SignUp/LoginScreen.dart';
-import 'package:simply_meet/Screens/Login_SignUp/SignUpScreen.dart';
-// import 'package:simply_meet/screens/Login_SignUp/LoginSignupScreen.dart';
+import 'package:simply_meet/screens/Login_SignUp/LoginSignupScreen.dart';
 import 'package:simply_meet/screens/Welcome/WelcomeScreen.dart';
-import 'package:simply_meet/screens/login_signUp/LoginSignupScreen.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,8 +56,6 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (_) => WelcomeScreen(),
-        NewLoginScreen.routeName: (_) => NewLoginScreen(),
-        NewSignUpScreen.routeName: (_) => NewSignUpScreen(),
         LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
         // LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
       },
