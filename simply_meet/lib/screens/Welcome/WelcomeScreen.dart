@@ -129,7 +129,7 @@ class SkipButton extends StatelessWidget {
           fontSize: 20,
         ),
       ),
-      onPressed: () => Navigator.pushNamed(context, NewLoginScreen.routeName),
+      onPressed: () => Navigator.pushNamed(context, LoginSignupScreen.routeName),
     );
   }
 }
