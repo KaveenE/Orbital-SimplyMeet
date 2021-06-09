@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:simply_meet/shared/ui_helpers.dart';
 
 class WelcomeScreenPage extends StatelessWidget {
   final String imageURL;
@@ -14,15 +15,14 @@ class WelcomeScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myTheme = Theme.of(context);
-    final screenSize = MediaQuery.of(context).size;
+
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth(context) * 0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Spacer(),
+          const Spacer(),
           Center(
               child: Opacity(
             opacity: 0.7,
@@ -31,20 +31,17 @@ class WelcomeScreenPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           )),
-          Spacer(),
+          const Spacer(),
           Text(
             title1,
-            style: myTheme.textTheme.headline2,
+            style: theme(context).textTheme.headline2,
           ),
-          //SizedBox(height: 15),
-          Spacer(),
-
+          const Spacer(),
           Text(
             title2,
-            style: myTheme.textTheme.bodyText1,
+            style: theme(context).textTheme.bodyText1,
           ),
-
-          Spacer(
+          const Spacer(
             flex: 4,
           ),
         ],

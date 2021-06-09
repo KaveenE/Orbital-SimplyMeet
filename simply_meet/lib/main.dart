@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simply_meet/screens/Login_SignUp/LoginSignupScreen.dart';
-import 'package:simply_meet/screens/Welcome/WelcomeScreen.dart';
+import 'package:simply_meet/start/ui/views/LoginSignupScreen.dart';
+import 'package:simply_meet/start/ui/views/WelcomeScreen.dart';
 
 
 void main() {
@@ -11,9 +11,9 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
-    runApp(new MyApp());
+    runApp(MyApp());
   });
-  runApp(MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {

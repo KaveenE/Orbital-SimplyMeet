@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderEmail.dart';
 import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderPassword.dart';
-import 'package:simply_meet/Screens/Login_SignUp/Widgets/SignUpLoginButton.dart';
+import 'package:simply_meet/start/ui/helper_widgets/SignUpLoginButton.dart';
 
 class LoginArea extends StatelessWidget {
-  final GlobalKey<FormBuilderState> _globalFormKey;
-  final bool hidePassword;
-  final VoidCallback togglePasswordVisibility;
-
-  const LoginArea(
-    this._globalFormKey, {
-    required this.hidePassword,
-    required this.togglePasswordVisibility,
-  });
+  const LoginArea();
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +13,19 @@ class LoginArea extends StatelessWidget {
     return Expanded(
       child: Column(
         children: <Widget>[
-          Spacer(flex: 4),
+          const Spacer(flex: 4),
           Text(
             "LOGIN",
             style: myTheme.textTheme.headline2!
                 .copyWith(color: myTheme.primaryColor),
           ),
-          Spacer(flex: 3),
-          FormBuilderEmail(),
-          Spacer(flex: 2),
+          const Spacer(flex: 3),
+          const FormBuilderEmail(),
+          const Spacer(flex: 2),
           FormBuilderPassword(
-            hidePassword: hidePassword,
-            onPress: togglePasswordVisibility,
             identifierForField: "password",
           ),
-          Spacer(),
+          const Spacer(),
           Align(
             alignment: Alignment.centerRight,
             child: Text(
@@ -44,12 +33,9 @@ class LoginArea extends StatelessWidget {
               style: myTheme.textTheme.subtitle2,
             ),
           ),
-          Spacer(),
-          SignUpLoginButton(
-            _globalFormKey,
-            title: "Login",
-          ),
-          Spacer(flex: 2),
+          const Spacer(),
+          SignUpLoginButton(title: "Login", loginSignup: () {}),
+          const Spacer(flex: 2),
           Text("Don't have an account?", style: myTheme.textTheme.subtitle1),
           Text(
             ">> Swipe left to sign up now! >>",

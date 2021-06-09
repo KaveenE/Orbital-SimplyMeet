@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 
 class SignUpLoginButton extends StatelessWidget {
   final String title;
-  final GlobalKey<FormBuilderState> _globalFormKey;
+  final VoidCallback loginSignup;
 
-  const SignUpLoginButton(
-    this._globalFormKey, {
-    required this.title,
-  });
+  const SignUpLoginButton({required this.title, required this.loginSignup});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +20,8 @@ class SignUpLoginButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10),
           textStyle: myTheme.textTheme.button,
         ),
-        onPressed: () {
+        onPressed: this
+            .loginSignup /*() {
           //Actually, you'd often call a server or save the information in a database. We'll do that soon...
           if (_globalFormKey.currentState!.validate()) {
             _globalFormKey.currentState!.save();
@@ -41,7 +38,8 @@ class SignUpLoginButton extends StatelessWidget {
               ),
             ),
           );
-        },
+        }*/
+        ,
         child: Text(title),
       ),
     );

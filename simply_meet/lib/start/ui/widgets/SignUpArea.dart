@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+
 import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderEmail.dart';
 import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderPassword.dart';
 import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderUserName.dart';
-import 'package:simply_meet/Screens/Login_SignUp/Widgets/SignUpLoginButton.dart';
+import 'package:simply_meet/start/ui/helper_widgets/SignUpLoginButton.dart';
 
 class SignUpArea extends StatelessWidget {
-  final GlobalKey<FormBuilderState> _globalFormKey;
-  final bool hidePassword;
-  final VoidCallback togglePasswordVisibility;
 
-  const SignUpArea(
-    this._globalFormKey, {
-    required this.hidePassword,
-    required this.togglePasswordVisibility,
-  });
+
+  const SignUpArea();
 
   @override
   Widget build(BuildContext context) {
@@ -35,22 +29,17 @@ class SignUpArea extends StatelessWidget {
           FormBuilderEmail(),
           Spacer(),
           FormBuilderPassword(
-            onPress: togglePasswordVisibility,
-            hidePassword: hidePassword,
             identifierForField: "password",
           ),
           Spacer(),
           FormBuilderPassword(
-            onPress: togglePasswordVisibility,
-            hidePassword: hidePassword,
             hintText: "Confirm Password",
             identifierForField: "confirmPassword",
-            globalFormKey: _globalFormKey,
           ),
           Spacer(),
           SignUpLoginButton(
-            _globalFormKey,
             title: "Sign Up",
+            loginSignup: () {},
           ),
           Spacer(),
           Text("Already have an account?", style: myTheme.textTheme.subtitle1),

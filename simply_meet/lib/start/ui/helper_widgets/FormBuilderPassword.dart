@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
+import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/start/view_models/login_signup_view_model.dart';
 
 class FormBuilderPassword extends StatelessWidget {
-  final bool hidePassword;
-  final void Function() onPress;
   final String hintText;
   final String identifierForField;
-  final GlobalKey<FormBuilderState>? globalFormKey;
 
   const FormBuilderPassword({
-    required this.onPress,
-    required this.hidePassword,
     required this.identifierForField,
     this.hintText = "Password",
-    this.globalFormKey,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final loginSignUpViewModel = Provider.of<LoginSignUpViewModel>(context);
 
     // final FormFieldValidator<String> passwordRequirement =
     //     FormBuilderValidators.match(context,
@@ -34,32 +31,34 @@ class FormBuilderPassword extends StatelessWidget {
       //   passwordRequirement,
       //   (reenteredPassword) {
       //     if (globalFormKey!= null && reenteredPassword !=
-      //         globalFormKey!.currentState!.fields[identifierForField]!.value) {
+      //     loginSignUpViewModel.globalFormKeyList[1].currentState!.fields[identifierForField]!.value) {
       //       return "Password entries are not the same";
       //     }
       //     return null;
       //   }
       // ]),
-      obscureText: hidePassword,
+      obscureText: loginSignUpViewModel.hidePassword,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(screenSize.width * 0.06),
+          borderRadius: BorderRadius.circular(screenWidth(context) * 0.06),
           borderSide: BorderSide.none,
         ),
         filled: true,
         fillColor: const Color(0xffCDC6DE),
         hintText: this.hintText,
-        contentPadding: EdgeInsets.only(left: screenSize.width * 0.06),
+        contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
         errorMaxLines: 3,
         prefixIcon: Icon(
           Icons.lock_outlined,
           color: Colors.grey.shade700,
         ),
         suffixIcon: IconButton(
-          onPressed: onPress,
+          onPressed: () => loginSignUpViewModel.toggleVisibility(),
           color: Colors.grey.shade700,
           icon: Icon(
-            hidePassword ? Icons.visibility_off : Icons.visibility,
+            loginSignUpViewModel.hidePassword
+                ? Icons.visibility_off
+                : Icons.visibility,
           ),
         ),
       ),
