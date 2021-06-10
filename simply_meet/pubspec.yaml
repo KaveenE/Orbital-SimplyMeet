@@ -23,12 +23,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #Constructs class diagrams
   dcdg: ^3.1.0
+  #Animated pictures?
   lottie: ^1.0.1
+  #Erm, fonts by google
   google_fonts: ^2.1.0
+  #To manage user inputs
   flutter_form_builder: ^6.0.1
-  flutter_switch: ^0.3.1
+  #State management helper. 
   provider: ^5.0.0
+   #FlutterFire
+  firebase_core: ^1.2.1
+  firebase_auth: ^1.3.0
+  cloud_firestore: ^2.2.1
+  #More customizable and easy to use compared to the standard dialogs like AlertDialog
+  awesome_dialog: ^2.1.0
+
 
 
   # The following adds the Cupertino Icons font to your application.

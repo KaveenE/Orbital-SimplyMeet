@@ -53,8 +53,7 @@ class _PageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final defaultWidth = screenSize.width * 0.04;
+    final defaultWidth = screenWidth(context) * 0.04;
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
@@ -74,10 +73,10 @@ class _GetStartedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myTheme = Theme.of(context);
+    
 
     return InkWell(
-      splashColor: myTheme.primaryColor,
+      splashColor: theme(context).primaryColor,
       onTap: () => Navigator.pushNamed(context, LoginSignupScreen.routeName),
       child: Center(
         child: Padding(
@@ -85,7 +84,7 @@ class _GetStartedButton extends StatelessWidget {
           child: Text(
             'Get started',
             style: TextStyle(
-              color: myTheme.primaryColor,
+              color: theme(context).primaryColor,
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),

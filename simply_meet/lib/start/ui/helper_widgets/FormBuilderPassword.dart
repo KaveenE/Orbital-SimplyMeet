@@ -37,6 +37,7 @@ class FormBuilderPassword extends StatelessWidget {
       //     return null;
       //   }
       // ]),
+      textInputAction: this.hintText.compareTo("Password") == 0 ? TextInputAction.next : TextInputAction.done,
       obscureText: loginSignUpViewModel.hidePassword,
       decoration: InputDecoration(
         border: OutlineInputBorder(

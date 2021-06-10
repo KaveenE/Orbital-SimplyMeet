@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:simply_meet/shared/ui_helpers.dart';
 
 class FormBuilderEmail extends StatelessWidget {
   const FormBuilderEmail({
@@ -8,7 +9,7 @@ class FormBuilderEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+  
     return FormBuilderTextField(
       name: "email",
       keyboardType: TextInputType.emailAddress,
@@ -19,15 +20,16 @@ class FormBuilderEmail extends StatelessWidget {
       //   FormBuilderValidators.email(context,
       //       errorText: "Not a valid email address")
       // ]),
+      textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(screenSize.width * 0.06),
+          borderRadius: BorderRadius.circular(screenWidth(context) * 0.06),
           borderSide: BorderSide.none,
         ),
         filled: true,
         fillColor: const Color(0xffCDC6DE),
         hintText: "Email Address",
-        contentPadding: EdgeInsets.only(left: screenSize.width * 0.06),
+        contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
         prefixIcon: Icon(
           Icons.alternate_email,
           color: Colors.grey.shade700,

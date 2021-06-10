@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderEmail.dart';
-import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderPassword.dart';
+import 'package:provider/provider.dart';
+import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/start/ui/helper_widgets/FormBuilderEmail.dart';
+import 'package:simply_meet/start/ui/helper_widgets/FormBuilderPassword.dart';
+
 import 'package:simply_meet/start/ui/helper_widgets/SignUpLoginButton.dart';
+import 'package:simply_meet/start/view_models/login_signup_view_model.dart';
 
 class LoginArea extends StatelessWidget {
   const LoginArea();
 
   @override
   Widget build(BuildContext context) {
-    final myTheme = Theme.of(context);
+    final loginSignUpViewModel = Provider.of<LoginSignUpViewModel>(context);
 
     return Expanded(
       child: Column(
@@ -16,8 +20,10 @@ class LoginArea extends StatelessWidget {
           const Spacer(flex: 4),
           Text(
             "LOGIN",
-            style: myTheme.textTheme.headline2!
-                .copyWith(color: myTheme.primaryColor),
+            style: theme(context)
+                .textTheme
+                .headline2!
+                .copyWith(color: theme(context).primaryColor),
           ),
           const Spacer(flex: 3),
           const FormBuilderEmail(),
@@ -30,16 +36,26 @@ class LoginArea extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text(
               "Forgot your password?",
-              style: myTheme.textTheme.subtitle2,
+              style: theme(context).textTheme.subtitle2,
             ),
           ),
           const Spacer(),
-          SignUpLoginButton(title: "Login", loginSignup: () {}),
+          SignUpLoginButton(
+            title: "Login",
+            loginSignupAction: () => loginSignUpViewModel.logIn(
+              formKey: loginSignUpViewModel.globalFormKeyList[0],
+              context: context,
+            ),
+            busy: loginSignUpViewModel.busy,
+          ),
           const Spacer(flex: 2),
-          Text("Don't have an account?", style: myTheme.textTheme.subtitle1),
+          Text("Don't have an account?",
+              style: theme(context).textTheme.subtitle1),
           Text(
             ">> Swipe left to sign up now! >>",
-            style: myTheme.textTheme.subtitle2!
+            style: theme(context)
+                .textTheme
+                .subtitle2!
                 .copyWith(decoration: TextDecoration.none),
           ),
         ],

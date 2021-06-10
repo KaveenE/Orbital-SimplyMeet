@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "747532767573",
+    "project_id": "simplymeet-76369",
+    "storage_bucket": "simplymeet-76369.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747532767573:android:e4e3462e9067f6f237dfdc",
+        "android_client_info": {
+          "package_name": "com.example.simply_meet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747532767573-a9e4cq0lp109idiifldo88ckqu1vpha9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnBQp4EwHE19kR4QihNt871FPxNbfA5fE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747532767573-a9e4cq0lp109idiifldo88ckqu1vpha9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "747532767573-j0k02sge4kf6b8bt3dgvcmgo407hu6mn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.simplyMeet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

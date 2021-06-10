@@ -1,18 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/start/ui/views/LoginSignupScreen.dart';
 import 'package:simply_meet/start/ui/views/WelcomeScreen.dart';
 
-
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
+
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((_) {
-    runApp(MyApp());
-  });
+  ]);
+
+  await Firebase.initializeApp();
+
+  runApp(MyApp());
+
   
 }
 
@@ -25,7 +30,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SimplyMeet',
       theme: ThemeData(
-  
         primaryColor: MINIMAL_PURPLE,
         scaffoldBackgroundColor: MINIMAL_PURPLE,
         backgroundColor: MINIMAL_PURPLE,
@@ -57,7 +61,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (_) => WelcomeScreen(),
         LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
-        // LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
+        HomeView.routeName: (_) => HomeView(),
       },
     );
   }

@@ -6,18 +6,19 @@ class FormBuilderWrapper extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
   final List<Widget> childrenInColumn;
-
+  final Key formKey;
   const FormBuilderWrapper({
-    required Key key,
+    required this.formKey,
     required this.childrenInColumn,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.min,
     this.crossAxisAlignment = CrossAxisAlignment.center,
   });
-@override
+  @override
   Widget build(BuildContext context) {
+    
     return FormBuilder(
-      key: key,
+      key: formKey,
       child: Column(
         mainAxisAlignment: this.mainAxisAlignment,
         mainAxisSize: this.mainAxisSize,

@@ -1,51 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/start/ui/helper_widgets/FormBuilderEmail.dart';
+import 'package:simply_meet/start/ui/helper_widgets/FormBuilderPassword.dart';
+import 'package:simply_meet/start/ui/helper_widgets/FormBuilderUserName.dart';
 
-import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderEmail.dart';
-import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderPassword.dart';
-import 'package:simply_meet/Screens/Login_SignUp/Widgets/FormBuilderUserName.dart';
 import 'package:simply_meet/start/ui/helper_widgets/SignUpLoginButton.dart';
+import 'package:simply_meet/start/view_models/login_signup_view_model.dart';
 
 class SignUpArea extends StatelessWidget {
-
-
   const SignUpArea();
 
   @override
   Widget build(BuildContext context) {
-    final myTheme = Theme.of(context);
+    final loginSignUpViewModel = Provider.of<LoginSignUpViewModel>(context);
 
     return Expanded(
       child: Column(
         children: <Widget>[
-          Spacer(flex: 2),
+          const Spacer(flex: 2),
           Text(
             "SIGN UP",
-            style: myTheme.textTheme.headline2!
-                .copyWith(color: myTheme.primaryColor),
+            style: theme(context)
+                .textTheme
+                .headline2!
+                .copyWith(color: theme(context).primaryColor),
           ),
-          Spacer(flex: 2),
-          FormBuilderUserName(),
-          Spacer(),
-          FormBuilderEmail(),
-          Spacer(),
-          FormBuilderPassword(
+          const Spacer(flex: 2),
+          const FormBuilderUserName(),
+          const Spacer(),
+          const FormBuilderEmail(),
+          const Spacer(),
+          const FormBuilderPassword(
             identifierForField: "password",
           ),
-          Spacer(),
-          FormBuilderPassword(
+          const Spacer(),
+          const FormBuilderPassword(
             hintText: "Confirm Password",
             identifierForField: "confirmPassword",
           ),
-          Spacer(),
+          const Spacer(),
           SignUpLoginButton(
             title: "Sign Up",
-            loginSignup: () {},
+            busy: loginSignUpViewModel.busy,
+            loginSignupAction: () => loginSignUpViewModel.signUp(
+                formKey: loginSignUpViewModel.globalFormKeyList[1] , context: context,),
           ),
-          Spacer(),
-          Text("Already have an account?", style: myTheme.textTheme.subtitle1),
+          const Spacer(),
+          Text("Already have an account?",
+              style: theme(context).textTheme.subtitle1),
           Text(
             "<< Swipe right to login <<",
-            style: myTheme.textTheme.subtitle2!
+            style: theme(context)
+                .textTheme
+                .subtitle2!
                 .copyWith(decoration: TextDecoration.none),
           ),
         ],

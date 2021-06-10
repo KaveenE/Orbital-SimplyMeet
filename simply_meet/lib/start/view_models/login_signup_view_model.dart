@@ -1,5 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:simply_meet/timetable/home_view.dart';
+import 'package:simply_meet/shared/custom_exception.dart';
+import 'package:simply_meet/shared/dialog_manager.dart';
+import 'package:simply_meet/start/backend/web/authentication_service.dart';
+import 'package:simply_meet/start/ui/helper_widgets/form_utility.dart';
 import 'package:simply_meet/start/ui/widgets/LoginArea.dart';
 import 'package:simply_meet/start/ui/widgets/SignUpArea.dart';
 import 'package:simply_meet/shared/ui_helpers.dart';
@@ -9,13 +15,13 @@ class LoginSignUpViewModel extends LoadableModel {
   late int _currentPage;
   late final int _numPages;
   late final BuildContext _context;
-  late final FormInfoCarrier _formInfoCarrier;
+  late final FormUtility _formInfoCarrier;
 
   LoginSignUpViewModel({
     required int currentPage,
     required int numPages,
     required BuildContext context,
-    required FormInfoCarrier formInfoCarrier,
+    required FormUtility formInfoCarrier,
   }) {
     this._currentPage = currentPage;
     this._numPages = numPages;
@@ -36,12 +42,8 @@ class LoginSignUpViewModel extends LoadableModel {
 
   List<List<Widget>> get childrenInColumnTochoose {
     return [
-      [
-        LoginArea(),
-      ],
-      [
-        SignUpArea(),
-      ],
+      [LoginArea()],
+      [SignUpArea()],
     ];
   }
 
@@ -52,35 +54,154 @@ class LoginSignUpViewModel extends LoadableModel {
   }
 
   void toggleVisibility() {
-    this._formInfoCarrier._toggleVisibility();
+    this._formInfoCarrier.toggleVisibility();
     super.notifyListeners();
   }
 
-  bool get hidePassword => this._formInfoCarrier._hidePassword;
+  bool get hidePassword => this._formInfoCarrier.hidePassword;
 
   List<GlobalKey<FormBuilderState>> get globalFormKeyList =>
       this._formInfoCarrier.globalFormKeyList;
-}
 
-class FormInfoCarrier {
-  late final List<GlobalKey<FormBuilderState>> _globalFormKeyList;
-  bool _hidePassword = true;
+  //Methods via delegation of AuthenticationService class
+  Future<void> logIn({
+    required GlobalKey<FormBuilderState> formKey,
+    required BuildContext context,
+  }) async {
+    
+    if (!_validateAllFieldsNonEmpty(
+        formKey: formKey,
+        context: context,
+        titleForDialog: "Login Failure")) {
+      
+      return;
+    }
 
-  FormInfoCarrier({
-    required List<GlobalKey<FormBuilderState>> globalFormKeyList,
-    required bool hidePassword,
-  }) {
-    _globalFormKeyList = globalFormKeyList;
+    final email = formKey.currentState!.fields["email"]!.value as String;
+    final password = formKey.currentState!.fields["password"]!.value as String;
+
+    bool loggedIn = false;
+
+    final dialogManager = DialogManager.singleton;
+    final titleForDialog = "Login Failure";
+
+    try {
+      super.setBusy(true);
+      loggedIn = await AuthenticationService.singleton
+          .logIn(email: email, password: password);
+
+    } on FirebaseAuthException catch (exception) {
+
+      super.setBusy(false);
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog,
+          description: exception.message!,
+          context: context)
+        ..show();
+    } catch (exception) {
+
+      super.setBusy(false);
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog,
+          description: "Please try again.",
+          context: context)
+        ..show();
+    }
+
+    super.setBusy(false);
+
+    if (loggedIn) {
+      Navigator.pushNamed(context, HomeView.routeName);
+    }
   }
 
-  List<GlobalKey<FormBuilderState>> get globalFormKeyList {
-    List<GlobalKey<FormBuilderState>> duplicate = [];
-    duplicate.addAll(_globalFormKeyList);
-    return duplicate;
+  Future<void> signUp({
+    required GlobalKey<FormBuilderState> formKey,
+    required BuildContext context,
+  }) async {
+    
+    if (!_validateAllFieldsNonEmpty(
+        formKey: formKey,
+        context: context,
+        titleForDialog: "Sign Up Failure")) {
+      
+      return;
+    }
+    
+    final email = formKey.currentState!.fields["email"]?.value as String;
+    final password = formKey.currentState!.fields["password"]?.value as String;
+    final reEnteredPassword =
+        formKey.currentState!.fields["confirmPassword"]?.value as String;
+
+    bool signedUp = false;
+
+    final dialogManager = DialogManager.singleton;
+    final titleForDialog = "Sign Up Failure";
+
+    //Using local check & FirebaseAuthException error codes to throw validation messages
+    try {
+      super.setBusy(true);
+
+      if (reEnteredPassword.isEmpty ||
+          reEnteredPassword.compareTo(password) != 0) {
+        throw PasswordNotSameException(
+            message: "Passwords entered are not same.");
+      }
+
+      signedUp = await AuthenticationService.singleton
+          .signUp(email: email, password: password);
+    } on PasswordNotSameException catch (exception) {
+      
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog,
+          description: exception.message,
+          context: context)
+        ..show();
+    } on FirebaseAuthException catch (exception) {
+      
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog,
+          description: exception.message!,
+          context: context)
+        ..show();
+    } catch (exception) {
+      
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog,
+          description: "Please try again.",
+          context: context)
+        ..show();
+    }
+
+    super.setBusy(false);
+
+    if (signedUp) {
+      Navigator.pushNamed(context, HomeView.routeName);
+    }
   }
 
-  void _toggleVisibility() {
-    _hidePassword = !_hidePassword;
+  bool _validateAllFieldsNonEmpty(
+      {required GlobalKey<FormBuilderState> formKey,
+      required String titleForDialog,
+      required BuildContext context}) {
+    try {
+      
+      for (final value in formKey.currentState!.fields.values) {
+        
+        if (value.value == null || value.value.isEmpty) {
+          
+          throw AllFieldsNotFilledException(
+              message: "Input fields must not be empty.");
+        }
+      }
+    } on AllFieldsNotFilledException catch (e) {
+      DialogManager.singleton.defaultErrorDialog(
+          title: titleForDialog, description: e.message, context: context)
+        ..show();
+      return false;
+    }
+
+    return true;
   }
 }
 
@@ -95,8 +216,7 @@ class _PageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final defaultWidth = screenSize.width * 0.04;
+    final defaultWidth = screenWidth(context)* 0.04;
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
@@ -104,7 +224,7 @@ class _PageIndicator extends StatelessWidget {
       height: 8.0,
       width: isActive ? myWidth : defaultWidth,
       decoration: BoxDecoration(
-        color: isActive ? Colors.white : Color(0xff7B51D3),
+        color: isActive ? Color(0xff7B51D3) : Color.fromRGBO(210,180,222,1),
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );

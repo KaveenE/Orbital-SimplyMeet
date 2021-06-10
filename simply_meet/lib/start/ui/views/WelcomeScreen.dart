@@ -9,7 +9,6 @@ class WelcomeScreen extends StatelessWidget {
   static const int _numPages = 3;
   final int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
-  
 
   @override
   Widget build(BuildContext context) {
@@ -22,50 +21,52 @@ class WelcomeScreen extends StatelessWidget {
       child: Consumer<WelcomeViewModel>(
         builder: (_, welcomeViewModel, __) => Scaffold(
           backgroundColor: theme(context).scaffoldBackgroundColor,
-          body: Container(
-            padding: EdgeInsets.symmetric(vertical: 25.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const Align(
-                  alignment: Alignment.topRight,
-                  child: SkipButton(),
-                ),
-                const Spacer(),
-                Center(
-                  child: Text(
-                    "Welcome to SimplyMeet",
-                    style: theme(context).textTheme.headline2,
+          body: SingleChildScrollView(
+            child: Container(
+              height: screenHeight(context),
+              padding: EdgeInsets.symmetric(vertical: 25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  const Align(
+                    alignment: Alignment.topRight,
+                    child: SkipButton(),
                   ),
-                ),
-                const Spacer(),
-                Container(
-                  height: screenHeight(context) * 0.6,
-                  child: PageView.builder(
-                    physics: ClampingScrollPhysics(),
-                    controller: _pageController,
-                    onPageChanged: (int page) {
-                     
-                      welcomeViewModel.setCurrentPage(page);
-                    },
-                    itemCount: _numPages,
-                    itemBuilder: (_, index) {
-                      final currMap = listOfMapsToPass[index];
+                  const Spacer(),
+                  Center(
+                    child: Text(
+                      "Welcome to SimplyMeet",
+                      style: theme(context).textTheme.headline2,
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    height: screenHeight(context) * 0.6,
+                    child: PageView.builder(
+                      physics: ClampingScrollPhysics(),
+                      controller: _pageController,
+                      onPageChanged: (int page) {
+                        welcomeViewModel.setCurrentPage(page);
+                      },
+                      itemCount: _numPages,
+                      itemBuilder: (_, index) {
+                        final currMap = listOfMapsToPass[index];
 
-                      return WelcomeScreenPage(
-                        imageURL: currMap["imageURL"]!,
-                        title1: currMap["title1"]!,
-                        title2: currMap["title2"]!,
-                      );
-                    },
+                        return WelcomeScreenPage(
+                          imageURL: currMap["imageURL"]!,
+                          title1: currMap["title1"]!,
+                          title2: currMap["title2"]!,
+                        );
+                      },
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: welcomeViewModel.buildPageIndicator(),
-                ),
-                const Spacer(),
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: welcomeViewModel.buildPageIndicator(),
+                  ),
+                  const Spacer(),
+                ],
+              ),
             ),
           ),
           bottomSheet: welcomeViewModel.buildBottomSheet(),
