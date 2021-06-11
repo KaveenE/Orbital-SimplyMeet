@@ -6,8 +6,8 @@ import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/shared/models/custom_exception.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
 import 'package:simply_meet/start/ui/helper_widgets/form_utility.dart';
-import 'package:simply_meet/start/ui/widgets/LoginArea.dart';
-import 'package:simply_meet/start/ui/widgets/SignUpArea.dart';
+import 'package:simply_meet/start/ui/widgets/login_area.dart';
+import 'package:simply_meet/start/ui/widgets/sign_up_area.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/shared/view_models/loadable_model.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/start/ui/widgets/WelcomeScreenPage.dart';
-import 'package:simply_meet/start/ui/views/LoginSignupScreen.dart';
+import 'package:simply_meet/start/ui/widgets/welcome_view_body.dart';
+import 'package:simply_meet/start/ui/views/login_signup_screen.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/view_models/welcome_view_model.dart';
 
@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
                       itemBuilder: (_, index) {
                         final currMap = listOfMapsToPass[index];
 
-                        return WelcomeScreenPage(
+                        return WelcomeViewBody(
                           imageURL: currMap["imageURL"]!,
                           title1: currMap["title1"]!,
                           title2: currMap["title2"]!,

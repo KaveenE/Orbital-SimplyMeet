@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/start/ui/views/LoginSignupScreen.dart';
+import 'package:simply_meet/start/ui/views/login_signup_screen.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class WelcomeViewModel extends ChangeNotifier {

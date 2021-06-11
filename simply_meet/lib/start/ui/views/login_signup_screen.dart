@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/ui/helper_widgets/form_utility.dart';
 
-import 'package:simply_meet/start/ui/widgets/FormBuilderWrapper.dart';
+import 'package:simply_meet/start/ui/widgets/formbuilder_wrapper.dart';
 import 'package:simply_meet/start/view_models/login_signup_view_model.dart';
 
 class LoginSignupScreen extends StatefulWidget {

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
-class WelcomeScreenPage extends StatelessWidget {
+class WelcomeViewBody extends StatelessWidget {
   final String imageURL;
   final String title1;
   final String title2;
 
-  const WelcomeScreenPage({
+  const WelcomeViewBody({
     required this.imageURL,
     required this.title1,
     required this.title2,

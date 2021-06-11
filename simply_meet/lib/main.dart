@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
 import 'package:simply_meet/timetable/home_view.dart';
-import 'package:simply_meet/start/ui/views/LoginSignupScreen.dart';
-import 'package:simply_meet/start/ui/views/WelcomeScreen.dart';
+import 'package:simply_meet/start/ui/views/login_signup_screen.dart';
+import 'package:simply_meet/start/ui/views/welcome_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
