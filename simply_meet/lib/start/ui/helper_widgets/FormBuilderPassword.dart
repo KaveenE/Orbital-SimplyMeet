@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/view_models/login_signup_view_model.dart';
 
 class FormBuilderPassword extends StatelessWidget {

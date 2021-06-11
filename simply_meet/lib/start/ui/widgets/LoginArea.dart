@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/ui/helper_widgets/FormBuilderEmail.dart';
 import 'package:simply_meet/start/ui/helper_widgets/FormBuilderPassword.dart';
 

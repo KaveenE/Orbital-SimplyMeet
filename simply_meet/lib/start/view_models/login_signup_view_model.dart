@@ -1,15 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
 import 'package:simply_meet/timetable/home_view.dart';
-import 'package:simply_meet/shared/custom_exception.dart';
-import 'package:simply_meet/shared/dialog_manager.dart';
-import 'package:simply_meet/start/backend/web/authentication_service.dart';
+import 'package:simply_meet/shared/models/custom_exception.dart';
+import 'package:simply_meet/shared/utility/dialog_manager.dart';
 import 'package:simply_meet/start/ui/helper_widgets/form_utility.dart';
 import 'package:simply_meet/start/ui/widgets/LoginArea.dart';
 import 'package:simply_meet/start/ui/widgets/SignUpArea.dart';
-import 'package:simply_meet/shared/ui_helpers.dart';
-import 'package:simply_meet/start/view_models/loadable_model.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
+import 'package:simply_meet/shared/view_models/loadable_model.dart';
 
 class LoginSignUpViewModel extends LoadableModel {
   late int _currentPage;
@@ -68,49 +67,27 @@ class LoginSignUpViewModel extends LoadableModel {
     required GlobalKey<FormBuilderState> formKey,
     required BuildContext context,
   }) async {
-    
     if (!_validateAllFieldsNonEmpty(
-        formKey: formKey,
-        context: context,
-        titleForDialog: "Login Failure")) {
-      
+        formKey: formKey, context: context, titleForDialog: "Login Failure")) {
       return;
     }
 
     final email = formKey.currentState!.fields["email"]!.value as String;
     final password = formKey.currentState!.fields["password"]!.value as String;
 
-    bool loggedIn = false;
-
     final dialogManager = DialogManager.singleton;
     final titleForDialog = "Login Failure";
 
-    try {
-      super.setBusy(true);
-      loggedIn = await AuthenticationService.singleton
-          .logIn(email: email, password: password);
-
-    } on FirebaseAuthException catch (exception) {
-
-      super.setBusy(false);
-      dialogManager.defaultErrorDialog(
-          title: titleForDialog,
-          description: exception.message!,
-          context: context)
-        ..show();
-    } catch (exception) {
-
-      super.setBusy(false);
-      dialogManager.defaultErrorDialog(
-          title: titleForDialog,
-          description: "Please try again.",
-          context: context)
-        ..show();
-    }
-
+    super.setBusy(true);
+    final response = await AuthenticationService.singleton
+        .logIn(email: email, password: password);
     super.setBusy(false);
 
-    if (loggedIn) {
+    if (response != null) {
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog, description: response, context: context)
+        ..show();
+    } else {
       Navigator.pushNamed(context, HomeView.routeName);
     }
   }
@@ -119,65 +96,46 @@ class LoginSignUpViewModel extends LoadableModel {
     required GlobalKey<FormBuilderState> formKey,
     required BuildContext context,
   }) async {
-    
     if (!_validateAllFieldsNonEmpty(
         formKey: formKey,
         context: context,
         titleForDialog: "Sign Up Failure")) {
-      
       return;
     }
-    
+
     final email = formKey.currentState!.fields["email"]?.value as String;
     final password = formKey.currentState!.fields["password"]?.value as String;
     final reEnteredPassword =
         formKey.currentState!.fields["confirmPassword"]?.value as String;
 
-    bool signedUp = false;
-
     final dialogManager = DialogManager.singleton;
     final titleForDialog = "Sign Up Failure";
 
-    //Using local check & FirebaseAuthException error codes to throw validation messages
-    try {
-      super.setBusy(true);
+    //Local validation
+    if (reEnteredPassword.isEmpty ||
+        reEnteredPassword.compareTo(password) != 0) {
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog,
+          description: "Passwords entered are not same",
+          context: context)
+        ..show();
 
-      if (reEnteredPassword.isEmpty ||
-          reEnteredPassword.compareTo(password) != 0) {
-        throw PasswordNotSameException(
-            message: "Passwords entered are not same.");
-      }
-
-      signedUp = await AuthenticationService.singleton
-          .signUp(email: email, password: password);
-    } on PasswordNotSameException catch (exception) {
-      
-      dialogManager.defaultErrorDialog(
-          title: titleForDialog,
-          description: exception.message,
-          context: context)
-        ..show();
-    } on FirebaseAuthException catch (exception) {
-      
-      dialogManager.defaultErrorDialog(
-          title: titleForDialog,
-          description: exception.message!,
-          context: context)
-        ..show();
-    } catch (exception) {
-      
-      dialogManager.defaultErrorDialog(
-          title: titleForDialog,
-          description: "Please try again.",
-          context: context)
-        ..show();
+      return;
     }
 
+    super.setBusy(true);
+    final response = await AuthenticationService.singleton
+        .signUp(email: email, password: password);
     super.setBusy(false);
 
-    if (signedUp) {
+    if (response != null) {
+      dialogManager.defaultErrorDialog(
+          title: titleForDialog, description: response, context: context)
+        ..show();
+    } else {
       Navigator.pushNamed(context, HomeView.routeName);
     }
+  
   }
 
   bool _validateAllFieldsNonEmpty(
@@ -185,11 +143,8 @@ class LoginSignUpViewModel extends LoadableModel {
       required String titleForDialog,
       required BuildContext context}) {
     try {
-      
       for (final value in formKey.currentState!.fields.values) {
-        
         if (value.value == null || value.value.isEmpty) {
-          
           throw AllFieldsNotFilledException(
               message: "Input fields must not be empty.");
         }
@@ -216,7 +171,7 @@ class _PageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultWidth = screenWidth(context)* 0.04;
+    final defaultWidth = screenWidth(context) * 0.04;
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
@@ -224,7 +179,7 @@ class _PageIndicator extends StatelessWidget {
       height: 8.0,
       width: isActive ? myWidth : defaultWidth,
       decoration: BoxDecoration(
-        color: isActive ? Color(0xff7B51D3) : Color.fromRGBO(210,180,222,1),
+        color: isActive ? Color(0xff7B51D3) : Color.fromRGBO(210, 180, 222, 1),
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );

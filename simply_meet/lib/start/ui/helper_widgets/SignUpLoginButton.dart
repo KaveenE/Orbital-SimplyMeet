@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class SignUpLoginButton extends StatelessWidget {
   final String title;

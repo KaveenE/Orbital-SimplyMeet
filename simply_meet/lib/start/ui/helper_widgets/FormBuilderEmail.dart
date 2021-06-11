@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class FormBuilderEmail extends StatelessWidget {
   const FormBuilderEmail({
@@ -20,6 +20,7 @@ class FormBuilderEmail extends StatelessWidget {
       //   FormBuilderValidators.email(context,
       //       errorText: "Not a valid email address")
       // ]),
+      autofillHints: [AutofillHints.email],
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         border: OutlineInputBorder(

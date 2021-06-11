@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class WelcomeScreenPage extends StatelessWidget {
   final String imageURL;

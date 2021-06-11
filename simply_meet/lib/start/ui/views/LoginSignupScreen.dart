@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/shared/ui_helpers.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/ui/helper_widgets/form_utility.dart';
 
 import 'package:simply_meet/start/ui/widgets/FormBuilderWrapper.dart';

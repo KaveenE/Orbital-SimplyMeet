@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DialogManager {
-  static final DialogManager singleton = DialogManager();
+  static final DialogManager _singleton = DialogManager._();
+  static DialogManager get singleton => _singleton;
+  DialogManager._();
 
   AwesomeDialog defaultErrorDialog({
     required String title,
