@@ -3,12 +3,8 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
-  static final AuthenticationService _singleton = AuthenticationService._();
-  static AuthenticationService get singleton => _singleton;
-
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  AuthenticationService._();
 
   Future<String?> logIn(
       {required String email, required String password}) async {

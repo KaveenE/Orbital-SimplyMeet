@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
 import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/shared/models/custom_exception.dart';
@@ -79,7 +80,7 @@ class LoginSignUpViewModel extends LoadableModel {
     final titleForDialog = "Login Failure";
 
     super.setBusy(true);
-    final response = await AuthenticationService.singleton
+    final response = await Provider.of<AuthenticationService>(context,listen: false)
         .logIn(email: email, password: password);
     super.setBusy(false);
 
@@ -124,7 +125,7 @@ class LoginSignUpViewModel extends LoadableModel {
     }
 
     super.setBusy(true);
-    final response = await AuthenticationService.singleton
+    final response = await Provider.of<AuthenticationService>(context,listen: false)
         .signUp(email: email, password: password);
     super.setBusy(false);
 
@@ -135,7 +136,6 @@ class LoginSignUpViewModel extends LoadableModel {
     } else {
       Navigator.pushNamed(context, HomeView.routeName);
     }
-  
   }
 
   bool _validateAllFieldsNonEmpty(
