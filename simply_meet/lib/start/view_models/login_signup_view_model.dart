@@ -89,10 +89,13 @@ class LoginSignUpViewModel extends LoadableModel {
 
     if (response != null) {
       dialogManager.defaultErrorDialog(
-          title: titleForDialog, description: response, context: context)
-        ..show();
+        title: titleForDialog,
+        description: response,
+        context: context,
+      )..show();
     } else {
-      if (await _isVerified(FirebaseAuth.instance)) {
+      
+      if (! (await _isVerified(FirebaseAuth.instance))) {
         Navigator.pushNamed(context, VerifyEmailView.routeName);
       }
 
@@ -123,29 +126,28 @@ class LoginSignUpViewModel extends LoadableModel {
     if (reEnteredPassword.isEmpty ||
         reEnteredPassword.compareTo(password) != 0) {
       dialogManager.defaultErrorDialog(
-          title: titleForDialog,
-          description: "Passwords entered are not same",
-          context: context)
-        ..show();
+        title: titleForDialog,
+        description: "Passwords entered are not same",
+        context: context,
+      )..show();
 
       return;
     }
 
-    
     super.setBusy(true);
-    
+
     final response =
         await Provider.of<AuthenticationService>(context, listen: false)
             .signUp(email: email, password: password);
     super.setBusy(false);
-    
+
     if (response != null) {
       dialogManager.defaultErrorDialog(
           title: titleForDialog, description: response, context: context)
         ..show();
     } else {
       await FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      
+
       Navigator.pushNamed(context, VerifyEmailView.routeName);
     }
   }

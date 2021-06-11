@@ -39,6 +39,8 @@ dependencies:
   cloud_firestore: ^2.2.1
   #More customizable and easy to use compared to the standard dialogs like AlertDialog
   awesome_dialog: ^2.1.0
+  #A diaglog configured to show from the top to give the illusion of a top snackbar
+  top_snackbar_flutter: ^1.0.0
 
 
 
@@ -79,6 +81,7 @@ flutter:
     - assets/animations/GirlOnPhone.json
     - assets/animations/Login.json
     - assets/animations/TwoPeopleWorking.json
+    - assets/animations/DumbGuyThinking.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simply_meet/start/ui/views/login_signup_screen.dart';
+import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class WelcomeViewModel extends ChangeNotifier {
@@ -77,7 +77,7 @@ class _GetStartedButton extends StatelessWidget {
 
     return InkWell(
       splashColor: theme(context).primaryColor,
-      onTap: () => Navigator.pushNamed(context, LoginSignupScreen.routeName),
+      onTap: () => Navigator.pushNamed(context, LoginSignupView.routeName),
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(bottom: 10),

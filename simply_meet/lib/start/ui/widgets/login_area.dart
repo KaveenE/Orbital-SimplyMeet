@@ -5,6 +5,7 @@ import 'package:simply_meet/start/ui/helper_widgets/formbuilder_email.dart';
 import 'package:simply_meet/start/ui/helper_widgets/formbuilder_password.dart';
 
 import 'package:simply_meet/start/ui/helper_widgets/signup_login_button.dart';
+import 'package:simply_meet/start/ui/views/forget_password.dart';
 import 'package:simply_meet/start/view_models/login_signup_view_model.dart';
 
 class LoginArea extends StatelessWidget {
@@ -34,9 +35,12 @@ class LoginArea extends StatelessWidget {
           const Spacer(),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "Forgot your password?",
-              style: theme(context).textTheme.subtitle2,
+            child: TextButton(
+              onPressed: () => Navigator.of(context).pushNamed(ForgetPasswordView.routeName),
+              child: Text(
+                "Forgot your password?",
+                style: theme(context).textTheme.subtitle2,
+              ),
             ),
           ),
           const Spacer(),

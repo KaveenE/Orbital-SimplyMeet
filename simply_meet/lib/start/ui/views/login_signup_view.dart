@@ -8,22 +8,22 @@ import 'package:simply_meet/start/ui/helper_widgets/form_utility.dart';
 import 'package:simply_meet/start/ui/widgets/formbuilder_wrapper.dart';
 import 'package:simply_meet/start/view_models/login_signup_view_model.dart';
 
-class LoginSignupScreen extends StatefulWidget {
+class LoginSignupView extends StatefulWidget {
   static const routeName = '/loginSignupScreen';
 
   static const int _numPages = 2;
 
   @override
-  _LoginSignupScreenState createState() => _LoginSignupScreenState();
+  _LoginSignupViewState createState() => _LoginSignupViewState();
 }
 
-class _LoginSignupScreenState extends State<LoginSignupScreen> {
+class _LoginSignupViewState extends State<LoginSignupView> {
   final int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
   final bool _hidePassword = true;
   final List<GlobalKey<FormBuilderState>> _globalFormKeyList =
       List<GlobalKey<FormBuilderState>>.generate(
-    LoginSignupScreen._numPages,
+    LoginSignupView._numPages,
     (index) {
       final formKey =
           GlobalKey<FormBuilderState>(debugLabel: 'GlobalFormKey #$index ');
@@ -37,6 +37,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
     return Scaffold(
       body: SingleChildScrollView(
+        reverse: true,
         child: SizedBox(
           height: screenHeight(context),
           child: Column(
@@ -64,7 +65,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                   child: ChangeNotifierProvider<LoginSignUpViewModel>(
                     create: (_) => LoginSignUpViewModel(
                       currentPage: _currentPage,
-                      numPages: LoginSignupScreen._numPages,
+                      numPages: LoginSignupView._numPages,
                       context: context,
                       formInfoCarrier: FormUtility(
                         globalFormKeyList: _globalFormKeyList,
@@ -85,7 +86,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               onPageChanged: (int page) {
                                 loginSignUpViewModel.setCurrentPage(page);
                               },
-                              itemCount: LoginSignupScreen._numPages,
+                              itemCount: LoginSignupView._numPages,
                               itemBuilder: (_, idx) {
                                 return FormBuilderWrapper(
                                   formKey: _globalFormKeyList[idx],

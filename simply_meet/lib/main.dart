@@ -5,10 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
+import 'package:simply_meet/start/ui/views/forget_password.dart';
 import 'package:simply_meet/start/ui/views/verfiy_email_view.dart';
 import 'package:simply_meet/timetable/home_view.dart';
-import 'package:simply_meet/start/ui/views/login_signup_screen.dart';
-import 'package:simply_meet/start/ui/views/welcome_screen.dart';
+import 'package:simply_meet/start/ui/views/login_signup_view.dart';
+import 'package:simply_meet/start/ui/views/welcome_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,9 +71,10 @@ class MyApp extends StatelessWidget {
               ),
         ),
         routes: {
-          '/': (_) => WelcomeScreen(),
-          LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
+          '/': (_) => WelcomeView(),
+          LoginSignupView.routeName: (_) => LoginSignupView(),
           VerifyEmailView.routeName: (_)=> VerifyEmailView(),
+          ForgetPasswordView.routeName: (_) => ForgetPasswordView(),
           HomeView.routeName: (_) => HomeView(),
         },
       ),

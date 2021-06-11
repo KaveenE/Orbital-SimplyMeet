@@ -14,7 +14,7 @@ class VerifyEmailViewModel extends LoadableModel {
       if (await _isVerified()) {
         
         timer.cancel();
-        Navigator.of(_context).pushNamed(HomeView.routeName);
+        Navigator.of(_context).pushReplacementNamed(HomeView.routeName);
       }
     });
   }

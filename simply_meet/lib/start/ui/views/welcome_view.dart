@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/start/ui/widgets/welcome_view_body.dart';
-import 'package:simply_meet/start/ui/views/login_signup_screen.dart';
+import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/view_models/welcome_view_model.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeView extends StatelessWidget {
   static const int _numPages = 3;
   final int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
@@ -22,6 +22,7 @@ class WelcomeScreen extends StatelessWidget {
         builder: (_, welcomeViewModel, __) => Scaffold(
           backgroundColor: theme(context).scaffoldBackgroundColor,
           body: SingleChildScrollView(
+            reverse: true,
             child: Container(
               height: screenHeight(context),
               padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -92,7 +93,7 @@ class SkipButton extends StatelessWidget {
         ),
       ),
       onPressed: () =>
-          Navigator.pushNamed(context, LoginSignupScreen.routeName),
+          Navigator.pushNamed(context, LoginSignupView.routeName),
     );
   }
 }
