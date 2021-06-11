@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
+import 'package:simply_meet/start/ui/views/verfiy_email_view.dart';
 import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/start/ui/views/login_signup_screen.dart';
 import 'package:simply_meet/start/ui/views/welcome_screen.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (_) => WelcomeScreen(),
           LoginSignupScreen.routeName: (_) => LoginSignupScreen(),
+          VerifyEmailView.routeName: (_)=> VerifyEmailView(),
           HomeView.routeName: (_) => HomeView(),
         },
       ),

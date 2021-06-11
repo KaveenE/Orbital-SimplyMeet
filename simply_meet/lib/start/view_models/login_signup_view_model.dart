@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
+import 'package:simply_meet/start/ui/views/verfiy_email_view.dart';
 import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/shared/models/custom_exception.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
@@ -80,8 +82,9 @@ class LoginSignUpViewModel extends LoadableModel {
     final titleForDialog = "Login Failure";
 
     super.setBusy(true);
-    final response = await Provider.of<AuthenticationService>(context,listen: false)
-        .logIn(email: email, password: password);
+    final response =
+        await Provider.of<AuthenticationService>(context, listen: false)
+            .logIn(email: email, password: password);
     super.setBusy(false);
 
     if (response != null) {
@@ -89,6 +92,10 @@ class LoginSignUpViewModel extends LoadableModel {
           title: titleForDialog, description: response, context: context)
         ..show();
     } else {
+      if (await _isVerified(FirebaseAuth.instance)) {
+        Navigator.pushNamed(context, VerifyEmailView.routeName);
+      }
+
       Navigator.pushNamed(context, HomeView.routeName);
     }
   }
@@ -124,17 +131,22 @@ class LoginSignUpViewModel extends LoadableModel {
       return;
     }
 
+    
     super.setBusy(true);
-    final response = await Provider.of<AuthenticationService>(context,listen: false)
-        .signUp(email: email, password: password);
+    
+    final response =
+        await Provider.of<AuthenticationService>(context, listen: false)
+            .signUp(email: email, password: password);
     super.setBusy(false);
-
+    
     if (response != null) {
       dialogManager.defaultErrorDialog(
           title: titleForDialog, description: response, context: context)
         ..show();
     } else {
-      Navigator.pushNamed(context, HomeView.routeName);
+      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+      
+      Navigator.pushNamed(context, VerifyEmailView.routeName);
     }
   }
 
@@ -157,6 +169,16 @@ class LoginSignUpViewModel extends LoadableModel {
     }
 
     return true;
+  }
+
+  Future<bool> _isVerified(FirebaseAuth firebaseAuth) async {
+    final user = firebaseAuth.currentUser;
+
+    //Call reload to retrieve latest info on user from Firebase
+    //Allows for accurately checking of user related shit
+    await user!.reload();
+
+    return user.emailVerified;
   }
 }
 
