@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
+
 import 'package:simply_meet/start/ui/views/forget_password.dart';
 import 'package:simply_meet/start/ui/views/verfiy_email_view.dart';
 import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/start/ui/views/welcome_view.dart';
+
+import 'shared/services/flutterfire/authentication_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

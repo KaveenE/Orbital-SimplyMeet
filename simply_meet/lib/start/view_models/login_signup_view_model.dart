@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
+import 'package:simply_meet/shared/services/flutterfire/authentication_service.dart';
 import 'package:simply_meet/start/ui/views/verfiy_email_view.dart';
 import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/shared/models/custom_exception.dart';

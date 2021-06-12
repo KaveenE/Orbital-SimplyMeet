@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/shared/flutterfire/authentication_service.dart';
+import 'package:simply_meet/shared/services/flutterfire/authentication_service.dart';
 import 'package:simply_meet/shared/models/custom_exception.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
