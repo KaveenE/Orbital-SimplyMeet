@@ -6,13 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:simply_meet/start/ui/views/forget_password.dart';
-import 'package:simply_meet/start/ui/views/verfiy_email_view.dart';
+import 'package:simply_meet/start/ui/views/verify_email_view.dart';
 import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/start/ui/views/welcome_view.dart';
 
 import 'shared/services/flutterfire/authentication_service.dart';
 
+//TODO: For start screens, implement email address change? Sign out will do later.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

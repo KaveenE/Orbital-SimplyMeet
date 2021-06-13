@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/services/flutterfire/authentication_service.dart';
-import 'package:simply_meet/start/ui/views/verfiy_email_view.dart';
+import 'package:simply_meet/start/ui/views/verify_email_view.dart';
 import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/shared/models/custom_exception.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
@@ -113,7 +113,8 @@ class LoginSignUpViewModel extends LoadableModel {
         titleForDialog: "Sign Up Failure")) {
       return;
     }
-
+    
+    final username = formKey.currentState!.fields["username"]?.value as String;
     final email = formKey.currentState!.fields["email"]?.value as String;
     final password = formKey.currentState!.fields["password"]?.value as String;
     final reEnteredPassword =
@@ -138,7 +139,7 @@ class LoginSignUpViewModel extends LoadableModel {
 
     final response =
         await Provider.of<AuthenticationService>(context, listen: false)
-            .signUp(email: email, password: password);
+            .signUp(email: email, password: password, username: username);
     super.setBusy(false);
 
     if (response != null) {
