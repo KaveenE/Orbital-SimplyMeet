@@ -13,15 +13,15 @@ const Widget verticalSpaceLarge =  SizedBox(height: 50.0);
 const Widget verticalSpaceMassive =  SizedBox(height: 120.0);
 
 //Screen sizes
-double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
-double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+ double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+ double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-double subScreenWidth(BuildContext context, {double offset = 0}) =>
+ double subScreenWidth(BuildContext context, {double offset = 0}) =>
     MediaQuery.of(context).size.width - offset;
-double subScreenHeight(BuildContext context, {double offset = 0}) =>
+ double subScreenHeight(BuildContext context, {double offset = 0}) =>
     MediaQuery.of(context).size.height - offset;
 
 //Theme data
-ThemeData theme(BuildContext context) => Theme.of(context);
+ ThemeData theme(BuildContext context) => Theme.of(context);
 
 

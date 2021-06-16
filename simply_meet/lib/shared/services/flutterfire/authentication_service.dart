@@ -27,21 +27,7 @@ class AuthenticationService {
       password: password,
       username: username,
     );
-    /*try {
-      print("b4");
-      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      print("after");
-      await userCredential.user!.updateDisplayName(username);
-    } on FirebaseAuthException catch (e) {
-      return e.message;
-    } on SocketException {
-      return "There is no Internet Connection";
-    } catch (e) {
-      print("Exception generated in AuthenticationService class. " +
-          e.toString());
-      return "Please try again";
-    }*/
+
   }
 
   Future<String?> logOut() async {

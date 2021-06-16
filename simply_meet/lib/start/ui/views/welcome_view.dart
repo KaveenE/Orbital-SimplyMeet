@@ -12,6 +12,7 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return ChangeNotifierProvider(
       create: (_) => WelcomeViewModel(
         currentPage: _currentPage,
@@ -92,8 +93,7 @@ class SkipButton extends StatelessWidget {
           fontSize: 20,
         ),
       ),
-      onPressed: () =>
-          Navigator.pushNamed(context, LoginSignupView.routeName),
+      onPressed: () => Navigator.pushNamed(context, LoginSignupView.routeName),
     );
   }
 }

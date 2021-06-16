@@ -21,20 +21,21 @@ class _LoginSignupViewState extends State<LoginSignupView> {
   final int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
   final bool _hidePassword = true;
+
   final List<GlobalKey<FormBuilderState>> _globalFormKeyList =
       List<GlobalKey<FormBuilderState>>.generate(
     LoginSignupView._numPages,
     (index) {
       final formKey =
           GlobalKey<FormBuilderState>(debugLabel: 'GlobalFormKey #$index ');
-      print("key #$index produced with state:${formKey.currentState}");
+     
       return formKey;
     },
   );
 
   @override
   Widget build(BuildContext context) {
-
+    
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,

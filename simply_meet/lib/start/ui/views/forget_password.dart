@@ -20,6 +20,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,

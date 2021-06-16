@@ -22,6 +22,7 @@ class FormBuilderEmail extends StatelessWidget {
       // ]),
       autofillHints: [AutofillHints.email],
       textInputAction: TextInputAction.next,
+      
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(screenWidth(context) * 0.06),

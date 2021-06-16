@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
+import 'package:simply_meet/core/ui/views/tabs_all_views.dart';
 import 'package:simply_meet/shared/services/flutterfire/authentication_service.dart';
 import 'package:simply_meet/start/ui/views/verify_email_view.dart';
-import 'package:simply_meet/timetable/home_view.dart';
 import 'package:simply_meet/shared/models/custom_exception.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
 import 'package:simply_meet/start/ui/helper_widgets/form_utility.dart';
@@ -70,6 +70,7 @@ class LoginSignUpViewModel extends LoadableModel {
     required GlobalKey<FormBuilderState> formKey,
     required BuildContext context,
   }) async {
+    
     if (!_validateAllFieldsNonEmpty(
         formKey: formKey, context: context, titleForDialog: "Login Failure")) {
       return;
@@ -95,11 +96,14 @@ class LoginSignUpViewModel extends LoadableModel {
       )..show();
     } else {
       
-      if (! (await _isVerified(FirebaseAuth.instance))) {
+      if (super.currentUser != null && !(await _isVerified(FirebaseAuth.instance))) {
+        print("gg veri");
         Navigator.pushNamed(context, VerifyEmailView.routeName);
       }
-
-      Navigator.pushNamed(context, HomeView.routeName);
+      else {
+        Navigator.pushNamed(context, TabsAllViews.routeName);
+      }
+      
     }
   }
 
@@ -175,13 +179,13 @@ class LoginSignUpViewModel extends LoadableModel {
   }
 
   Future<bool> _isVerified(FirebaseAuth firebaseAuth) async {
-    final user = firebaseAuth.currentUser;
+    
 
     //Call reload to retrieve latest info on user from Firebase
     //Allows for accurately checking of user related shit
-    await user!.reload();
+    await super.currentUser?.reload();
 
-    return user.emailVerified;
+    return super.currentUser!.emailVerified;
   }
 }
 

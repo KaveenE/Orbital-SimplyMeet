@@ -43,6 +43,18 @@ dependencies:
   top_snackbar_flutter: ^1.0.0
   #Defines the annotations used by json_serializable to create code for JSON serialization and deserialization.
   json_annotation: ^4.0.1
+  #We learn how to do this package, 80% of UI stuff is done
+  syncfusion_flutter_calendar: ^19.1.67
+  #Obvious
+  flutter_colorpicker: ^0.4.0
+  #Idk how to use this but apparently it easy to create bottom modal sheets. I just copied example code from github.
+  modal_bottom_sheet: ^2.0.0
+  #This is a super customizable dropdown search. But I'm only its basic functionality(tho Flutter can do it cos I'm lazy setting up boilerplate)
+  dropdown_search: ^0.6.3
+  enum_to_string: ^2.0.1
+  #I want to see the navigation stack for debugging purposes.Refer to package on how to use it, it's ez
+  navigation_history_observer: ^1.1.0
+  intl: ^0.17.0
 
 
 
