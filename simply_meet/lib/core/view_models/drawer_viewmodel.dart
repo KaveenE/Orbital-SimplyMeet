@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/services/flutterfire/authentication_service.dart';
+import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
 import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 
@@ -21,20 +21,26 @@ class DrawerViewModel extends ChangeNotifier {
   DrawerViewModel();
 
   void logOut(BuildContext context) async {
-    print("in");
-    final fireAuth = Provider.of<AuthenticationService>(context,listen: false);
+    // await Provider.of<FirestoreService>(context, listen: false)
+    //     .stopListeningEvents();
+    final fireAuth = Provider.of<AuthenticationService>(context, listen: false);
     final response = await fireAuth.logOut();
     final dialogManager = DialogManager.singleton;
 
     if (response == null) {
+      await Provider.of<FirestoreService>(context, listen: false)
+          .stopListeningEvents();
       dialogManager.defaultSuccessDialog(
         title: "Successfully logged out",
         description: "",
         context: context,
-      )..show().then((_) => Navigator.popUntil(
+      )..show().then((_) {
+          debugPrint("Popped to default login page");
+          return Navigator.popUntil(
             context,
             ModalRoute.withName(LoginSignupView.routeName),
-          ));
+          );
+        });
     } else {
       dialogManager.defaultErrorDialog(
         title: "Unable to log out",

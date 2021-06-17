@@ -33,8 +33,8 @@ class _HomeViewState extends State<HomeView> {
       controller: homeViewModel.controller,
       showNavigationArrow: true,
       //Callbacks. Too expensive, whatsapp yo
-      onLongPress: (longPressDetails) =>
-          homeViewModel.longPressCalenderElement(longPressDetails, context),
+      onTap: (onTapDetails) =>
+          homeViewModel.tapCalenderElement(onTapDetails, context),
     );
   }
 }

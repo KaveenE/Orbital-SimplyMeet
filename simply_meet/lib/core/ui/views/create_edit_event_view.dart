@@ -146,9 +146,7 @@ class FormBuilderDropdownExtract extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(dropdownMenu.where((val) {
-      return val.value != this.initialValue;
-    }).length);
+
     return FormBuilderDropdown(
       name: "recurrenceType",
       initialValue: this.initialValue,

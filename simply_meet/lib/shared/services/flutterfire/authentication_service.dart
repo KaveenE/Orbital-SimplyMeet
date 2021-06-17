@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -31,9 +33,14 @@ class AuthenticationService {
   }
 
   Future<String?> logOut() async {
-    print("sign out loading");
-    await _firebaseAuth.signOut();
-    print("sign out success");
+    debugPrint("sign out loading");
+      try {
+          await _firebaseAuth.signOut();
+      }
+      catch (e) {
+      return (e is PlatformException) ? e.message : e.toString();
+    }
+    debugPrint("sign out success");
   }
 
   Future<String?> sendPasswordResetEmail({required String email}) async {

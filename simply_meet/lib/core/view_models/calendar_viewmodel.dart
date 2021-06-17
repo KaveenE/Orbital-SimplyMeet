@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simply_meet/core/ui/views/update_event_view.dart';
+import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
 import 'package:simply_meet/shared/models/event.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/view_models/loadable_model.dart';
@@ -11,9 +13,18 @@ abstract class CalendarViewModel extends LoadableModel {
   CalendarViewModel({required this.controller});
 
   //Callbacks related
-  void longPressCalenderElement(
-      CalendarLongPressDetails calendarLongPressDetails,
-      BuildContext context) {}
+  void tapCalenderElement(
+    CalendarTapDetails calendarTapDetails,
+    BuildContext context,
+  ) async {
+    if (calendarTapDetails.targetElement == CalendarElement.appointment) {
+      await showFloatingModalBottomSheet(
+        context: context,
+        builder: (_) => UpdateEventView(
+            event: calendarTapDetails.appointments![0] as Event),
+      );
+    }
+  }
 
   //Controller related
   CalendarController getController() => controller;
@@ -31,7 +42,7 @@ abstract class CalendarViewModel extends LoadableModel {
 
     final firestore = Provider.of<FirestoreService>(context, listen: false);
 
-    firestore.getPostsRealTime().listen((events) {
+    firestore.getEventsRealTime().listen((events) {
       List<Event> eventsToDisplay = events;
 
       if (eventsToDisplay.length >= 0) {
@@ -84,6 +95,4 @@ abstract class CalendarViewModel extends LoadableModel {
 
     return events;
   }
-
-
 }

@@ -5,9 +5,10 @@ import 'package:simply_meet/core/view_models/drawer_viewmodel.dart';
 import 'package:simply_meet/core/view_models/home_viewmodel.dart';
 import 'package:simply_meet/core/view_models/tabs_all_viewmodel.dart';
 import 'package:simply_meet/core/view_models/timetable_viewmodel.dart';
+import 'package:simply_meet/shared/models/event.dart';
+import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
 
 class TabsAllViews extends StatelessWidget {
   static const routeName = '/tabsAllViews';
@@ -27,7 +28,11 @@ class TabsAllViews extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => DrawerViewModel(),
         ),
-        
+        StreamProvider<List<Event>>(
+          create: (_) => FirestoreService().getEventsRealTime(),
+          initialData: [],
+          
+        )
       ],
       builder: (_, __) => Consumer<TabsAllViewModel>(
         builder: (ctx, tabsAllViewModel, __) {

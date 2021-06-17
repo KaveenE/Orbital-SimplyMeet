@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart' ;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:simply_meet/shared/models/event.dart';
-
 
 class FirestoreService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -47,7 +47,7 @@ class FirestoreService {
     }
   }
 
-  Stream<List<Event>> getPostsRealTime() {
+  Stream<List<Event>> getEventsRealTime() {
     //subscribes to stream and execute corresponding callback
     //In this case, i listen for new data and add onto my controller.
     //Controller then produces stream
@@ -69,6 +69,11 @@ class FirestoreService {
     return _eventsController.stream;
   }
 
+  Future<void> stopListeningEvents() async {
+    debugPrint("close");
+    await _eventsController.close();
+  }
+
   Future<void> deleteEvent(String documentIDFireStore) async {
     await _usersCollectionReference
         .doc(_firebaseAuth.currentUser!.uid)
@@ -76,7 +81,7 @@ class FirestoreService {
         .doc(documentIDFireStore)
         .delete();
 
-    print("Deleted success");
+    debugPrint("Deleted success on ${_firebaseAuth.currentUser!.uid}");
   }
 
   Future<String?> updateEvent(Event event) async {

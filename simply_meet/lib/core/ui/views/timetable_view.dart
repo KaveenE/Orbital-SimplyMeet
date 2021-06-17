@@ -28,8 +28,8 @@ class TimetableView extends StatelessWidget {
       controller: timetableViewModel.controller,
       showNavigationArrow: true,
       //Callbacks. Too expensive, whatsapp yo
-      onLongPress: (longPressDetails) => timetableViewModel
-          .longPressCalenderElement(longPressDetails, context),
+      onTap: (onTapDetails) => timetableViewModel
+          .tapCalenderElement(onTapDetails, context),
     );
   }
 }
