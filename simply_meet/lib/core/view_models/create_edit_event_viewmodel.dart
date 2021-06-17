@@ -93,16 +93,17 @@ class CreateEditEventViewModel extends LoadableModel {
           0;
 
       final eventToUpdate = Event(
-        startTime: mapForInputs["startDate"]!.value,
-        endTime: mapForInputs["endDate"]!.value,
-        color: mapForInputs["color"]!.value,
-        description: mapForInputs["description"]!.value,
-        isAllDay: mapForInputs["allDay"]!.value,
-        subject: mapForInputs["subject"]!.value,
-        recurrenceRule:
-            is1Time ? null : 'FREQ=' + mapForInputs["recurrenceType"]!.value,
-        documentIDFireStore: event.documentIDFireStore
-      );
+          startTime: mapForInputs["startDate"]!.value,
+          endTime: mapForInputs["endDate"]!.value,
+          color: mapForInputs["color"]!.value,
+          description: mapForInputs["description"]!.value,
+          isAllDay: mapForInputs["allDay"]!.value,
+          subject: mapForInputs["subject"]!.value,
+          recurrenceRule: _rruleStringConverter(
+            mapForInputs["recurrenceType"]!.value,
+            mapForInputs["startDate"]!.value,
+          ),
+          documentIDFireStore: event.documentIDFireStore);
 
       super.setBusy(true);
 
@@ -123,5 +124,90 @@ class CreateEditEventViewModel extends LoadableModel {
           ..show();
       }
     }
+  }
+
+  String? _rruleStringConverter(String freqValue, DateTime startDate) {
+    final prefix = 'FREQ=';
+
+    if (freqValue == "ONE-TIME") {
+      return null;
+    } else if (freqValue == "DAILY") {
+      return prefix + freqValue + ";";
+    } else if (freqValue == "WEEKLY") {
+      return prefix +
+          freqValue +
+          ";" +
+          "BYDAY=" +
+          _intToDayConverter(startDate.weekday) +
+          ";" +
+          "INTERVAL=1";
+    } else if (freqValue == "MONTHLY") {
+      return prefix +
+          freqValue +
+          ";" +
+          "BYMONTHDAY=" +
+          startDate.day.toString() +
+          ";" +
+          "INTERVAL=1";
+    } else {
+      return prefix +
+          freqValue +
+          ";" +
+          "BYMONTH=" +
+          startDate.month.toString() +
+          ";" +
+          "BYMONTHDAY=" +
+          startDate.day.toString() +
+          ";";
+    }
+  }
+
+  String _intToDayConverter(int n) {
+    final String day;
+
+    switch (n) {
+      case 1:
+        {
+          day = "MO";
+        }
+        break;
+      case 2:
+        {
+          day = "TU";
+        }
+        break;
+      case 3:
+        {
+          day = "WE";
+        }
+        break;
+      case 4:
+        {
+          day = "TH";
+        }
+        break;
+      case 5:
+        {
+          day = "FR";
+        }
+        break;
+      case 6:
+        {
+          day = "SA";
+        }
+        break;
+      case 7:
+        {
+          day = "SU";
+        }
+        break;
+      default:
+        {
+          debugPrint("Can't convert int to day");
+          day = "GAY";
+        }
+    }
+
+    return day;
   }
 }

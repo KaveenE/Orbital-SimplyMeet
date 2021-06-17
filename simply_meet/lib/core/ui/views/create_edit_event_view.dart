@@ -144,15 +144,25 @@ class FormBuilderDropdownExtract extends StatelessWidget {
     required this.initialValue,
   });
 
+  String stripPrefix() {
+    if (initialValue.contains("DAILY")) {
+      return "DAILY";
+    } else if (initialValue.contains("WEEKLY")) {
+      return "WEEKLY";
+    } else if (initialValue.contains("MONTHLY")) {
+      return "MONTHLY";
+    } else {
+      return "YEARLY";
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return FormBuilderDropdown(
       name: "recurrenceType",
-      initialValue: this.initialValue,
-      items: dropdownMenu.where((val) {
-        return val.value == this.initialValue;
-      }).toList(),
+      initialValue: stripPrefix(),
+      items: dropdownMenu,
       decoration: InputDecoration(
           border: InputBorder.none, labelText: "Recurrence Pattern"),
       hint: Text("Select Recurrence Pattern"),
