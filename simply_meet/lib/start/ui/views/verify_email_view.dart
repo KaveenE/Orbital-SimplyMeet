@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simply_meet/core/ui/views/tabs_all_views.dart';
+import 'package:simply_meet/shared/utility/loader.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 
@@ -58,10 +59,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
               textAlign: TextAlign.center,
             ),
             verticalSpaceMedium,
-            CircularProgressIndicator.adaptive(
-              strokeWidth: 6,
-              backgroundColor: Colors.grey,
-            ),
+            Loaders.singleton.cubeGrid(screenHeight(context) * 0.1),
           ],
         ),
       ),

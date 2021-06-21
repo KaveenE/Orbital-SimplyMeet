@@ -6,6 +6,7 @@ import 'package:simply_meet/core/ui/helper_widgets/formbuilder_datetimepicker_wr
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_textfield_wrapper.dart';
 import 'package:simply_meet/core/view_models/create_edit_event_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
+import 'package:simply_meet/shared/utility/loader.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class CreateEditEventView extends StatefulWidget {
@@ -189,9 +190,7 @@ class ButtonsAtBottom extends StatelessWidget {
           onPressed: addEventAction,
           icon: Icon(Icons.save_alt_rounded),
           label: busy
-              ? CircularProgressIndicator.adaptive(
-                  backgroundColor: Colors.white,
-                )
+              ? Loaders.singleton.wave(screenHeight(context) * 0.03)
               : Text("Save"),
         ),
       ],
@@ -220,5 +219,45 @@ class Group {
   // OK, my question: Do you have any idea how to print out timings they CAN MEET? (Cos as of know know how to print when they CAN'T MEET)
   //PS: Have to modify equivalence property for Event
 
+}
+*/
+/*
+import 'package:simply_meet/shared/models/event.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'my_user.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class MyUser {
+  late Set<Event> _events;
+  late String _displayName;
+  late String _uid;
+
+  MyUser({
+    required List<Event> events,
+    required String displayName,
+    required String uid,
+  }) {
+    this._events = events.toSet();
+    this._displayName = displayName;
+    this._uid = uid;
+  }
+
+  Map<String, dynamic> toJson() => _$MyUserToJson(this);
+  factory MyUser.fromJson(Map<String, dynamic> json, String? documentID) =>
+      _$MyUserFromJson(json, documentID);
+
+  Set<Event> get events {
+    Set<Event> defensiveCopy = {};
+
+    for (final someEvent in _events) {
+      defensiveCopy.add(someEvent);
+    }
+
+    return _events;
+  }
+
+  String get displayName => _displayName;
+  String get uid => _uid;
 }
 */

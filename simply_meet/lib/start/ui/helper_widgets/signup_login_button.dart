@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simply_meet/shared/utility/loader.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class SignUpLoginButton extends StatelessWidget {
@@ -27,9 +28,7 @@ class SignUpLoginButton extends StatelessWidget {
         ),
         onPressed: this.loginSignupAction,
         child: busy
-            ? CircularProgressIndicator.adaptive(
-                backgroundColor: Colors.white,
-              )
+            ? Loaders.singleton.wave(screenHeight(context) * 0.03)
             : Text(title),
       ),
     );

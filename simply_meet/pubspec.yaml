@@ -55,6 +55,7 @@ dependencies:
   #I want to see the navigation stack for debugging purposes.Refer to package on how to use it, it's ez
   navigation_history_observer: ^1.1.0
   intl: ^0.17.0
+  flutter_spinkit: ^5.0.0
 
 
 
