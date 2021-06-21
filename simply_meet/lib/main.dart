@@ -6,19 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/ui/views/tabs_all_views.dart';
-import 'package:simply_meet/shared/models/event.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 
 import 'package:simply_meet/start/ui/views/forget_password.dart';
 import 'package:simply_meet/start/ui/views/verify_email_view.dart';
 import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/start/ui/views/welcome_view.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:simply_meet/start/ui/widgets/redirect_page.dart';
 
 import 'core/ui/views/create_edit_event_view.dart';
 import 'shared/services/flutterfire/authentication_service.dart';
 
 //TODO: For start screens, implement email address change?
+const MINIMAL_PURPLE = Color(0xff584191);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -33,7 +33,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static const MINIMAL_PURPLE = Color(0xff584191);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +86,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/': (_) => WelcomeView(),
+          WelcomeView.routeName: (_) => WelcomeView(),
           LoginSignupView.routeName: (_) => LoginSignupView(),
           VerifyEmailView.routeName: (_) => VerifyEmailView(),
           ForgetPasswordView.routeName: (_) => ForgetPasswordView(),
@@ -97,5 +98,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/services/flutterfire/authentication_service.dart';
-import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
 import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 

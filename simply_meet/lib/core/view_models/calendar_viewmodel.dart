@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:simply_meet/core/ui/views/update_event_view.dart';
 import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
 import 'package:simply_meet/shared/models/event.dart';
-import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
+
 import 'package:simply_meet/shared/view_models/loadable_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -34,25 +34,7 @@ abstract class CalendarViewModel extends LoadableModel {
     super.notifyListeners();
   }
 
-  //Events related.
-  //TODO: Remove this method?
-  List<Event> _events = [];
-  void listenToEvents(BuildContext context) {
-    super.setBusy(true);
 
-    final firestore = Provider.of<FirestoreService>(context, listen: false);
-
-    firestore.getEventsRealTime().listen((events) {
-      List<Event> eventsToDisplay = events;
-
-      if (eventsToDisplay.length >= 0) {
-        _events = eventsToDisplay;
-        notifyListeners();
-      }
-    });
-
-    super.setBusy(false);
-  }
 
   EventDataSource dataSource(List<Event> events) => EventDataSource(events);
   //Used for testing

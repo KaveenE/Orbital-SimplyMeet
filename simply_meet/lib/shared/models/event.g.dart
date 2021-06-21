@@ -6,9 +6,11 @@ part of 'event.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Event _$EventFromJson(Map<String, dynamic> json, String? fireStoreDocID) {
+Event _$EventFromJson(Map<String, dynamic> json,String? firebaseDocID) {
   return Event(
-    documentIDFireStore: fireStoreDocID,
+    startTimeZone: json['startTimeZone'] as String?,
+    endTimeZone: json['endTimeZone'] as String?,
+    documentIDFireStore: firebaseDocID,
     recurrenceRule: json['recurrenceRule'] as String?,
     isAllDay: json['isAllDay'] as bool,
     description: json['description'] as String,
@@ -37,5 +39,7 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   }
 
   writeNotNull('documentIDFireStore', instance.documentIDFireStore);
+  val['startTimeZone'] = instance.startTimeZone;
+  val['endTimeZone'] = instance.endTimeZone;
   return val;
 }

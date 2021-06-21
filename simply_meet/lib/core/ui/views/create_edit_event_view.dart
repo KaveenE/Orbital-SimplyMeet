@@ -145,7 +145,9 @@ class FormBuilderDropdownExtract extends StatelessWidget {
   });
 
   String stripPrefix() {
-    if (initialValue.contains("DAILY")) {
+    if (initialValue.contains("ONE-TIME")) {
+      return "ONE-TIME";
+    } else if (initialValue.contains("DAILY")) {
       return "DAILY";
     } else if (initialValue.contains("WEEKLY")) {
       return "WEEKLY";
@@ -197,22 +199,7 @@ class ButtonsAtBottom extends StatelessWidget {
   }
 }
 
-class myUser {
-  late Set<Event> _events;
-  late String _displayName;
-  late String _uid;
-
-  myUser({
-    required Set<Event> events,
-    required String displayName,
-    required String uid,
-  }) {
-    this._events = events;
-    this._displayName = displayName;
-    this._uid = uid;
-  }
-}
-
+/*
 class Group {
   late List<myUser> _members;
 
@@ -234,3 +221,4 @@ class Group {
   //PS: Have to modify equivalence property for Event
 
 }
+*/

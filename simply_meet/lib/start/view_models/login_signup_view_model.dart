@@ -97,7 +97,7 @@ class LoginSignUpViewModel extends LoadableModel {
     } else {
       
       if (super.currentUser != null && !(await _isVerified(FirebaseAuth.instance))) {
-        print("gg veri");
+        debugPrint("gg verified");
         Navigator.pushNamed(context, VerifyEmailView.routeName);
       }
       else {

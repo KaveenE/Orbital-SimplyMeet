@@ -6,13 +6,13 @@ import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/view_models/welcome_view_model.dart';
 
 class WelcomeView extends StatelessWidget {
+  static const routeName = "/welcomeView";
   static const int _numPages = 3;
   final int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
-    
     return ChangeNotifierProvider(
       create: (_) => WelcomeViewModel(
         currentPage: _currentPage,

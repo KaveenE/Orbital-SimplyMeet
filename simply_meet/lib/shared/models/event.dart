@@ -26,7 +26,12 @@ class Event {
   @JsonKey(includeIfNull: false)
   final String? documentIDFireStore;
 
+  final String? startTimeZone;
+  final String? endTimeZone;
+
   Event({
+    this.startTimeZone ="Singapore Standard Time",
+    this.endTimeZone = "Singapore Standard Time",
     this.documentIDFireStore,
     this.recurrenceRule,
     this.isAllDay = false,
