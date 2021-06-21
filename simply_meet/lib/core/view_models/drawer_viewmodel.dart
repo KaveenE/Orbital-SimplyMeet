@@ -24,12 +24,10 @@ class DrawerViewModel extends ChangeNotifier {
     // await Provider.of<FirestoreService>(context, listen: false)
     //     .stopListeningEvents();
     final fireAuth = Provider.of<AuthenticationService>(context, listen: false);
-    final response = await fireAuth.logOut();
+    final response = await fireAuth.logOut(context);
     final dialogManager = DialogManager.singleton;
 
     if (response == null) {
-      await Provider.of<FirestoreService>(context, listen: false)
-          .stopListeningEvents();
       dialogManager.defaultSuccessDialog(
         title: "Successfully logged out",
         description: "",

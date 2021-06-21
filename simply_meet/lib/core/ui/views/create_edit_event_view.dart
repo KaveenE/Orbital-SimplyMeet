@@ -154,7 +154,6 @@ class FormBuilderDropdownExtract extends StatelessWidget {
     } else {
       return "YEARLY";
     }
-
   }
 
   @override
@@ -196,4 +195,42 @@ class ButtonsAtBottom extends StatelessWidget {
       ],
     );
   }
+}
+
+class myUser {
+  late Set<Event> _events;
+  late String _displayName;
+  late String _uid;
+
+  myUser({
+    required Set<Event> events,
+    required String displayName,
+    required String uid,
+  }) {
+    this._events = events;
+    this._displayName = displayName;
+    this._uid = uid;
+  }
+}
+
+class Group {
+  late List<myUser> _members;
+
+  Group({required List<myUser> members}) {
+    List<myUser> defensiveCopy = [];
+
+    for (final someUser in members) {
+      defensiveCopy.add(someUser);
+    }
+
+    this._members = defensiveCopy;
+  
+  }
+
+  //TODO: Methods for remove,add member
+
+  //findFreeTimings method. Gonna use Set Data structure and fina all the timings they CAN'T MEET.
+  // OK, my question: Do you have any idea how to print out timings they CAN MEET? (Cos as of know know how to print when they CAN'T MEET)
+  //PS: Have to modify equivalence property for Event
+
 }

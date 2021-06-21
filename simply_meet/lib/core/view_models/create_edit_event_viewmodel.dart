@@ -86,11 +86,7 @@ class CreateEditEventViewModel extends LoadableModel {
     if (_formKey.currentState!.validate()) {
       final firestore = Provider.of<FirestoreService>(context, listen: false);
       final mapForInputs = _formKey.currentState!.fields;
-      final is1Time = mapForInputs["recurrenceType"]!
-              .value
-              .toString()
-              .compareTo("ONE-TIME") ==
-          0;
+      
 
       final eventToUpdate = Event(
           startTime: mapForInputs["startDate"]!.value,

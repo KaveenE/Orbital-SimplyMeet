@@ -9,16 +9,9 @@ class FirestoreService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final CollectionReference _usersCollectionReference =
       FirebaseFirestore.instance.collection('users');
-  late CollectionReference _eventsCollectionReference;
 
   final StreamController<List<Event>> _eventsController =
       StreamController<List<Event>>.broadcast();
-
-  FirestoreService() {
-    _eventsCollectionReference = _usersCollectionReference
-        .doc(_firebaseAuth.currentUser!.uid)
-        .collection("timetable");
-  }
 
   // //User related methods. Not getting user is a 1-time read. No point using real-time read.
   // Future<String?> createUser(User user) async {
@@ -41,6 +34,7 @@ class FirestoreService {
   //Event related methods
   Future<String?> addEvent(Event event) async {
     try {
+      //_eventsCollectionReference.
       await _eventsCollectionReference.add(event.toJson());
     } catch (e) {
       return (e is PlatformException) ? e.message : e.toString();
@@ -70,16 +64,12 @@ class FirestoreService {
   }
 
   Future<void> stopListeningEvents() async {
-    debugPrint("close");
+    debugPrint("close stream");
     await _eventsController.close();
   }
 
   Future<void> deleteEvent(String documentIDFireStore) async {
-    await _usersCollectionReference
-        .doc(_firebaseAuth.currentUser!.uid)
-        .collection("timetable")
-        .doc(documentIDFireStore)
-        .delete();
+    await _eventsCollectionReference.doc(documentIDFireStore).delete();
 
     debugPrint("Deleted success on ${_firebaseAuth.currentUser!.uid}");
   }
@@ -92,5 +82,12 @@ class FirestoreService {
     } catch (e) {
       return (e is PlatformException) ? e.message : e.toString();
     }
+  }
+
+  CollectionReference<Object?> get _eventsCollectionReference {
+    var eventsCollectionReference = _usersCollectionReference
+        .doc(_firebaseAuth.currentUser!.uid)
+        .collection("timetable");
+    return eventsCollectionReference;
   }
 }

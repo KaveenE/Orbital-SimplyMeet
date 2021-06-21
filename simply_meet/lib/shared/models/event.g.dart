@@ -6,9 +6,9 @@ part of 'event.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Event _$EventFromJson(Map<String, dynamic> json,String documentIDFireStore) {
+Event _$EventFromJson(Map<String, dynamic> json, String? fireStoreDocID) {
   return Event(
-    documentIDFireStore: documentIDFireStore,
+    documentIDFireStore: fireStoreDocID,
     recurrenceRule: json['recurrenceRule'] as String?,
     isAllDay: json['isAllDay'] as bool,
     description: json['description'] as String,

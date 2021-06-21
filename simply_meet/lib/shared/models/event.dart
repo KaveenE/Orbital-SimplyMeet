@@ -38,7 +38,7 @@ class Event {
   });
 
   Map<String, dynamic> toJson() => _$EventToJson(this);
-  factory Event.fromJson(Map<String, dynamic> json, String documentID) =>
+  factory Event.fromJson(Map<String, dynamic> json, String? documentID) =>
       _$EventFromJson(json, documentID);
 
   factory Event.deepCopy(Event another) {

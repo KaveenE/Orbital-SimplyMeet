@@ -28,6 +28,7 @@ class TabsAllViews extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => DrawerViewModel(),
         ),
+        
         StreamProvider<List<Event>>(
           create: (_) => FirestoreService().getEventsRealTime(),
           initialData: [],

@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -32,9 +34,11 @@ class AuthenticationService {
 
   }
 
-  Future<String?> logOut() async {
+  Future<String?> logOut(BuildContext context) async {
     debugPrint("sign out loading");
       try {
+          await Provider.of<FirestoreService>(context, listen: false)
+          .stopListeningEvents();
           await _firebaseAuth.signOut();
       }
       catch (e) {
