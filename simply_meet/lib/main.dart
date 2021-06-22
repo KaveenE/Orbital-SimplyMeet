@@ -12,7 +12,7 @@ import 'package:simply_meet/start/ui/views/forget_password.dart';
 import 'package:simply_meet/start/ui/views/verify_email_view.dart';
 import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/start/ui/views/welcome_view.dart';
-import 'package:simply_meet/start/ui/widgets/start_up_view.dart';
+
 
 
 import 'core/ui/views/create_edit_event_view.dart';

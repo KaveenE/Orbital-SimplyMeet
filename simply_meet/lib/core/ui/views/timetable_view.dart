@@ -27,6 +27,7 @@ class TimetableView extends StatelessWidget {
       dataSource: timetableViewModel.dataSource(eventList),
       controller: timetableViewModel.controller,
       showNavigationArrow: true,
+      showDatePickerButton: true,
       //Callbacks. Too expensive, whatsapp yo
       onTap: (onTapDetails) => timetableViewModel
           .tapCalenderElement(onTapDetails, context),

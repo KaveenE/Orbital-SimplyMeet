@@ -9,6 +9,7 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
   final String initialValue;
   final TextInputType keyboardType;
   final TextInputAction? textInputAction;
+  final InputDecoration? decoration;
   final BuildContext context;
 
   FormBuilderTextFieldWrapper({
@@ -18,6 +19,7 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
     required this.context,
     required this.initialValue,
     this.textInputAction,
+    this.decoration,
   });
 
   @override
@@ -28,16 +30,17 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
       initialValue: this.initialValue,
       keyboardType: this.keyboardType,
       textInputAction: this.textInputAction ?? TextInputAction.next,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText: this.hintText,
-        hintStyle: TextStyle(height: 2.2),
-        contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
-        prefixIcon: Icon(
-          isSubjectField ? Icons.short_text_rounded : Icons.subject_rounded,
-          color: Colors.grey.shade700,
-        ),
-      ),
+      decoration: this.decoration ??
+          InputDecoration(
+            border: InputBorder.none,
+            hintText: this.hintText,
+            hintStyle: TextStyle(height: 2.2),
+            contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
+            prefixIcon: Icon(
+              isSubjectField ? Icons.short_text_rounded : Icons.subject_rounded,
+              color: Colors.grey.shade700,
+            ),
+          ),
       maxLines: isSubjectField ? 2 : 5,
     );
   }

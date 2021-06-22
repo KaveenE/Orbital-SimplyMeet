@@ -70,7 +70,6 @@ class CreateEditEventViewModel extends LoadableModel {
         dialogManager.defaultSuccessDialog(
             title: "Event added", description: "", context: context)
           ..show().then((_) => Navigator.pop(context));
-        ;
       } else {
         dialogManager.defaultErrorDialog(
             title: "Failed to added event",
@@ -111,7 +110,6 @@ class CreateEditEventViewModel extends LoadableModel {
         dialogManager.defaultSuccessDialog(
             title: "Event updated", description: "", context: context)
           ..show().then((_) => Navigator.pop(context));
-        ;
       } else {
         dialogManager.defaultErrorDialog(
             title: "Failed to update event",

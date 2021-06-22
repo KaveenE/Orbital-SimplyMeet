@@ -32,6 +32,7 @@ class _HomeViewState extends State<HomeView> {
       dataSource: homeViewModel.dataSource(eventList),
       controller: homeViewModel.controller,
       showNavigationArrow: true,
+      showDatePickerButton: true,
       //Callbacks. Too expensive, whatsapp yo
       onTap: (onTapDetails) =>
           homeViewModel.tapCalenderElement(onTapDetails, context),
