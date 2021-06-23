@@ -46,6 +46,7 @@ abstract class CalendarViewModel extends LoadableModel {
     events.add(Event(
       startTime: DateTime.now(),
       endTime: DateTime.now().add(const Duration(hours: 1)),
+      notifID: Event.uuid.v4(),
       subject: 'Meeting',
       color: Colors.pink,
       isAllDay: true,
@@ -53,24 +54,28 @@ abstract class CalendarViewModel extends LoadableModel {
     events.add(Event(
       startTime: DateTime.now().add(const Duration(hours: 4, days: -1)),
       endTime: DateTime.now().add(const Duration(hours: 5, days: -1)),
+      notifID: Event.uuid.v4(),
       subject: 'Release Meeting',
       color: Colors.lightBlueAccent,
     ));
     events.add(Event(
       startTime: DateTime.now().add(const Duration(hours: 2, days: -2)),
       endTime: DateTime.now().add(const Duration(hours: 4, days: -2)),
+      notifID: Event.uuid.v4(),
       subject: 'Performance check',
       color: Colors.amber,
     ));
     events.add(Event(
       startTime: DateTime.now().add(const Duration(hours: 6, days: -3)),
       endTime: DateTime.now().add(const Duration(hours: 7, days: -3)),
+      notifID: Event.uuid.v4(),
       subject: 'Support',
       color: Colors.green,
     ));
     events.add(Event(
       startTime: DateTime.now().add(const Duration(hours: 6, days: 2)),
       endTime: DateTime.now().add(const Duration(hours: 7, days: 2)),
+      notifID: Event.uuid.v4(),
       subject: 'Retrospective',
       color: Colors.purple,
     ));

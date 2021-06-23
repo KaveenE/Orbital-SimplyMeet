@@ -43,25 +43,23 @@ class CreateEditEventViewModel extends LoadableModel {
     if (_formKey.currentState!.validate()) {
       final firestore = Provider.of<FirestoreService>(context, listen: false);
       final mapForInputs = _formKey.currentState!.fields;
-      final is1Time = mapForInputs["recurrenceType"]!
-              .value
-              .toString()
-              .compareTo("ONE-TIME") ==
-          0;
 
       final eventToAdd = Event(
         startTime: mapForInputs["startDate"]!.value,
         endTime: mapForInputs["endDate"]!.value,
+        notifID: Event.uuid.v4(),
         color: mapForInputs["color"]!.value,
         description: mapForInputs["description"]!.value,
         isAllDay: mapForInputs["allDay"]!.value,
         subject: mapForInputs["subject"]!.value,
-        recurrenceRule:
-            is1Time ? null : 'FREQ=' + mapForInputs["recurrenceType"]!.value,
+        recurrenceRule: _rruleStringConverter(
+          mapForInputs["recurrenceType"]!.value,
+          mapForInputs["startDate"]!.value,
+        ),
       );
 
       super.setBusy(true);
-
+      debugPrint(eventToAdd.notifID);
       final response = await firestore.addEvent(eventToAdd);
       final dialogManager = DialogManager.singleton;
       super.setBusy(false);
@@ -85,11 +83,11 @@ class CreateEditEventViewModel extends LoadableModel {
     if (_formKey.currentState!.validate()) {
       final firestore = Provider.of<FirestoreService>(context, listen: false);
       final mapForInputs = _formKey.currentState!.fields;
-      
 
       final eventToUpdate = Event(
           startTime: mapForInputs["startDate"]!.value,
           endTime: mapForInputs["endDate"]!.value,
+          notifID: event.notifID,
           color: mapForInputs["color"]!.value,
           description: mapForInputs["description"]!.value,
           isAllDay: mapForInputs["allDay"]!.value,

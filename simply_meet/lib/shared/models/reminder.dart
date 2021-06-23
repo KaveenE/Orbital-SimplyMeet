@@ -5,6 +5,7 @@ part 'reminder.g.dart';
 @JsonSerializable()
 class Reminder {
   String text;
+  
   @JsonKey(includeIfNull: false)
   final String? documentIDFireStore;
 

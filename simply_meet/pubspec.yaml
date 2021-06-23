@@ -54,8 +54,12 @@ dependencies:
   enum_to_string: ^2.0.1
   #I want to see the navigation stack for debugging purposes.Refer to package on how to use it, it's ez
   navigation_history_observer: ^1.1.0
+  #primarliy used for DateTime formatting
   intl: ^0.17.0
+  #Where we get our loading stuff
   flutter_spinkit: ^5.0.0
+  #Cryptographically strong id generator. I want to the events and reminders to have their own internal ids(seems necessary for local notification). 
+  uuid: ^3.0.4
 
 
 

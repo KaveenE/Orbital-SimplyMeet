@@ -15,6 +15,7 @@ import 'package:simply_meet/start/ui/views/welcome_view.dart';
 
 
 
+
 import 'core/ui/views/create_edit_event_view.dart';
 import 'shared/services/flutterfire/authentication_service.dart';
 
