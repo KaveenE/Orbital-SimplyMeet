@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:intl/intl.dart';
+
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/models/event.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/services/local_notif.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
-import 'package:timezone/timezone.dart' as tz;
+
 
 import 'package:simply_meet/shared/view_models/loadable_model.dart';
 
@@ -67,12 +67,7 @@ class CreateEditEventViewModel extends LoadableModel {
       super.setBusy(true);
 
       final response = await firestore.addEvent(eventToAdd);
-    
-      await _localNotif.scheduledNotification(
-          context: context,
-          notifID: eventToAdd.notifID!,
-          subject: eventToAdd.subject,
-          scheduledDate: eventToAdd.startTime);
+      await _scheduleNotification(eventToAdd, context);
 
       super.setBusy(false);
 
@@ -114,12 +109,7 @@ class CreateEditEventViewModel extends LoadableModel {
 
       await _localNotif.cancelNotification(eventToUpdate.notifID.hashCode);
       final response = await firestore.updateEvent(eventToUpdate);
-      await _localNotif.scheduledNotification(
-        context: context,
-        notifID: eventToUpdate.notifID!,
-        subject: eventToUpdate.subject,
-        scheduledDate: eventToUpdate.startTime,
-      );
+      await _scheduleNotification(eventToUpdate, context);
 
       super.setBusy(false);
 
@@ -220,5 +210,18 @@ class CreateEditEventViewModel extends LoadableModel {
     }
 
     return day;
+  }
+
+  Future<void> _scheduleNotification(Event event, BuildContext context) async {
+    var scheduledTimingForNotif = event.startTime.isBefore(currTime)
+        ? currTime.add(Duration(seconds: 20))
+        : event.startTime;
+  
+    return await _localNotif.scheduledNotification(
+      context: context,
+      notifID: event.notifID!,
+      subject: event.subject,
+      scheduledDate: scheduledTimingForNotif,
+    );
   }
 }

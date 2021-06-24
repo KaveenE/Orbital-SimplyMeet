@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:intl/intl.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:timezone/data/latest.dart' as tzInitialize;
 import 'package:timezone/timezone.dart' as tz;
@@ -62,6 +63,8 @@ class LocalNotification {
 
     var platform = NotificationDetails(android: android, iOS: iOS);
 
+    debugPrint(
+        "Passed: ${DateFormat("d/M/y").add_jm().format(scheduledDate)} VS acceptd: ${tz.TZDateTime.from(scheduledDate, tz.getLocation(_sgTimeZone))},");
     return await _flutterLocalNotificationsPlugin.zonedSchedule(
       notifID.hashCode,
       "Event Reminder",
