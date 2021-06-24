@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:simply_meet/shared/models/event.dart';
-import 'package:simply_meet/shared/models/reminder.dart';
+import 'package:simply_meet/shared/models/task.dart';
 
 class FirestoreService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -14,8 +14,8 @@ class FirestoreService {
   final StreamController<List<Event>> _eventsController =
       StreamController<List<Event>>.broadcast();
 
-  final StreamController<List<Reminder>> _remindersController =
-      StreamController<List<Reminder>>.broadcast();
+  final StreamController<List<Task>> _remindersController =
+      StreamController<List<Task>>.broadcast();
 
   // //User related methods. Not getting user is a 1-time read. No point using real-time read.
   // Future<String?> createUser(User user) async {
@@ -96,7 +96,7 @@ class FirestoreService {
   }
 
   //Reminder related methods
-  Future<String?> addReminder(Reminder reminder) async {
+  Future<String?> addReminder(Task reminder) async {
     try {
       await _todoCollectionReference.add(reminder.toJson());
     } catch (e) {
@@ -104,7 +104,7 @@ class FirestoreService {
     }
   }
 
-  Stream<List<Reminder>> getRemindersRealTime() {
+  Stream<List<Task>> getRemindersRealTime() {
     //subscribes to stream and execute corresponding callback
     //In this case, i listen for new data and add onto my controller.
     //Controller then produces stream
@@ -112,13 +112,13 @@ class FirestoreService {
       (reminderSnapShot) {
         if (reminderSnapShot.size >= 0) {
           final todoList = reminderSnapShot.docs
-              .map((reminderDocSnapShot) => Reminder.fromJson(
+              .map((reminderDocSnapShot) => Task.fromJson(
                   reminderDocSnapShot.data() as Map<String, dynamic>,
                   reminderDocSnapShot.id))
               .toList();
 
           //Add the timetable onto the controller. We use this controller to produce the stream
-          _remindersController.add(Reminder.deepCopyList(todoList));
+          _remindersController.add(Task.deepCopyList(todoList));
         }
       },
     );
@@ -137,7 +137,7 @@ class FirestoreService {
     debugPrint("Deleted success on ${_firebaseAuth.currentUser!.uid}");
   }
 
-  Future<String?> updateReminder(Reminder reminder) async {
+  Future<String?> updateReminder(Task reminder) async {
     try {
       await _todoCollectionReference
           .doc(reminder.documentIDFireStore)

@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'reminder.dart';
+part of 'task.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Reminder _$ReminderFromJson(Map<String, dynamic> json, String? firestoreDocID) {
-  return Reminder(
+Task _$TaskFromJson(Map<String, dynamic> json, String? firestoreDocID) {
+  return Task(
     text: json['text'] as String,
     documentIDFireStore: firestoreDocID,
   );
 }
 
-Map<String, dynamic> _$ReminderToJson(Reminder instance) {
+Map<String, dynamic> _$TaskToJson(Task instance) {
   final val = <String, dynamic>{
     'text': instance.text,
   };
