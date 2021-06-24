@@ -66,7 +66,6 @@ dependencies:
   flutter_native_timezone: ^2.0.0
 
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
@@ -78,6 +77,14 @@ dev_dependencies:
   json_serializable: ^4.1.3
   #Ginerates dart files within file. Meant to generate deserialization/serialization logic for json in separate files.
   build_runner: ^2.0.4
+  #Changing app logo
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/AppLogo.PNG"
+  remove_alpha_icon: true
   
   
 
