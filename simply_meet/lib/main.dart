@@ -13,13 +13,14 @@ import 'package:simply_meet/start/ui/views/verify_email_view.dart';
 import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/start/ui/views/welcome_view.dart';
 
-
-
 import 'core/ui/views/create_edit_event_view.dart';
 import 'shared/services/flutterfire/authentication_service.dart';
 
-//TODO: For start screens, implement email address change?
+// TO-DO: For start screens, implement email address change?
+
 const MINIMAL_PURPLE = Color(0xff584191);
+const ACCENT_PURPLE = Color(0xffd696d0);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -34,8 +35,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -58,7 +57,7 @@ class MyApp extends StatelessWidget {
           primaryColor: MINIMAL_PURPLE,
           scaffoldBackgroundColor: MINIMAL_PURPLE,
           backgroundColor: MINIMAL_PURPLE,
-          accentColor: Colors.purple[300],
+          accentColor: ACCENT_PURPLE, // accent color has been deprecated
           errorColor: Colors.red[700],
           fontFamily: GoogleFonts.raleway().fontFamily,
           textTheme: ThemeData.light().textTheme.copyWith(

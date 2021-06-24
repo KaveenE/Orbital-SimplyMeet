@@ -20,49 +20,53 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,
-        child: SizedBox(
-          height: screenHeight(context),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Opacity(
-                  opacity: 0.7,
-                  child: Lottie.asset(
-                    "assets/animations/DumbGuyThinking.json",
-                    fit:BoxFit.cover,
-                    alignment: Alignment.centerRight,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: SizedBox(
+            height: screenHeight(context),
+            child: Column(
+              children: <Widget>[
+                Spacer(),
+                Expanded(
+                  flex: 5,
+                  child: Opacity(
+                    opacity: 0.7,
+                    child: Lottie.asset(
+                      "assets/animations/DumbGuyThinking.json",
+                      fit: BoxFit.cover,
+                      alignment: Alignment.centerRight,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: screenWidth(context) * 0.03),
-                    padding: EdgeInsets.all(screenHeight(context) * 0.04),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(35)),
-                    ),
-                    child: Provider<ForgetPasswordViewModel>(
-                      create: (_) => ForgetPasswordViewModel(_formKey, context),
-                      child: FormBuilderWrapper(
-                        formKey: _formKey,
-                        childrenInColumn: [ForgetPasswordArea()],
+                Expanded(
+                  flex: 3,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: screenWidth(context) * 0.03),
+                      padding: EdgeInsets.all(screenHeight(context) * 0.04),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(35)),
+                      ),
+                      child: Provider<ForgetPasswordViewModel>(
+                        create: (_) =>
+                            ForgetPasswordViewModel(_formKey, context),
+                        child: FormBuilderWrapper(
+                          formKey: _formKey,
+                          childrenInColumn: [ForgetPasswordArea()],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Spacer(),
-            ],
+                Spacer(),
+              ],
+            ),
           ),
         ),
       ),

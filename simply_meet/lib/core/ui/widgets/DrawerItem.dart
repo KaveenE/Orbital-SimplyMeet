@@ -26,11 +26,9 @@ class DrawerItem extends StatelessWidget {
       style: theme(context)
           .textTheme
           .subtitle1!
-          .copyWith(fontSize: fontSizeForHeader ?? 24),
+          .copyWith(fontSize: fontSizeForHeader ?? 20),
     );
 
-
-  
     return currBoolean == null
         ? ListTile(
             leading: icon,
@@ -42,6 +40,9 @@ class DrawerItem extends StatelessWidget {
             onChanged: tapHandler as void Function(bool),
             secondary: icon,
             title: headingWidget,
+            activeColor: Colors.amber.shade400,
+            inactiveThumbColor: Colors.grey.shade700,
+            dense: true,
           );
   }
 }

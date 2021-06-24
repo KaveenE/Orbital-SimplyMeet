@@ -30,11 +30,25 @@ class WelcomeView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  const Align(
-                    alignment: Alignment.topRight,
-                    child: SkipButton(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 13.0, left: 20.0, right: 6.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/WhiteLogoWithoutText.png',
+                          height: 55,
+                          width: 55,
+                        ),
+                        const Align(
+                          alignment: Alignment.topRight,
+                          child: SkipButton(),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Spacer(),
+                  const Spacer(flex: 2),
                   Center(
                     child: Text(
                       "Welcome to SimplyMeet",
@@ -66,7 +80,7 @@ class WelcomeView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: welcomeViewModel.buildPageIndicator(),
                   ),
-                  const Spacer(),
+                  const Spacer(flex: 2),
                 ],
               ),
             ),

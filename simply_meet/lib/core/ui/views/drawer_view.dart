@@ -13,19 +13,18 @@ class DrawerView extends StatelessWidget {
       child: ListView(
         children: [
           Container(
-            height: screenHeight(context) * 0.2,
+            height: screenHeight(context) * 0.25,
             width: double.infinity,
             color: Theme.of(context).accentColor,
             child: Center(
               child: Text(
                 "User profile. Directs to profile page. Showcase email,username, function to update e-mail/password",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 17),
+          // lightDarkModeSwitch()
           DrawerItem(
             icon: drawerViewModel.iconBasedOnMode,
             heading: drawerViewModel.headingBasedOnMode,
@@ -34,7 +33,10 @@ class DrawerView extends StatelessWidget {
             context: context,
           ),
           DrawerItem(
-            icon: Icon(Icons.logout),
+            icon: Icon(
+              Icons.logout_rounded,
+              color: Colors.grey.shade800,
+            ),
             heading: "Log out",
             tapHandler: () => drawerViewModel.logOut(context),
             context: context,

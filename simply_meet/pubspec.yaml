@@ -56,6 +56,8 @@ dependencies:
   navigation_history_observer: ^1.1.0
   intl: ^0.17.0
   flutter_spinkit: ^5.0.0
+  #Cool switch package
+  lite_rolling_switch: ^0.1.1
 
 
 
@@ -87,14 +89,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    # - assets/images/finalLogoWithTitle.png
-    # - assets/images/finalLogoWoTitle.png
-    # - assets/images/bottomLeft.png
-    # - assets/images/topRight.png
-    # - assets/images/randomSide.png
-    # - assets/images/randSide2.png
-    # - assets/images/loginImageFinal.png
-    # - assets/images/signupImageFinal.png
     - assets/animations/BoyWithLaptop.json
     - assets/animations/GirlWorking.json
     - assets/animations/TwoPeopleTalking.json
@@ -102,6 +96,7 @@ flutter:
     - assets/animations/Login.json
     - assets/animations/TwoPeopleWorking.json
     - assets/animations/DumbGuyThinking.json
+    - assets/images/WhiteLogoWithoutText.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
