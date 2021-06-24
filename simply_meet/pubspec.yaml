@@ -60,7 +60,10 @@ dependencies:
   flutter_spinkit: ^5.0.0
   #Cryptographically strong id generator. I want to the events and reminders to have their own internal ids(seems necessary for local notification). 
   uuid: ^3.0.4
-
+  #This is a mystery
+  flutter_local_notifications: ^6.0.0
+  #Read 
+  flutter_native_timezone: ^2.0.0
 
 
 

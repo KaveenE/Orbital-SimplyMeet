@@ -9,7 +9,7 @@ part of 'reminder.dart';
 Reminder _$ReminderFromJson(Map<String, dynamic> json, String? firestoreDocID) {
   return Reminder(
     text: json['text'] as String,
-    documentIDFireStore:  firestoreDocID,
+    documentIDFireStore: firestoreDocID,
   );
 }
 

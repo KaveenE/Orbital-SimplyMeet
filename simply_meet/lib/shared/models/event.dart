@@ -62,6 +62,8 @@ class Event {
       description: another.description,
       recurrenceRule: another.recurrenceRule,
       subject: another.subject,
+      endTimeZone: another.endTimeZone,
+      startTimeZone: another.startTimeZone,
     );
   }
 
@@ -117,4 +119,10 @@ class EventDataSource extends CalendarDataSource {
 
   @override
   bool isAllDay(int index) => (appointments![index] as Event).isAllDay;
+
+  @override
+  String? getEndTimeZone(int index) => (appointments![index] as Event).endTimeZone;
+
+  @override
+  String? getStartTimeZone(int index) => (appointments![index] as Event).startTimeZone;
 }
