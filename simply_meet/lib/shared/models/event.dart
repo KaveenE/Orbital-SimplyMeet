@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 part 'event.g.dart';
 
 @JsonSerializable()
 class Event {
+  static const uuid = Uuid();
+
   String? recurrenceRule;
   final bool isAllDay;
   final String description;
@@ -28,9 +31,10 @@ class Event {
 
   final String? startTimeZone;
   final String? endTimeZone;
+  final String? notifID;
 
   Event({
-    this.startTimeZone ="Singapore Standard Time",
+    this.startTimeZone = "Singapore Standard Time",
     this.endTimeZone = "Singapore Standard Time",
     this.documentIDFireStore,
     this.recurrenceRule,
@@ -38,6 +42,7 @@ class Event {
     this.description = '',
     required this.startTime,
     required this.endTime,
+    required this.notifID,
     this.subject = 'No subject',
     this.color = Colors.lightBlue,
   });
@@ -50,12 +55,15 @@ class Event {
     return Event(
       endTime: another.endTime,
       startTime: another.startTime,
+      notifID: another.notifID,
       color: another.color,
       documentIDFireStore: another.documentIDFireStore,
       isAllDay: another.isAllDay,
       description: another.description,
       recurrenceRule: another.recurrenceRule,
       subject: another.subject,
+      endTimeZone: another.endTimeZone,
+      startTimeZone: another.startTimeZone,
     );
   }
 
@@ -111,4 +119,10 @@ class EventDataSource extends CalendarDataSource {
 
   @override
   bool isAllDay(int index) => (appointments![index] as Event).isAllDay;
+
+  @override
+  String? getEndTimeZone(int index) => (appointments![index] as Event).endTimeZone;
+
+  @override
+  String? getStartTimeZone(int index) => (appointments![index] as Event).startTimeZone;
 }

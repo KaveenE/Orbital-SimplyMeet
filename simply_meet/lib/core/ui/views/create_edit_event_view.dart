@@ -6,6 +6,7 @@ import 'package:simply_meet/core/ui/helper_widgets/formbuilder_datetimepicker_wr
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_textfield_wrapper.dart';
 import 'package:simply_meet/core/view_models/create_edit_event_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
+import 'package:simply_meet/shared/services/local_notif.dart';
 import 'package:simply_meet/shared/utility/loader.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
@@ -20,6 +21,12 @@ class CreateEditEventView extends StatefulWidget {
 
 class _CreateEditEventViewState extends State<CreateEditEventView> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    LocalNotification.singleton.initialize();
+  }
 
   void changeColor(Color initialColor, Color color) {
     setState(
