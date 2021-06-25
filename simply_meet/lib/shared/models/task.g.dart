@@ -6,16 +6,23 @@ part of 'task.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Task _$TaskFromJson(Map<String, dynamic> json, String? firestoreDocID) {
+Task _$TaskFromJson(Map<String, dynamic> json,String? firestoreDocID) {
   return Task(
-    text: json['text'] as String,
-    documentIDFireStore: firestoreDocID,
+    title: json['title'] as String,
+    date: Task._dateTimeFromJson(json['date'] as String),
+    priority: json['priority'] as String,
+    notifID: json['notifID'] as String?,
+    completionStatus: json['completionStatus'] as bool,
+    documentIDFireStore:  firestoreDocID,
   );
 }
 
 Map<String, dynamic> _$TaskToJson(Task instance) {
   final val = <String, dynamic>{
-    'text': instance.text,
+    'title': instance.title,
+    'date': Task._dateTimeToJson(instance.date),
+    'priority': instance.priority,
+    'completionStatus': instance.completionStatus,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -25,5 +32,6 @@ Map<String, dynamic> _$TaskToJson(Task instance) {
   }
 
   writeNotNull('documentIDFireStore', instance.documentIDFireStore);
+  val['notifID'] = instance.notifID;
   return val;
 }

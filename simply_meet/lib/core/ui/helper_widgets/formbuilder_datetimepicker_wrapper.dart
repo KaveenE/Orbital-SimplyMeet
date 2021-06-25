@@ -8,12 +8,16 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
   final String wordBelowIcon;
   final DateTime currTime;
   final DateTime initialValue;
+  final TextStyle? textStyle;
+  final InputDecoration? decoration;
 
   const FormBuilderDateTimePickerWrapper({
     required this.currTime,
     required this.name,
-    required this.wordBelowIcon,
+    this.wordBelowIcon = '',
     required this.initialValue,
+    this.textStyle,
+    this.decoration,
   });
 
   @override
@@ -29,7 +33,8 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
       lastDate: this.currTime.add(
             Duration(days: 365),
           ),
-      decoration: InputDecoration(
+      style: textStyle,
+      decoration: decoration ?? InputDecoration(
         border: InputBorder.none,
         hintText: "Choose Date",
         hintStyle: TextStyle(height: 2),

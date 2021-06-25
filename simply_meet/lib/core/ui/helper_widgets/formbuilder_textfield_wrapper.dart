@@ -10,6 +10,7 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
   final TextInputType keyboardType;
   final TextInputAction? textInputAction;
   final InputDecoration? decoration;
+  final TextStyle? textStyle;
   final BuildContext context;
 
   FormBuilderTextFieldWrapper({
@@ -20,16 +21,19 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
     required this.initialValue,
     this.textInputAction,
     this.decoration,
+    this.textStyle,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isSubjectField = name.contains("sub");
+    final isShortField = name.contains("sub") || name.contains("title");
     return FormBuilderTextField(
       name: this.name,
       initialValue: this.initialValue,
       keyboardType: this.keyboardType,
       textInputAction: this.textInputAction ?? TextInputAction.next,
+      validator: FormBuilderValidators.required(context,errorText:'Please enter a task title' ),
+      style: textStyle,
       decoration: this.decoration ??
           InputDecoration(
             border: InputBorder.none,
@@ -37,11 +41,11 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
             hintStyle: TextStyle(height: 2.2),
             contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
             prefixIcon: Icon(
-              isSubjectField ? Icons.short_text_rounded : Icons.subject_rounded,
+              isShortField ? Icons.short_text_rounded : Icons.subject_rounded,
               color: Colors.grey.shade700,
             ),
           ),
-      maxLines: isSubjectField ? 2 : 5,
+      maxLines: isShortField ? 2 : 5,
     );
   }
 }

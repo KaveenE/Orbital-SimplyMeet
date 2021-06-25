@@ -14,7 +14,7 @@ class FirestoreService {
   final StreamController<List<Event>> _eventsController =
       StreamController<List<Event>>.broadcast();
 
-  final StreamController<List<Task>> _remindersController =
+  final StreamController<List<Task>> _tasksController =
       StreamController<List<Task>>.broadcast();
 
   // //User related methods. Not getting user is a 1-time read. No point using real-time read.
@@ -96,52 +96,52 @@ class FirestoreService {
   }
 
   //Reminder related methods
-  Future<String?> addReminder(Task reminder) async {
+  Future<String?> addTask(Task task) async {
     try {
-      await _todoCollectionReference.add(reminder.toJson());
+      await _todoCollectionReference.add(task.toJson());
     } catch (e) {
       return (e is PlatformException) ? e.message : e.toString();
     }
   }
 
-  Stream<List<Task>> getRemindersRealTime() {
+  Stream<List<Task>> getTasksRealTime() {
     //subscribes to stream and execute corresponding callback
     //In this case, i listen for new data and add onto my controller.
     //Controller then produces stream
     _todoCollectionReference.snapshots().listen(
-      (reminderSnapShot) {
-        if (reminderSnapShot.size >= 0) {
-          final todoList = reminderSnapShot.docs
-              .map((reminderDocSnapShot) => Task.fromJson(
-                  reminderDocSnapShot.data() as Map<String, dynamic>,
-                  reminderDocSnapShot.id))
+      (taskSnapShot) {
+        if (taskSnapShot.size >= 0) {
+          final todoList = taskSnapShot.docs
+              .map((taskDocSnapShot) => Task.fromJson(
+                  taskDocSnapShot.data() as Map<String, dynamic>,
+                  taskDocSnapShot.id))
               .toList();
 
           //Add the timetable onto the controller. We use this controller to produce the stream
-          _remindersController.add(Task.deepCopyList(todoList));
+          _tasksController.add(Task.deepCopyList(todoList));
         }
       },
     );
 
-    return _remindersController.stream;
+    return _tasksController.stream;
   }
 
-  Future<void> stopListeningReminders() async {
-    debugPrint("close stream for reminders");
-    await _remindersController.close();
+  Future<void> stopListeningTasks() async {
+    debugPrint("close stream for task");
+    await _tasksController.close();
   }
 
-  Future<void> deleteReminder(String documentIDFireStore) async {
+  Future<void> deleteTask(String documentIDFireStore) async {
     await _todoCollectionReference.doc(documentIDFireStore).delete();
 
     debugPrint("Deleted success on ${_firebaseAuth.currentUser!.uid}");
   }
 
-  Future<String?> updateReminder(Task reminder) async {
+  Future<String?> updateTask(Task task) async {
     try {
       await _todoCollectionReference
-          .doc(reminder.documentIDFireStore)
-          .set(reminder.toJson());
+          .doc(task.documentIDFireStore)
+          .set(task.toJson());
     } catch (e) {
       return (e is PlatformException) ? e.message : e.toString();
     }

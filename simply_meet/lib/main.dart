@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:provider/provider.dart';
+import 'package:simply_meet/core/ui/views/add_tasks_view.dart';
+import 'package:simply_meet/core/ui/views/todo_view.dart';
 import 'package:simply_meet/core/ui/views/tabs_all_views.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 
@@ -96,6 +98,8 @@ class MyApp extends StatelessWidget {
           ForgetPasswordView.routeName: (_) => ForgetPasswordView(),
           TabsAllViews.routeName: (_) => TabsAllViews(),
           CreateEditEventView.routeName: (_) => CreateEditEventView(),
+          ToDoView.routeName: (_) => ToDoView(),
+          AddTaskView.routeName: (_) => AddTaskView(),
         },
         navigatorObservers: [NavigationHistoryObserver()],
       ),

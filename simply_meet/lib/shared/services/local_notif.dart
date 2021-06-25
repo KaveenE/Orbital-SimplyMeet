@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:timezone/data/latest.dart' as tzInitialize;
 import 'package:timezone/timezone.dart' as tz;
@@ -75,9 +74,9 @@ class LocalNotification {
   }
 
   Future cancelNotification([int? id]) async {
-    return await id == null
-        ? _flutterLocalNotificationsPlugin.cancelAll()
-        : _flutterLocalNotificationsPlugin.cancel(id!);
+    return  id == null
+        ? await _flutterLocalNotificationsPlugin.cancelAll()
+        : await _flutterLocalNotificationsPlugin.cancel(id);
   }
 
   tz.TZDateTime convertToSGTZ(DateTime dateTime) {

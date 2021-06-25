@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/ui/views/drawer_view.dart';
@@ -7,6 +6,7 @@ import 'package:simply_meet/core/view_models/home_viewmodel.dart';
 import 'package:simply_meet/core/view_models/tabs_all_viewmodel.dart';
 import 'package:simply_meet/core/view_models/timetable_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
+import 'package:simply_meet/shared/models/task.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -32,7 +32,11 @@ class TabsAllViews extends StatelessWidget {
         StreamProvider<List<Event>>(
           create: (_) => FirestoreService().getEventsRealTime(),
           initialData: [],
-        )
+        ),
+        StreamProvider<List<Task>>(
+          create: (_) => FirestoreService().getTasksRealTime(),
+          initialData: [],
+        ),
       ],
       builder: (_, __) => Consumer<TabsAllViewModel>(
         builder: (ctx, tabsAllViewModel, __) {

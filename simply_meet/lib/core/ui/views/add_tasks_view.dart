@@ -1,220 +1,178 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:simply_meet/core/view_models/database_helper.dart';
-import 'package:simply_meet/core/view_models/todo_view_model.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
+import 'package:simply_meet/core/ui/helper_widgets/formbuilder_datetimepicker_wrapper.dart';
+import 'package:simply_meet/core/ui/helper_widgets/formbuilder_dropdown_wrapper.dart';
+import 'package:simply_meet/core/ui/helper_widgets/formbuilder_textfield_wrapper.dart';
+import 'package:simply_meet/core/view_models/add_tasks_viewmodel.dart';
+import 'package:simply_meet/shared/models/task.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  final Task task;
-  final Function updateTaskList;
+import 'package:simply_meet/shared/utility/loader.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
-  AddTaskScreen({required this.task, required this.updateTaskList});
+class AddTaskView extends StatefulWidget {
+  static const routeName = "/addTaskView";
+
+  final Task? task;
+
+  AddTaskView({this.task});
 
   @override
-  _AddTaskScreenState createState() => _AddTaskScreenState();
+  _AddTaskViewState createState() => _AddTaskViewState();
 }
 
-class _AddTaskScreenState extends State<AddTaskScreen> {
-  final _formKey = GlobalKey<FormState>();
-  String _title = '';
-  late String _priority;
-  DateTime _date = DateTime.now();
-  late int _status;
-  TextEditingController _dateController = TextEditingController();
-  final DateFormat _dateFormatter = DateFormat('MMM dd, yyyy');
-  final List<String> _priorities = ['Low', 'Medium', 'High'];
-
-  @override
-  void initState() {
-    super.initState();
-
-    _title = widget.task.title;
-    _date = widget.task.date;
-    _priority = widget.task.priority;
-    _status = widget.task.status;
-
-    _dateController.text = _dateFormatter.format(_date);
-  }
-
-  @override
-  void dispose() {
-    _dateController.dispose();
-    super.dispose();
-  }
-
-  _handleDatePicker() async {
-    final DateTime? date = await showDatePicker(
-      context: context,
-      initialDate: _date,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
-    );
-    if (date != null && date != _date) {
-      setState(() {
-        _date = date;
-      });
-      _dateController.text = _dateFormatter.format(date);
-    }
-  }
-
-  _saveTask() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      print('Title: $_title, Date: $_date, Priority: $_priority');
-      // Insert new task to user's database
-      Task task = Task(
-          title: _title, date: _date, priority: _priority, status: _status);
-      if (widget.task == null) {
-        task.status = 0;
-        DatabaseHelper.instance.insertTask(task);
-      } else {
-        task.status = widget.task.status;
-        DatabaseHelper.instance.updateTask(task);
-      }
-      // Update existing task
-      widget.updateTaskList();
-      Navigator.pop(context);
-    }
-  }
+class _AddTaskViewState extends State<AddTaskView> {
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 80),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.arrow_back_rounded,
-                    size: 30,
-                    color: Colors.white,
+    final task = widget.task;
+    return ChangeNotifierProvider(
+      create: (_) => AddTasksViewModel(formKey: _formKey),
+      child: Scaffold(
+        body: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 80),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(
+                      Icons.arrow_back_rounded,
+                      size: 30,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "Add Task",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(color: Colors.white),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      "Add Task",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1!
+                          .copyWith(color: Colors.white),
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: "Title",
-                            labelStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          validator: (input) => input!.trim().isEmpty
-                              ? 'Please enter a task title'
-                              : null,
-                          onSaved: (input) => _title = input!,
-                          initialValue: _title,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: TextFormField(
-                          readOnly: true,
-                          controller: _dateController,
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                          onTap: _handleDatePicker,
-                          decoration: InputDecoration(
-                            labelText: "Date",
-                            labelStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: DropdownButtonFormField(
-                          icon: Icon(Icons.arrow_drop_down_circle_rounded),
-                          iconSize: 20,
-                          iconEnabledColor: Colors.white,
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: "Priority",
-                            labelStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          items: _priorities.map((String priority) {
-                            return DropdownMenuItem(
-                              value: priority,
-                              child: Text(
-                                priority,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
+                  SizedBox(height: 10),
+                  Consumer<AddTasksViewModel>(
+                    builder: (_, myModel, __) => FormBuilder(
+                      key: _formKey,
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: FormBuilderTextFieldWrapper(
+                              context: context,
+                              hintText: "Title",
+                              initialValue: task?.title ?? '',
+                              keyboardType: TextInputType.text,
+                              name: "title",
+                              decoration: InputDecoration(
+                                labelText: "Title",
+                                labelStyle: TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
                                 ),
                               ),
-                            );
-                          }).toList(),
-                          validator: (input) => _priority == null
-                              ? 'Please select a priority level'
-                              : null,
-                          onSaved: (input) => _priority = (input as String?)!,
-                          onChanged: (value) {
-                            setState(() {
-                              _priority = (value as String?)!;
-                            });
-                          },
-                          value: _priority,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 20),
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: FloatingActionButton.extended(
-                          icon: Icon(
-                            Icons.save_alt_rounded,
-                            color: Colors.white,
-                          ),
-                          label: Text(
-                            "Save",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                              textStyle:
+                                  TextStyle(fontSize: 18, color: Colors.white),
                             ),
                           ),
-                          onPressed: _saveTask,
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: FormBuilderDateTimePickerWrapper(
+                              currTime: myModel.currTime,
+                              name: "date",
+                              initialValue: task?.date ?? DateTime.now(),
+                              textStyle:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                              decoration: InputDecoration(
+                                labelText: "Date",
+                                labelStyle: TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: FormBuilderDropdownWrapper(
+                              dropdownMenu: myModel.dropdownMenu,
+                              hintText: "Select Priority",
+                              initialValue: task?.priority ?? "LOW",
+                              name: "priority",
+                              decoration: InputDecoration(
+                                labelText: "Priority",
+                                labelStyle: TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                              ),
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.black),
+                              icon: Icon(Icons.arrow_drop_down_circle_rounded),
+                              iconSize: 20,
+                              iconEnabledColor: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 20),
+                            height: 50,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).accentColor,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Button(
+                              busy: myModel.busy,
+                              addTaskAction: task == null
+                                  ? () async => await myModel.addTask(context)
+                                  : () async =>
+                                      await myModel.updateTask(context, task),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class Button extends StatelessWidget {
+  final bool busy;
+  final void Function() addTaskAction;
+  const Button({required this.busy, required this.addTaskAction});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      icon: Icon(
+        Icons.save_alt_rounded,
+        color: Colors.white,
+      ),
+      label: busy
+          ? Loaders.singleton.wave(screenHeight(context) * 0.03)
+          : Text(
+              "Save",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+      onPressed: addTaskAction,
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_colorpicker.dart';
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_datetimepicker_wrapper.dart';
+import 'package:simply_meet/core/ui/helper_widgets/formbuilder_dropdown_wrapper.dart';
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_textfield_wrapper.dart';
 import 'package:simply_meet/core/view_models/create_edit_event_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
@@ -94,9 +95,15 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                     formKey: _formKey,
                     initialValue: event?.isAllDay ?? false,
                   ),
-                  FormBuilderDropdownExtract(
+                  FormBuilderDropdownWrapper(
                     dropdownMenu: myModel.dropdownMenu,
                     initialValue: event?.recurrenceRule ?? "ONE-TIME",
+                    name: "recurrenceType",
+                    hintText: "Select Recurrence Pattern",
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      labelText: "Recurrence Pattern",
+                    ),
                   ),
                   ButtonsAtBottom(
                     busy: myModel.busy,
@@ -144,41 +151,6 @@ class FormBuilderSwitchExtract extends StatelessWidget {
   }
 }
 
-class FormBuilderDropdownExtract extends StatelessWidget {
-  final List<DropdownMenuItem<String>> dropdownMenu;
-  final String initialValue;
-  const FormBuilderDropdownExtract({
-    required this.dropdownMenu,
-    required this.initialValue,
-  });
-
-  String stripPrefix() {
-    if (initialValue.contains("ONE-TIME")) {
-      return "ONE-TIME";
-    } else if (initialValue.contains("DAILY")) {
-      return "DAILY";
-    } else if (initialValue.contains("WEEKLY")) {
-      return "WEEKLY";
-    } else if (initialValue.contains("MONTHLY")) {
-      return "MONTHLY";
-    } else {
-      return "YEARLY";
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FormBuilderDropdown(
-      name: "recurrenceType",
-      initialValue: stripPrefix(),
-      items: dropdownMenu,
-      decoration: InputDecoration(
-          border: InputBorder.none, labelText: "Recurrence Pattern"),
-      hint: Text("Select Recurrence Pattern"),
-    );
-  }
-}
-
 class ButtonsAtBottom extends StatelessWidget {
   final bool busy;
   final void Function() addEventAction;
@@ -204,67 +176,3 @@ class ButtonsAtBottom extends StatelessWidget {
     );
   }
 }
-
-/*
-class Group {
-  late List<myUser> _members;
-
-  Group({required List<myUser> members}) {
-    List<myUser> defensiveCopy = [];
-
-    for (final someUser in members) {
-      defensiveCopy.add(someUser);
-    }
-
-    this._members = defensiveCopy;
-  
-  }
-
-  //TODO: Methods for remove,add member
-
-  //findFreeTimings method. Gonna use Set Data structure and fina all the timings they CAN'T MEET.
-  // OK, my question: Do you have any idea how to print out timings they CAN MEET? (Cos as of know know how to print when they CAN'T MEET)
-  //PS: Have to modify equivalence property for Event
-
-}
-*/
-/*
-import 'package:simply_meet/shared/models/event.dart';
-import 'package:json_annotation/json_annotation.dart';
-
-part 'my_user.g.dart';
-
-@JsonSerializable(explicitToJson: true)
-class MyUser {
-  late Set<Event> _events;
-  late String _displayName;
-  late String _uid;
-
-  MyUser({
-    required List<Event> events,
-    required String displayName,
-    required String uid,
-  }) {
-    this._events = events.toSet();
-    this._displayName = displayName;
-    this._uid = uid;
-  }
-
-  Map<String, dynamic> toJson() => _$MyUserToJson(this);
-  factory MyUser.fromJson(Map<String, dynamic> json, String? documentID) =>
-      _$MyUserFromJson(json, documentID);
-
-  Set<Event> get events {
-    Set<Event> defensiveCopy = {};
-
-    for (final someEvent in _events) {
-      defensiveCopy.add(someEvent);
-    }
-
-    return _events;
-  }
-
-  String get displayName => _displayName;
-  String get uid => _uid;
-}
-*/
