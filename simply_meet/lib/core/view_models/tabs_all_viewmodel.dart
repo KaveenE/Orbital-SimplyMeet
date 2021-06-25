@@ -2,7 +2,7 @@ import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 import '../ui/views/create_edit_event_view.dart';
-import '../ui/views/groups_view.dart';
+import '../ui/views/todo_view.dart';
 import '../ui/views/home_view.dart';
 import '../ui/views/timetable_view.dart';
 
@@ -14,7 +14,7 @@ class TabsAllViewModel extends ChangeNotifier {
       icon = "icon",
       label = "label";
   final BuildContext _context;
-  
+
   int _currIdx = 0;
 
   TabsAllViewModel(this._context);
@@ -41,12 +41,12 @@ class TabsAllViewModel extends ChangeNotifier {
       },
       {
         appBar: AppBar(
-          title: Text("My Groups"),
+          title: Text("My To-Do List"),
           actions: null,
         ),
-        widget: GroupWidget(),
-        icon: Icon(Icons.people_alt_rounded),
-        label: "Groups"
+        widget: ToDoWidget(),
+        icon: Icon(Icons.checklist_rounded),
+        label: "To-Do"
       }
     ];
   }

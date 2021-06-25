@@ -14,8 +14,8 @@ class DrawerViewModel extends ChangeNotifier {
   bool get islightMode => _lightMode;
   String get headingBasedOnMode => _lightMode ? "Light Mode" : "Night Mode";
   Icon get iconBasedOnMode => _lightMode
-      ? Icon(Icons.wb_sunny_rounded, color: Colors.amber)
-      : Icon(Icons.dark_mode_rounded, color: Colors.grey[800]);
+      ? Icon(Icons.wb_sunny_rounded, color: Colors.amber.shade400)
+      : Icon(Icons.mode_night_rounded, color: Colors.grey.shade700);
 
   DrawerViewModel();
 

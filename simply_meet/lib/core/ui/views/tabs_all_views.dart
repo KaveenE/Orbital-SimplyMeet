@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/ui/views/drawer_view.dart';
@@ -28,11 +29,9 @@ class TabsAllViews extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => DrawerViewModel(),
         ),
-        
         StreamProvider<List<Event>>(
           create: (_) => FirestoreService().getEventsRealTime(),
           initialData: [],
-          
         )
       ],
       builder: (_, __) => Consumer<TabsAllViewModel>(
@@ -44,7 +43,25 @@ class TabsAllViews extends StatelessWidget {
             appBar: viewMappings[currIdx][TabsAllViewModel.appBar],
             drawer: DrawerView(),
             body: viewMappings[currIdx][TabsAllViewModel.widget],
-            bottomNavigationBar: BottomNavigationBar(
+            bottomNavigationBar:
+                // CurvedNavigationBar(
+                //   color: Colors.grey.shade900,
+                //   backgroundColor: Colors.white,
+                //   buttonBackgroundColor: theme(ctx).accentColor,
+                //   height: 55,
+                //   items: <Widget>[
+                //     Icon(Icons.verified_user, color: Colors.white, size: 20),
+                //     Icon(Icons.verified_user_outlined,
+                //         color: Colors.white, size: 20),
+                //     Icon(Icons.verified_user, color: Colors.white, size: 20)
+                //   ],
+                //   animationCurve: Curves.easeInOutBack,
+                //   index: 1, // default selection
+                //   onTap: (index) {
+                //     debugPrint("Currnt Index is $index");
+                //   },
+                // )
+                BottomNavigationBar(
               currentIndex: currIdx,
               onTap: tabsAllViewModel.setIndex,
               showUnselectedLabels: false,
@@ -65,6 +82,7 @@ class TabsAllViews extends StatelessWidget {
     );
   }
 }
+
 /*
 class TabsAllViews extends StatelessWidget {
   static const routeName = '/tabsAllViews';

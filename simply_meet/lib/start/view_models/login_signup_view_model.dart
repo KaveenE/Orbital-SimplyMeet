@@ -70,7 +70,6 @@ class LoginSignUpViewModel extends LoadableModel {
     required GlobalKey<FormBuilderState> formKey,
     required BuildContext context,
   }) async {
-    
     if (!_validateAllFieldsNonEmpty(
         formKey: formKey, context: context, titleForDialog: "Login Failure")) {
       return;
@@ -95,15 +94,13 @@ class LoginSignUpViewModel extends LoadableModel {
         context: context,
       )..show();
     } else {
-      
-      if (super.currentUser != null && !(await _isVerified(FirebaseAuth.instance))) {
+      if (super.currentUser != null &&
+          !(await _isVerified(FirebaseAuth.instance))) {
         debugPrint("gg verified");
         Navigator.pushNamed(context, VerifyEmailView.routeName);
-      }
-      else {
+      } else {
         Navigator.pushNamed(context, TabsAllViews.routeName);
       }
-      
     }
   }
 
@@ -117,7 +114,7 @@ class LoginSignUpViewModel extends LoadableModel {
         titleForDialog: "Sign Up Failure")) {
       return;
     }
-    
+
     final username = formKey.currentState!.fields["username"]?.value as String;
     final email = formKey.currentState!.fields["email"]?.value as String;
     final password = formKey.currentState!.fields["password"]?.value as String;
@@ -179,8 +176,6 @@ class LoginSignUpViewModel extends LoadableModel {
   }
 
   Future<bool> _isVerified(FirebaseAuth firebaseAuth) async {
-    
-
     //Call reload to retrieve latest info on user from Firebase
     //Allows for accurately checking of user related shit
     await super.currentUser?.reload();

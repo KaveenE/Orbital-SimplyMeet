@@ -52,7 +52,6 @@ class DialogManager {
     required void Function(Color color) changeColor,
     required FormFieldState<Color?> inputField,
   }) {
-  
     return AwesomeDialog(
       context: context,
       dialogType: DialogType.NO_HEADER,
@@ -64,7 +63,7 @@ class DialogManager {
               "Pick a color to highlight cell",
               softWrap: true,
               style: TextStyle(
-                fontSize: 25,
+                fontSize: 20,
               ),
             ),
             Divider(),
@@ -100,7 +99,7 @@ class DialogManager {
       headerAnimationLoop: false,
       title: title,
       desc: description,
-      btnCancelOnPress: (){},
+      btnCancelOnPress: () {},
       btnCancelColor: Colors.red,
       btnCancelText: "CANCEL",
       btnOkOnPress: confirmAction,

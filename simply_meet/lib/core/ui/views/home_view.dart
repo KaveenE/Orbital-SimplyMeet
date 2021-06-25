@@ -19,13 +19,13 @@ class _HomeViewState extends State<HomeView> {
     final eventList = Provider.of<List<Event>>(context, listen: true);
 
     return SfCalendar(
-      //Aesthetics baby
+      // Aesthetics baby
       view: CalendarView.month,
       headerStyle: CalendarHeaderStyle(
         textAlign: TextAlign.center,
       ),
       monthViewSettings: MonthViewSettings(showAgenda: true),
-      //Aesthetics, date specific
+      // Aesthetics, date specific
       initialSelectedDate: DateTime.now(),
       showCurrentTimeIndicator: true,
       timeZone: "Singapore Standard Time",
@@ -33,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
       controller: homeViewModel.controller,
       showNavigationArrow: true,
       showDatePickerButton: true,
-      //Callbacks. Too expensive, whatsapp yo
+      // Callbacks. Too expensive, whatsapp yo
       onTap: (onTapDetails) =>
           homeViewModel.tapCalenderElement(onTapDetails, context),
     );

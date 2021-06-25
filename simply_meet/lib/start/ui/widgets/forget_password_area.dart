@@ -4,7 +4,6 @@ import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/ui/helper_widgets/formbuilder_email.dart';
 import 'package:simply_meet/start/view_models/forget_password_view_model.dart';
 
-
 class ForgetPasswordArea extends StatelessWidget {
   const ForgetPasswordArea();
 
@@ -13,16 +12,17 @@ class ForgetPasswordArea extends StatelessWidget {
     return Expanded(
       child: Column(
         children: <Widget>[
+          // Spacer(),
           Text(
-            "FORGET PASSWORD ",
-            style: theme(context)
-                .textTheme
-                .headline2!
-                .copyWith(color: theme(context).primaryColor),
+            "Enter your email address",
+            style: theme(context).textTheme.headline2!.copyWith(
+                color: theme(context).primaryColor,
+                fontWeight: FontWeight.w700,
+                fontSize: 23),
           ),
-          Spacer(),
+          Spacer(flex: 2),
           const FormBuilderEmail(),
-          Spacer(flex: 1),
+          Spacer(flex: 2),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -34,14 +34,13 @@ class ForgetPasswordArea extends StatelessWidget {
                 textStyle: theme(context).textTheme.button,
               ),
               onPressed: () async {
-                await Provider.of<ForgetPasswordViewModel>(context,listen:false)
+                await Provider.of<ForgetPasswordViewModel>(context,
+                        listen: false)
                     .resetPassword();
-                
               },
               child: Text("Change Password"),
             ),
           ),
-          Spacer(flex: 2),
         ],
       ),
     );
