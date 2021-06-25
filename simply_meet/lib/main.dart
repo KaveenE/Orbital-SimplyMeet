@@ -61,6 +61,10 @@ class MyApp extends StatelessWidget {
           errorColor: Colors.red[700],
           fontFamily: GoogleFonts.raleway().fontFamily,
           textTheme: ThemeData.light().textTheme.copyWith(
+                headline1: GoogleFonts.raleway(
+                    color: Colors.black,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w600),
                 headline2: GoogleFonts.raleway(
                   color: Colors.white,
                   fontSize: 28,

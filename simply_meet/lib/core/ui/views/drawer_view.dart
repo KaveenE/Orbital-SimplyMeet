@@ -34,7 +34,7 @@ class DrawerView extends StatelessWidget {
           ),
           DrawerItem(
             icon: Icon(
-              Icons.logout_rounded,
+              Icons.exit_to_app_rounded,
               color: Colors.grey.shade800,
             ),
             heading: "Log out",

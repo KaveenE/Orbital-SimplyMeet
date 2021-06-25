@@ -38,8 +38,8 @@ class WelcomeView extends StatelessWidget {
                       children: <Widget>[
                         Image.asset(
                           'assets/images/WhiteLogoWithoutText.png',
-                          height: 55,
-                          width: 55,
+                          height: 60,
+                          width: 60,
                         ),
                         const Align(
                           alignment: Alignment.topRight,

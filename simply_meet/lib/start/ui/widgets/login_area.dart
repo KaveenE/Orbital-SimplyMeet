@@ -26,24 +26,26 @@ class LoginArea extends StatelessWidget {
                 .headline2!
                 .copyWith(color: theme(context).primaryColor),
           ),
-          const Spacer(flex: 3),
+          const Spacer(flex: 2),
           const FormBuilderEmail(),
           const Spacer(flex: 2),
           FormBuilderPassword(
             identifierForField: "password",
           ),
-          const Spacer(),
+          // const Spacer(),
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: () => Navigator.of(context).pushNamed(ForgetPasswordView.routeName),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(ForgetPasswordView.routeName),
               child: Text(
                 "Forgot your password?",
-                style: theme(context).textTheme.subtitle2,
+                style:
+                    theme(context).textTheme.subtitle2!.copyWith(fontSize: 16),
               ),
             ),
           ),
-          const Spacer(),
+          //const Spacer(),
           SignUpLoginButton(
             title: "Login",
             loginSignupAction: () => loginSignUpViewModel.logIn(
@@ -62,6 +64,7 @@ class LoginArea extends StatelessWidget {
                 .subtitle2!
                 .copyWith(decoration: TextDecoration.none),
           ),
+          Spacer(),
         ],
       ),
     );

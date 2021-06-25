@@ -18,7 +18,7 @@ class SignUpArea extends StatelessWidget {
     return Expanded(
       child: Column(
         children: <Widget>[
-          const Spacer(flex: 2),
+          const Spacer(flex: 3),
           Text(
             "SIGN UP",
             style: theme(context)
@@ -44,7 +44,9 @@ class SignUpArea extends StatelessWidget {
             title: "Sign Up",
             busy: loginSignUpViewModel.busy,
             loginSignupAction: () => loginSignUpViewModel.signUp(
-                formKey: loginSignUpViewModel.globalFormKeyList[1] , context: context,),
+              formKey: loginSignUpViewModel.globalFormKeyList[1],
+              context: context,
+            ),
           ),
           const Spacer(),
           Text("Already have an account?",
