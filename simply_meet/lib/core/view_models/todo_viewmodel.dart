@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/core/ui/views/add_tasks_view.dart';
+
 import 'package:simply_meet/core/ui/views/update_task_view.dart';
 import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
 import 'package:simply_meet/shared/models/task.dart';
@@ -42,7 +42,9 @@ class ToDoViewModel extends LoadableModel {
                 final response = await firestore
                     .updateTask(someTask.copyWith(completionStatus: newBool));
 
-                _scheduleNotification(someTask, context);
+                if (!newBool!) {
+                  _scheduleNotification(someTask, context);
+                }
 
                 super.setBusy(false);
 

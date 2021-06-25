@@ -30,6 +30,7 @@ class _AddTaskViewState extends State<AddTaskView> {
     return ChangeNotifierProvider(
       create: (_) => AddTasksViewModel(formKey: _formKey),
       child: Scaffold(
+        
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
@@ -59,88 +60,93 @@ class _AddTaskViewState extends State<AddTaskView> {
                   ),
                   SizedBox(height: 10),
                   Consumer<AddTasksViewModel>(
-                    builder: (_, myModel, __) => FormBuilder(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child: FormBuilderTextFieldWrapper(
-                              context: context,
-                              hintText: "Title",
-                              initialValue: task?.title ?? '',
-                              keyboardType: TextInputType.text,
-                              name: "title",
-                              decoration: InputDecoration(
-                                labelText: "Title",
-                                labelStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50),
+                    builder: (_, myModel, __) {
+                      final currTime = myModel.currTime;
+
+                      return FormBuilder(
+                        key: _formKey,
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: FormBuilderTextFieldWrapper(
+                                context: context,
+                                hintText: "Title",
+                                initialValue: task?.title ?? '',
+                                keyboardType: TextInputType.text,
+                                name: "title",
+                                decoration: InputDecoration(
+                                  labelText: "Title",
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
                                 ),
-                              ),
-                              textStyle:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child: FormBuilderDateTimePickerWrapper(
-                              currTime: myModel.currTime,
-                              name: "date",
-                              initialValue: task?.date ?? DateTime.now(),
-                              textStyle:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                              decoration: InputDecoration(
-                                labelText: "Date",
-                                labelStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
+                                textStyle: TextStyle(
+                                    fontSize: 18, color: Colors.white),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child: FormBuilderDropdownWrapper(
-                              dropdownMenu: myModel.dropdownMenu,
-                              hintText: "Select Priority",
-                              initialValue: task?.priority ?? "LOW",
-                              name: "priority",
-                              decoration: InputDecoration(
-                                labelText: "Priority",
-                                labelStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: FormBuilderDateTimePickerWrapper(
+                                firstDate: task?.date ?? currTime,
+                                name: "date",
+                                initialValue: task?.date ?? currTime,
+                                textStyle: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                                decoration: InputDecoration(
+                                  labelText: "Date",
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
                                 ),
                               ),
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
-                              icon: Icon(Icons.arrow_drop_down_circle_rounded),
-                              iconSize: 20,
-                              iconEnabledColor: Colors.white,
                             ),
-                          ),
-                          SizedBox(height: 20),
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 20),
-                            height: 50,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).accentColor,
-                              borderRadius: BorderRadius.circular(30),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: FormBuilderDropdownWrapper(
+                                dropdownMenu: myModel.dropdownMenu,
+                                hintText: "Select Priority",
+                                initialValue: task?.priority ?? "LOW",
+                                name: "priority",
+                                decoration: InputDecoration(
+                                  labelText: "Priority",
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                ),
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.black),
+                                icon:
+                                    Icon(Icons.arrow_drop_down_circle_rounded),
+                                iconSize: 20,
+                                iconEnabledColor: Colors.white,
+                              ),
                             ),
-                            child: Button(
-                              busy: myModel.busy,
-                              addTaskAction: task == null
-                                  ? () async => await myModel.addTask(context)
-                                  : () async =>
-                                      await myModel.updateTask(context, task),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
+                            SizedBox(height: 20),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 20),
+                              height: 50,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).accentColor,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Button(
+                                busy: myModel.busy,
+                                addTaskAction: task == null
+                                    ? () async => await myModel.addTask(context)
+                                    : () async =>
+                                        await myModel.updateTask(context, task),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

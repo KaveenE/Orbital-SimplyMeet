@@ -6,20 +6,23 @@ import 'package:simply_meet/shared/utility/ui_helpers.dart';
 class FormBuilderDateTimePickerWrapper extends StatelessWidget {
   final String name;
   final String wordBelowIcon;
-  final DateTime currTime;
   final DateTime initialValue;
   final TextStyle? textStyle;
   final InputDecoration? decoration;
+  final DateTime firstDate;
+
 
   const FormBuilderDateTimePickerWrapper({
-    required this.currTime,
+    
     required this.name,
     this.wordBelowIcon = '',
     required this.initialValue,
     this.textStyle,
     this.decoration,
+    required this.firstDate,
   });
 
+  
   @override
   Widget build(BuildContext context) {
     return FormBuilderDateTimePicker(
@@ -29,8 +32,8 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
       maxLines: 2,
       validator: FormBuilderValidators.required(context,
           errorText: "Field cannot be empty"),
-      firstDate: this.currTime,
-      lastDate: this.currTime.add(
+      firstDate: this.firstDate,
+      lastDate: this.firstDate.add(
             Duration(days: 365),
           ),
       style: textStyle,

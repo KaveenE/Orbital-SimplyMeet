@@ -50,6 +50,8 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
         padding: EdgeInsets.all(screenWidth(context) * 0.04),
         child: Consumer<CreateEditEventViewModel>(
           builder: (_, myModel, __) {
+            final currTime = myModel.currTime;
+
             return FormBuilder(
               key: _formKey,
               child: Column(
@@ -75,15 +77,15 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                   FormBuilderDateTimePickerWrapper(
                     name: "startDate",
                     wordBelowIcon: "Start",
-                    currTime: myModel.currTime,
-                    initialValue: event?.startTime ?? DateTime.now(),
+                    firstDate: event?.startTime ?? currTime,
+                    initialValue: event?.startTime ?? currTime,
                   ),
                   Divider(),
                   FormBuilderDateTimePickerWrapper(
                     name: "endDate",
                     wordBelowIcon: "End",
-                    currTime: myModel.currTime,
-                    initialValue: event?.endTime ?? DateTime.now(),
+                    firstDate: event?.startTime ?? currTime,
+                    initialValue: event?.startTime ?? currTime,
                   ),
                   Divider(),
                   FormBuilderColorPicker(

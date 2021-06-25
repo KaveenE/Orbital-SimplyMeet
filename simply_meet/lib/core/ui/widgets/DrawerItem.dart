@@ -37,7 +37,8 @@ class DrawerItem extends StatelessWidget {
           )
         : SwitchListTile(
             value: currBoolean!,
-            onChanged: tapHandler as void Function(bool),
+            // ignore: unnecessary_cast
+            onChanged: ( (invertedBool) => tapHandler(invertedBool,context) ) as void Function(bool),
             secondary: icon,
             title: headingWidget,
             activeColor: Colors.amber.shade400,

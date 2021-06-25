@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
 import 'package:provider/provider.dart';
 import 'package:simply_meet/shared/models/event.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/services/local_notif.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
+
 
 import 'package:simply_meet/shared/view_models/loadable_model.dart';
 
@@ -65,7 +67,6 @@ class CreateEditEventViewModel extends LoadableModel {
       super.setBusy(true);
 
       final response = await firestore.addEvent(eventToAdd);
-
       await _scheduleNotification(eventToAdd, context);
 
       super.setBusy(false);
@@ -215,7 +216,7 @@ class CreateEditEventViewModel extends LoadableModel {
     var scheduledTimingForNotif = event.startTime.isBefore(currTime)
         ? currTime.add(Duration(seconds: 20))
         : event.startTime;
-
+  
     return await _localNotif.scheduledNotification(
       context: context,
       notifID: event.notifID!,

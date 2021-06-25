@@ -12,7 +12,7 @@ class TimetableView extends StatelessWidget {
     final timetableViewModel =
         Provider.of<TimetableViewModel>(context, listen: false);
     final eventList = Provider.of<List<Event>>(context, listen: true);
-    print(eventList);
+    
     return SfCalendar(
       //Aesthetics baby
       view: CalendarView.week,
