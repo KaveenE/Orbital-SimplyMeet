@@ -44,7 +44,7 @@ class TabsAllViewModel extends ChangeNotifier {
           title: Text("My To-Do List"),
           actions: null,
         ),
-        widget: TodoWidget(),
+        widget: ToDoWidget(),
         icon: Icon(Icons.checklist_rounded),
         label: "To-Do"
       }

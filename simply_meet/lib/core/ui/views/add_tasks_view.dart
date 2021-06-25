@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:simply_meet/core/view_models/database_helper.dart';
+import 'package:simply_meet/core/view_models/todo_view_model.dart';
 
 class AddTaskScreen extends StatefulWidget {
+  final Task task;
+  final Function updateTaskList;
+
+  AddTaskScreen({required this.task, required this.updateTaskList});
+
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? _title = '';
-  String? _priority;
+  String _title = '';
+  late String _priority;
   DateTime _date = DateTime.now();
+  late int _status;
   TextEditingController _dateController = TextEditingController();
   final DateFormat _dateFormatter = DateFormat('MMM dd, yyyy');
   final List<String> _priorities = ['Low', 'Medium', 'High'];
@@ -18,6 +26,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   void initState() {
     super.initState();
+
+    _title = widget.task.title;
+    _date = widget.task.date;
+    _priority = widget.task.priority;
+    _status = widget.task.status;
+
     _dateController.text = _dateFormatter.format(_date);
   }
 
@@ -47,7 +61,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       _formKey.currentState!.save();
       print('Title: $_title, Date: $_date, Priority: $_priority');
       // Insert new task to user's database
+      Task task = Task(
+          title: _title, date: _date, priority: _priority, status: _status);
+      if (widget.task == null) {
+        task.status = 0;
+        DatabaseHelper.instance.insertTask(task);
+      } else {
+        task.status = widget.task.status;
+        DatabaseHelper.instance.updateTask(task);
+      }
       // Update existing task
+      widget.updateTaskList();
       Navigator.pop(context);
     }
   }
@@ -101,7 +125,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           validator: (input) => input!.trim().isEmpty
                               ? 'Please enter a task title'
                               : null,
-                          onSaved: (input) => _title = input,
+                          onSaved: (input) => _title = input!,
                           initialValue: _title,
                         ),
                       ),
@@ -150,10 +174,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           validator: (input) => _priority == null
                               ? 'Please select a priority level'
                               : null,
-                          onSaved: (input) => _priority = input as String?,
+                          onSaved: (input) => _priority = (input as String?)!,
                           onChanged: (value) {
                             setState(() {
-                              _priority = value as String?;
+                              _priority = (value as String?)!;
                             });
                           },
                           value: _priority,
