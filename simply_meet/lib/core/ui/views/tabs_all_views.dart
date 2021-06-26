@@ -57,10 +57,10 @@ class TabsAllViews extends StatelessWidget {
                 bottomNavigationBar: BottomNavigationBar(
                   currentIndex: currIdx,
                   onTap: tabsAllViewModel.setIndex,
-                  backgroundColor: Colors.grey.shade900,
+                  backgroundColor: themeProvider.themeType.backgroundColor,
                   showUnselectedLabels: false,
                   selectedItemColor: theme(ctx).accentColor,
-                  unselectedItemColor: Colors.white,
+                  //unselectedItemColor: Colors.white,
                   items: viewMappings
                       .map(
                         (map) => BottomNavigationBarItem(

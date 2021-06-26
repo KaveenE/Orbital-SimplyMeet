@@ -22,7 +22,7 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60,
       child: FormBuilderDateTimePicker(
         name: this.name,

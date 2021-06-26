@@ -33,9 +33,9 @@ class _AddTaskViewState extends State<AddTaskView> {
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
-            child: Container(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 80),
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
