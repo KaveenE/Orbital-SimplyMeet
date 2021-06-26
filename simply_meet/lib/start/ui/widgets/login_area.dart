@@ -41,7 +41,7 @@ class LoginArea extends StatelessWidget {
               child: Text(
                 "Forgot your password?",
                 style:
-                    theme(context).textTheme.subtitle2!.copyWith(fontSize: 16),
+                    theme(context).textTheme.subtitle2!.copyWith(fontSize: 15),
               ),
             ),
           ),

@@ -29,7 +29,7 @@ class ToDoView extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+            padding: const EdgeInsets.only(left: 30, top: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

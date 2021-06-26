@@ -57,9 +57,10 @@ class TabsAllViews extends StatelessWidget {
                 bottomNavigationBar: BottomNavigationBar(
                   currentIndex: currIdx,
                   onTap: tabsAllViewModel.setIndex,
-                  backgroundColor: themeProvider.themeType.backgroundColor,
+                  backgroundColor: Colors.grey.shade900,
                   showUnselectedLabels: false,
                   selectedItemColor: theme(ctx).accentColor,
+                  unselectedItemColor: Colors.white,
                   items: viewMappings
                       .map(
                         (map) => BottomNavigationBarItem(
@@ -79,8 +80,7 @@ class TabsAllViews extends StatelessWidget {
   }
 }
 
-/*
-class TabsAllViews extends StatelessWidget {
+/* class TabsAllViews extends StatelessWidget {
   static const routeName = '/tabsAllViews';
   @override
   Widget build(BuildContext context) {

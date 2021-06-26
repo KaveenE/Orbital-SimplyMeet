@@ -27,7 +27,7 @@ class TabsAllViewModel extends ChangeNotifier {
           actions: _appBarActions,
         ),
         widget: HomeView(),
-        icon: Icon(Icons.home),
+        icon: Icon(Icons.home_filled),
         label: "Home",
       },
       {
@@ -36,7 +36,10 @@ class TabsAllViewModel extends ChangeNotifier {
           actions: _appBarActions,
         ),
         widget: TimetableView(),
-        icon: Icon(Icons.calendar_today_rounded),
+        icon: Icon(
+          Icons.calendar_today_rounded,
+          size: 21,
+        ),
         label: "Timetable",
       },
       {
@@ -45,7 +48,10 @@ class TabsAllViewModel extends ChangeNotifier {
           actions: null,
         ),
         widget: ToDoView(),
-        icon: Icon(Icons.checklist_rounded),
+        icon: Icon(
+          Icons.checklist_rounded,
+          size: 25,
+        ),
         label: "To-Do"
       }
     ];
