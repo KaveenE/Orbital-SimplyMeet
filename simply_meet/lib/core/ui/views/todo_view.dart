@@ -27,7 +27,7 @@ class ToDoView extends StatelessWidget {
         ),
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(left: 30, top: 30),
             child: Column(
@@ -43,7 +43,7 @@ class ToDoView extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 35),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Text(
                   "${ToDoViewModel.completedTasks(taskList)} of ${taskList.length}",
                   style: theme(context).textTheme.subtitle1!.copyWith(
@@ -52,6 +52,7 @@ class ToDoView extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                 ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.005),
               ],
             ),
           ),

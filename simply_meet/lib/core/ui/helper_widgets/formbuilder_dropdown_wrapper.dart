@@ -43,6 +43,7 @@ class FormBuilderDropdownWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilderDropdown(
+      isDense: true,
       icon: this.icon,
       iconSize: this.iconSize,
       iconEnabledColor: this.iconEnabledColor,
@@ -50,10 +51,12 @@ class FormBuilderDropdownWrapper extends StatelessWidget {
       initialValue: name.contains("recur") ? stripPrefix() : initialValue,
       items: dropdownMenu,
       style: this.style,
-      decoration: decoration ?? InputDecoration(
-        border: InputBorder.none,
-        labelText: "Recurrence Pattern",
-      ),
+      dropdownColor: Colors.grey.shade800,
+      decoration: decoration ??
+          InputDecoration(
+            border: InputBorder.none,
+            labelText: "Recurrence Pattern",
+          ),
       hint: Text(hintText),
     );
   }

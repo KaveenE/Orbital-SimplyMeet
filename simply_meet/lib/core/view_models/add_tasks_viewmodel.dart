@@ -24,7 +24,12 @@ class AddTasksViewModel extends LoadableModel {
       .map(
         (priority) => DropdownMenuItem(
           value: priority,
-          child: Text(priority),
+          child: Text(
+            priority,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
       )
       .toList();

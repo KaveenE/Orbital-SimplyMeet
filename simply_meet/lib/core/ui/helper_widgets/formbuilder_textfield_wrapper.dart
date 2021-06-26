@@ -32,7 +32,11 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
       initialValue: this.initialValue,
       keyboardType: this.keyboardType,
       textInputAction: this.textInputAction ?? TextInputAction.next,
-      validator: isShortField ? FormBuilderValidators.required(context,errorText:'${name[0].toUpperCase()+name.substring(1,name.length)} must be non-empty' ) : null,
+      validator: isShortField
+          ? FormBuilderValidators.required(context,
+              errorText:
+                  '${name[0].toUpperCase() + name.substring(1, name.length)} must be non-empty')
+          : null,
       style: textStyle,
       decoration: this.decoration ??
           InputDecoration(

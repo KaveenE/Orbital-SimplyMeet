@@ -14,6 +14,7 @@ import 'package:simply_meet/shared/view_models/loadable_model.dart';
 class ToDoViewModel extends LoadableModel {
   final _dialogManager = DialogManager.singleton;
   final _localNotif = LocalNotification.singleton;
+  final DateFormat _dateFormatter = DateFormat('MMM dd, yyyy - hh:mm a');
   DateTime get currTime => DateTime.now();
 
   Widget buildTask(Task someTask, BuildContext context) {
@@ -28,7 +29,7 @@ class ToDoViewModel extends LoadableModel {
                   fontSize: 18, decoration: _finishTaskDecoration(someTask)),
             ),
             subtitle: Text(
-              '${DateFormat("d/M/y").add_jm().format(someTask.date)} • ${someTask.priority}',
+              '${_dateFormatter.format(someTask.date)} • ${someTask.priority}',
               style: TextStyle(
                   fontSize: 15, decoration: _finishTaskDecoration(someTask)),
             ),

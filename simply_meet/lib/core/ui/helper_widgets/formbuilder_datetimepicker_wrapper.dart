@@ -11,9 +11,7 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
   final InputDecoration? decoration;
   final DateTime firstDate;
 
-
   const FormBuilderDateTimePickerWrapper({
-    
     required this.name,
     this.wordBelowIcon = '',
     required this.initialValue,
@@ -22,35 +20,39 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
     required this.firstDate,
   });
 
-  
   @override
   Widget build(BuildContext context) {
-    return FormBuilderDateTimePicker(
-      name: this.name,
-      format: DateFormat("d/M/y").add_jm(),
-      initialValue: this.initialValue,
-      maxLines: 2,
-      validator: FormBuilderValidators.required(context,
-          errorText: "Field cannot be empty"),
-      firstDate: this.firstDate,
-      lastDate: this.firstDate.add(
-            Duration(days: 365),
-          ),
-      style: textStyle,
-      decoration: decoration ?? InputDecoration(
-        border: InputBorder.none,
-        hintText: "Choose Date",
-        hintStyle: TextStyle(height: 2),
-        contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
-        prefixIcon: Column(
-          children: [
-            Icon(
-              Icons.calendar_today_rounded,
-              color: Colors.grey.shade700,
+    return Container(
+      height: 60,
+      child: FormBuilderDateTimePicker(
+        name: this.name,
+        format: DateFormat("d/M/y").add_jm(),
+        initialValue: this.initialValue,
+        maxLines: 2,
+        validator: FormBuilderValidators.required(context,
+            errorText: "Field cannot be empty"),
+        firstDate: this.firstDate,
+        lastDate: this.firstDate.add(
+              Duration(days: 365),
             ),
-            Text(this.wordBelowIcon),
-          ],
-        ),
+        style: textStyle,
+        decoration: decoration ??
+            InputDecoration(
+              border: InputBorder.none,
+              hintText: "Choose Date",
+              hintStyle: TextStyle(height: 2),
+              contentPadding:
+                  EdgeInsets.only(left: screenWidth(context) * 0.06),
+              prefixIcon: Column(
+                children: [
+                  Icon(
+                    Icons.calendar_today_rounded,
+                    color: Colors.grey.shade700,
+                  ),
+                  Text(this.wordBelowIcon),
+                ],
+              ),
+            ),
       ),
     );
   }

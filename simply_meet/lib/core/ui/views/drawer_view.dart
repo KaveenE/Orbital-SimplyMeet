@@ -26,9 +26,7 @@ class DrawerView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 17,
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025),
             DrawerItem(
               icon: drawerViewModel.iconBasedOnMode,
               heading: drawerViewModel.headingBasedOnMode,
@@ -37,7 +35,10 @@ class DrawerView extends StatelessWidget {
               context: context,
             ),
             DrawerItem(
-              icon: Icon(Icons.exit_to_app_rounded,color: theme(context).primaryColor,),
+              icon: Icon(
+                Icons.exit_to_app_rounded,
+                color: theme(context).primaryColor,
+              ),
               heading: "Log out",
               tapHandler: () => drawerViewModel.logOut(context),
               context: context,
