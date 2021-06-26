@@ -113,6 +113,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                                   dropdownMenu: myModel.dropdownMenu,
                                   hintText: "Select Priority",
                                   initialValue: task?.priority ?? "LOW",
+                                  dropdownColor: Colors.grey.shade800,
                                   name: "priority",
                                   decoration: InputDecoration(
                                     labelText: "Priority",

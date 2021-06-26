@@ -7,7 +7,6 @@ import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/services/local_notif.dart';
 import 'package:simply_meet/shared/utility/dialog_manager.dart';
 
-
 import 'package:simply_meet/shared/view_models/loadable_model.dart';
 
 class CreateEditEventViewModel extends LoadableModel {
@@ -216,7 +215,7 @@ class CreateEditEventViewModel extends LoadableModel {
     var scheduledTimingForNotif = event.startTime.isBefore(currTime)
         ? currTime.add(Duration(seconds: 20))
         : event.startTime;
-  
+
     return await _localNotif.scheduledNotification(
       context: context,
       notifID: event.notifID!,

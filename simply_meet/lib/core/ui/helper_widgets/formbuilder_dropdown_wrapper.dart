@@ -6,6 +6,7 @@ class FormBuilderDropdownWrapper extends StatelessWidget {
   final String initialValue;
   final String name;
   final String hintText;
+  final Color? dropdownColor;
 
   final Icon? icon;
   final double iconSize;
@@ -19,6 +20,7 @@ class FormBuilderDropdownWrapper extends StatelessWidget {
     required this.initialValue,
     required this.hintText,
     required this.name,
+    this.dropdownColor,
     this.icon,
     this.iconSize = 24,
     this.decoration,
@@ -51,7 +53,7 @@ class FormBuilderDropdownWrapper extends StatelessWidget {
       initialValue: name.contains("recur") ? stripPrefix() : initialValue,
       items: dropdownMenu,
       style: this.style,
-      dropdownColor: Colors.grey.shade800,
+      dropdownColor: this.dropdownColor,
       decoration: decoration ??
           InputDecoration(
             border: InputBorder.none,
