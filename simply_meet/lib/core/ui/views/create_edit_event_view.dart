@@ -84,8 +84,8 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                   FormBuilderDateTimePickerWrapper(
                     name: "endDate",
                     wordBelowIcon: "End",
-                    firstDate: event?.startTime ?? currTime,
-                    initialValue: event?.startTime ?? currTime,
+                    firstDate: event?.endTime ?? currTime,
+                    initialValue: event?.endTime ?? currTime,
                   ),
                   Divider(),
                   FormBuilderColorPicker(
