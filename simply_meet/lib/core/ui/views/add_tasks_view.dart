@@ -96,7 +96,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                                   hintText: "Description",
                                   initialValue: task?.description ?? '',
                                   keyboardType: TextInputType.multiline,
-                                  name: "subject",
+                                  name: "description",
                                   decoration: InputDecoration(
                                     labelText: "Description",
                                     labelStyle: TextStyle(color: Colors.white),

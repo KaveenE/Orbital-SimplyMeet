@@ -44,6 +44,7 @@ class AddTasksViewModel extends LoadableModel {
         date: mapForInputs["date"]!.value,
         notifID: task.notifID,
         priority: mapForInputs["priority"]!.value,
+        description: mapForInputs["description"]!.value,
         title: mapForInputs["title"]!.value,
         documentIDFireStore: task.documentIDFireStore,
       );
@@ -81,6 +82,7 @@ class AddTasksViewModel extends LoadableModel {
         notifID: Task.uuid.v4(),
         priority: mapForInputs["priority"]!.value,
         title: mapForInputs["title"]!.value,
+        description: mapForInputs["description"]!.value,
       );
 
       super.setBusy(true);
