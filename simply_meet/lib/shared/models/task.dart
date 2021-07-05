@@ -10,8 +10,8 @@ class Task {
   final String title;
   final String description;
 
-  @JsonKey(toJson: _dateTimeToJson, fromJson: _dateTimeFromJson)
-  final DateTime date;
+  @JsonKey(toJson: _dateTimeToJson, fromJson: _dateTimeFromJson,includeIfNull: false)
+  final DateTime? date;
 
   final String priority;
   final bool completionStatus;
@@ -24,7 +24,7 @@ class Task {
   Task({
     this.title = '',
     this.description = '',
-    required this.date,
+    this.date,
     required this.priority,
     required this.notifID,
     this.completionStatus = false,
@@ -57,15 +57,14 @@ class Task {
     return defensiveCopy;
   }
 
-  Task copyWith({
-    String? title,
-    DateTime? date,
-    String? priority,
-    String? notifID,
-    bool? completionStatus,
-    String? documentIDFireStore,
-    String? description
-  }) {
+  Task copyWith(
+      {String? title,
+      DateTime? date,
+      String? priority,
+      String? notifID,
+      bool? completionStatus,
+      String? documentIDFireStore,
+      String? description}) {
     return Task(
       date: date ?? this.date,
       notifID: notifID ?? this.notifID,
@@ -78,9 +77,9 @@ class Task {
   }
 
   //Helper functions for @JsonKey
-  static String _dateTimeToJson(DateTime dateTime) =>
-      DateFormat("d/M/y").add_jm().format(dateTime);
+  static String? _dateTimeToJson(DateTime? dateTime) =>
+      dateTime == null ? null : DateFormat("d/M/y").add_jm().format(dateTime);
 
-  static DateTime _dateTimeFromJson(String dateTime) =>
-      DateFormat("d/M/y").add_jm().parse(dateTime);
+  static DateTime? _dateTimeFromJson(String? dateTime) =>
+      dateTime == null ? null : DateFormat("d/M/y").add_jm().parse(dateTime);
 }

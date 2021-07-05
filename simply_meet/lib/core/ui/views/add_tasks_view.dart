@@ -115,11 +115,11 @@ class _AddTaskViewState extends State<AddTaskView> {
                                 child: FormBuilderDateTimePickerWrapper(
                                   firstDate: task?.date ?? currTime,
                                   name: "date",
-                                  initialValue: task?.date ?? currTime,
+                                  initialValue: task?.date ?? null,
                                   textStyle: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                   decoration: InputDecoration(
-                                    labelText: "Date",
+                                    labelText: "Date(Optional)",
                                     labelStyle: TextStyle(color: Colors.white),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(50),

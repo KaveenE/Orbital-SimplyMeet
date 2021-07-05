@@ -38,7 +38,6 @@ class FirestoreService {
   //Event related methods
   Future<String?> addEvent(Event event) async {
     try {
-      
       await _timetableCollectionReference.add(event.toJson());
     } catch (e) {
       return (e is PlatformException) ? e.message : e.toString();

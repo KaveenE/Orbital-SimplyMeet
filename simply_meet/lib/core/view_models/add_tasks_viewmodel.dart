@@ -53,6 +53,8 @@ class AddTasksViewModel extends LoadableModel {
 
       await _localNotif.cancelNotification(taskToUpdate.notifID.hashCode);
       final response = await firestore.updateTask(taskToUpdate);
+
+      if(mapForInputs["date"]!.value != null)
       await _scheduleNotification(taskToUpdate, context);
 
       super.setBusy(false);
@@ -88,6 +90,8 @@ class AddTasksViewModel extends LoadableModel {
       super.setBusy(true);
 
       final response = await firestore.addTask(taskToAdd);
+
+      if(mapForInputs["date"]!.value != null)
       await _scheduleNotification(taskToAdd, context);
 
       super.setBusy(false);
@@ -107,7 +111,7 @@ class AddTasksViewModel extends LoadableModel {
   }
 
   Future<void> _scheduleNotification(Task task, BuildContext context) async {
-    var scheduledTimingForNotif = task.date.isBefore(currTime)
+    var scheduledTimingForNotif = task.date!.isBefore(currTime)
         ? currTime.add(Duration(seconds: 20))
         : task.date;
 
@@ -115,7 +119,7 @@ class AddTasksViewModel extends LoadableModel {
       context: context,
       notifID: task.notifID!,
       subject: task.title,
-      scheduledDate: scheduledTimingForNotif,
+      scheduledDate: scheduledTimingForNotif!,
     );
   }
 }

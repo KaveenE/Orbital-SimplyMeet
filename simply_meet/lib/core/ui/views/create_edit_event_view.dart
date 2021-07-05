@@ -79,6 +79,8 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                     wordBelowIcon: "Start",
                     firstDate: event?.startTime ?? currTime,
                     initialValue: event?.startTime ?? currTime,
+                    validator: FormBuilderValidators.required(context,
+                        errorText: "Field cannot be empty"),
                   ),
                   Divider(),
                   FormBuilderDateTimePickerWrapper(
@@ -86,6 +88,8 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                     wordBelowIcon: "End",
                     firstDate: event?.endTime ?? currTime,
                     initialValue: event?.endTime ?? currTime,
+                    validator: FormBuilderValidators.required(context,
+                        errorText: "Field cannot be empty"),
                   ),
                   Divider(),
                   FormBuilderColorPicker(

@@ -15,7 +15,7 @@ import 'package:simply_meet/shared/view_models/loadable_model.dart';
 class ToDoViewModel extends LoadableModel {
   final _dialogManager = DialogManager.singleton;
   final _localNotif = LocalNotification.singleton;
-  final DateFormat _dateFormatter = DateFormat('MMM dd, yyyy - hh:mm a');
+  final DateFormat _dateFormatter = DateFormat('MMM dd yyyy, hh:mm a');
 
   DateTime get currTime => DateTime.now();
 
@@ -32,19 +32,11 @@ class ToDoViewModel extends LoadableModel {
     if (sortFilterViewModel.sortByDate) {
       modifiedTaskList.sort(
         (task1, task2) {
-          final task1Priority = _priorityInInt(task1.priority);
-          final task2Priority = _priorityInInt(task2.priority);
-
-          if (task2.date.compareTo(task1.date) != 0) {
-            return task2.date.compareTo(task1.date);
-          } else if (task1Priority != task2Priority) {
-            return task2Priority - task1Priority;
-          } else if (task2.title != task1.title) {
-            return task1.title.compareTo(task2.title);
-          } else {
-            return task1.documentIDFireStore!
-                .compareTo(task2.documentIDFireStore!);
-          }
+          return _compare(
+            task1,
+            task2,
+            true,
+          );
         },
       );
     }
@@ -52,23 +44,15 @@ class ToDoViewModel extends LoadableModel {
     if (sortFilterViewModel.sortByPriority) {
       modifiedTaskList.sort(
         (task1, task2) {
-          final task1Priority = _priorityInInt(task1.priority);
-          final task2Priority = _priorityInInt(task2.priority);
-
-          if (task1Priority != task2Priority) {
-            return task2Priority - task1Priority;
-          } else if (task2.date.compareTo(task1.date) != 0) {
-            return task2.date.compareTo(task1.date);
-          } else if (task2.title != task1.title) {
-            return task1.title.compareTo(task2.title);
-          } else {
-            return task1.documentIDFireStore!
-                .compareTo(task2.documentIDFireStore!);
-          }
+          return _compare(
+            task1,
+            task2,
+            false,
+          );
         },
       );
     }
-    for (var task in modifiedTaskList) print(task.date);
+    
     return modifiedTaskList;
   }
 
@@ -84,7 +68,7 @@ class ToDoViewModel extends LoadableModel {
                   fontSize: 18, decoration: _finishTaskDecoration(someTask)),
             ),
             subtitle: Text(
-              '${_dateFormatter.format(someTask.date)} • ${someTask.priority}\n\n ${someTask.description}',
+              '${someTask.date != null ? _dateFormatter.format(someTask.date!) + ' • ' : ''}${someTask.priority}\n\n ${someTask.description}',
               style: TextStyle(
                   fontSize: 15, decoration: _finishTaskDecoration(someTask)),
             ),
@@ -141,7 +125,7 @@ class ToDoViewModel extends LoadableModel {
   }
 
   Future<void> _scheduleNotification(Task task, BuildContext context) async {
-    var scheduledTimingForNotif = task.date.isBefore(currTime)
+    var scheduledTimingForNotif = task.date!.isBefore(currTime)
         ? currTime.add(Duration(seconds: 20))
         : task.date;
 
@@ -149,7 +133,7 @@ class ToDoViewModel extends LoadableModel {
       context: context,
       notifID: task.notifID!,
       subject: task.title,
-      scheduledDate: scheduledTimingForNotif,
+      scheduledDate: scheduledTimingForNotif!,
     );
   }
 
@@ -160,6 +144,46 @@ class ToDoViewModel extends LoadableModel {
       return 2;
     } else {
       return 3;
+    }
+  }
+
+  int _compare(Task task1, Task task2,
+      [bool compareByDate = true, int defaultOrderingValue = 0]) {
+    final task1Priority = _priorityInInt(task1.priority);
+    final task2Priority = _priorityInInt(task2.priority);
+
+    if (compareByDate) {
+      if (task2.date == null && task1.date == null) {
+        return defaultOrderingValue;
+      } else if (task1.date == null) {
+        return -1;
+      } else if (task2.date == null) {
+        return 1;
+      } else if (task2.date!.compareTo(task1.date!) != 0) {
+        return task2.date!.compareTo(task1.date!);
+      } else if (task1Priority != task2Priority) {
+        return task2Priority - task1Priority;
+      } else if (task2.title != task1.title) {
+        return task1.title.compareTo(task2.title);
+      } else {
+        return defaultOrderingValue;
+      }
+    } else {
+      if (task1Priority != task2Priority) {
+        return task2Priority - task1Priority;
+      } else if (task2.date == null && task1.date == null) {
+        return defaultOrderingValue;
+      } else if (task1.date == null) {
+        return -1;
+      } else if (task2.date == null) {
+        return 1;
+      } else if (task2.date!.compareTo(task1.date!) != 0) {
+        return task2.date!.compareTo(task1.date!);
+      } else if (task2.title != task1.title) {
+        return task1.title.compareTo(task2.title);
+      } else {
+        return defaultOrderingValue;
+      }
     }
   }
 }
