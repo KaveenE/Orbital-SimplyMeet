@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/ui/views/add_tasks_view.dart';
+import 'package:simply_meet/core/view_models/sortfilter_viewmodel.dart';
 import 'package:simply_meet/core/view_models/todo_viewmodel.dart';
 import 'package:simply_meet/shared/models/task.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
@@ -11,7 +12,11 @@ class ToDoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final taskList = Provider.of<List<Task>>(context);
+
+    final sortFilterViewModel = Provider.of<SortFilterViewModel>(context);
+
     final todoViewModel = ToDoViewModel();
+    final modifiedTaskList = todoViewModel.modifyTaskList(taskList, context, sortFilterViewModel);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -59,9 +64,9 @@ class ToDoView extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.symmetric(vertical: 15),
-              itemCount: taskList.length,
+              itemCount: modifiedTaskList.length,
               itemBuilder: (BuildContext context, int index) {
-                return todoViewModel.buildTask(taskList[index], context);
+                return todoViewModel.buildTask(modifiedTaskList[index], context);
               },
             ),
           )

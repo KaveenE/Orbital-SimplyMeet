@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'package:simply_meet/core/ui/views/update_task_view.dart';
 import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
+import 'package:simply_meet/core/view_models/sortfilter_viewmodel.dart';
 import 'package:simply_meet/shared/models/task.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
 import 'package:simply_meet/shared/services/local_notif.dart';
@@ -15,7 +16,61 @@ class ToDoViewModel extends LoadableModel {
   final _dialogManager = DialogManager.singleton;
   final _localNotif = LocalNotification.singleton;
   final DateFormat _dateFormatter = DateFormat('MMM dd, yyyy - hh:mm a');
+
   DateTime get currTime => DateTime.now();
+
+  List<Task> modifyTaskList(List<Task> taskList, BuildContext context,
+      SortFilterViewModel sortFilterViewModel) {
+    var modifiedTaskList = Task.deepCopyList(taskList);
+
+    if (sortFilterViewModel.hideComplete) {
+      modifiedTaskList = modifiedTaskList
+          .where((task) => task.completionStatus == false)
+          .toList();
+    }
+
+    if (sortFilterViewModel.sortByDate) {
+      modifiedTaskList.sort(
+        (task1, task2) {
+          final task1Priority = _priorityInInt(task1.priority);
+          final task2Priority = _priorityInInt(task2.priority);
+
+          if (task2.date.compareTo(task1.date) != 0) {
+            return task2.date.compareTo(task1.date);
+          } else if (task1Priority != task2Priority) {
+            return task2Priority - task1Priority;
+          } else if (task2.title != task1.title) {
+            return task1.title.compareTo(task2.title);
+          } else {
+            return task1.documentIDFireStore!
+                .compareTo(task2.documentIDFireStore!);
+          }
+        },
+      );
+    }
+
+    if (sortFilterViewModel.sortByPriority) {
+      modifiedTaskList.sort(
+        (task1, task2) {
+          final task1Priority = _priorityInInt(task1.priority);
+          final task2Priority = _priorityInInt(task2.priority);
+
+          if (task1Priority != task2Priority) {
+            return task2Priority - task1Priority;
+          } else if (task2.date.compareTo(task1.date) != 0) {
+            return task2.date.compareTo(task1.date);
+          } else if (task2.title != task1.title) {
+            return task1.title.compareTo(task2.title);
+          } else {
+            return task1.documentIDFireStore!
+                .compareTo(task2.documentIDFireStore!);
+          }
+        },
+      );
+    }
+    for (var task in modifiedTaskList) print(task.date);
+    return modifiedTaskList;
+  }
 
   Widget buildTask(Task someTask, BuildContext context) {
     return Padding(
@@ -29,7 +84,7 @@ class ToDoViewModel extends LoadableModel {
                   fontSize: 18, decoration: _finishTaskDecoration(someTask)),
             ),
             subtitle: Text(
-              '${_dateFormatter.format(someTask.date)} • ${someTask.priority}',
+              '${_dateFormatter.format(someTask.date)} • ${someTask.priority}\n\n ${someTask.description}',
               style: TextStyle(
                   fontSize: 15, decoration: _finishTaskDecoration(someTask)),
             ),
@@ -72,7 +127,7 @@ class ToDoViewModel extends LoadableModel {
       ),
     );
   }
-  
+
   static TextDecoration _finishTaskDecoration(Task someTask) {
     return someTask.completionStatus
         ? TextDecoration.lineThrough
@@ -96,5 +151,15 @@ class ToDoViewModel extends LoadableModel {
       subject: task.title,
       scheduledDate: scheduledTimingForNotif,
     );
+  }
+
+  int _priorityInInt(String priorityInString) {
+    if (priorityInString == "LOW") {
+      return 1;
+    } else if (priorityInString == "MEDIUM") {
+      return 2;
+    } else {
+      return 3;
+    }
   }
 }

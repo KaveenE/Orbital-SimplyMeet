@@ -33,6 +33,8 @@ class DrawerView extends StatelessWidget {
               tapHandler: drawerViewModel.toggleMode,
               currBoolean: drawerViewModel.islightMode,
               context: context,
+              activeColor: Colors.amber.shade400,
+              inactiveThumbColor: Colors.grey.shade700,
             ),
             DrawerItem(
               icon: Icon(

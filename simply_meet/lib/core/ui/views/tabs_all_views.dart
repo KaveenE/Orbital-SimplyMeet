@@ -40,7 +40,8 @@ class TabsAllViews extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
-        )
+        ),
+       
       ],
       child: Consumer<TabsAllViewModel>(
         builder: (ctx, tabsAllViewModel, __) {

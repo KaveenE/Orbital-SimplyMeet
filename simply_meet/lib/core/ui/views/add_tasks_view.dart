@@ -91,6 +91,27 @@ class _AddTaskViewState extends State<AddTaskView> {
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 20),
+                                child: FormBuilderTextFieldWrapper(
+                                  context: context,
+                                  hintText: "Description",
+                                  initialValue: task?.description ?? '',
+                                  keyboardType: TextInputType.multiline,
+                                  name: "subject",
+                                  decoration: InputDecoration(
+                                    labelText: "Description",
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  ),
+                                  textStyle: TextStyle(
+                                      fontSize: 18, color: Colors.white),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 20),
                                 child: FormBuilderDateTimePickerWrapper(
                                   firstDate: task?.date ?? currTime,
                                   name: "date",

@@ -9,6 +9,8 @@ class DrawerItem extends StatelessWidget {
   final Function tapHandler;
   final BuildContext context;
   final double? fontSizeForHeader;
+  final Color? activeColor;
+  final Color? inactiveThumbColor;
 
   const DrawerItem({
     this.currBoolean,
@@ -17,6 +19,8 @@ class DrawerItem extends StatelessWidget {
     required this.tapHandler,
     required this.context,
     this.fontSizeForHeader,
+    this.activeColor,
+    this.inactiveThumbColor,
   });
 
   @override
@@ -38,11 +42,12 @@ class DrawerItem extends StatelessWidget {
         : SwitchListTile(
             value: currBoolean!,
             // ignore: unnecessary_cast
-            onChanged: ( (invertedBool) => tapHandler(invertedBool,context) ) as void Function(bool),
+            onChanged: ((invertedBool) => tapHandler(invertedBool, context))
+                as void Function(bool),
             secondary: icon,
             title: headingWidget,
-            activeColor: Colors.amber.shade400,
-            inactiveThumbColor: Colors.grey.shade700,
+            activeColor: this.activeColor,
+            inactiveThumbColor: this.inactiveThumbColor,
             dense: true,
           );
   }

@@ -1,5 +1,7 @@
+import 'package:simply_meet/core/ui/views/sortfilter_view.dart';
 import 'package:simply_meet/core/ui/views/todo_view.dart';
 import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
+
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 import '../ui/views/create_edit_event_view.dart';
@@ -24,7 +26,7 @@ class TabsAllViewModel extends ChangeNotifier {
       {
         appBar: AppBar(
           title: Text("Home"),
-          actions: _appBarActions,
+          actions: _appBarActionsForEvents,
         ),
         widget: HomeView(),
         icon: Icon(Icons.home_filled),
@@ -33,7 +35,7 @@ class TabsAllViewModel extends ChangeNotifier {
       {
         appBar: AppBar(
           title: Text("Timetable"),
-          actions: _appBarActions,
+          actions: _appBarActionsForEvents,
         ),
         widget: TimetableView(),
         icon: Icon(
@@ -45,7 +47,7 @@ class TabsAllViewModel extends ChangeNotifier {
       {
         appBar: AppBar(
           title: Text("My To-Do List"),
-          actions: null,
+          actions: _appBarActionsForReminders,
         ),
         widget: ToDoView(),
         icon: Icon(
@@ -63,7 +65,7 @@ class TabsAllViewModel extends ChangeNotifier {
     super.notifyListeners();
   }
 
-  List<Widget> get _appBarActions {
+  List<Widget> get _appBarActionsForEvents {
     return [
       IconButton(
         onPressed: () async => await showFloatingModalBottomSheet(
@@ -75,4 +77,17 @@ class TabsAllViewModel extends ChangeNotifier {
       ),
     ];
   }
+List<Widget> get _appBarActionsForReminders {
+    return [
+      IconButton(
+        onPressed: () async => await showFloatingModalBottomSheet(
+          context: _context,
+          builder: (_) => SortFilterView(),
+        ),
+        icon: const Icon(Icons.filter_alt_rounded),
+        highlightColor: theme(_context).accentColor,
+      ),
+    ];
+  }
+  
 }

@@ -16,6 +16,7 @@ import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/start/ui/views/welcome_view.dart';
 
 import 'core/ui/views/create_edit_event_view.dart';
+import 'core/view_models/sortfilter_viewmodel.dart';
 import 'shared/services/flutterfire/authentication_service.dart';
 
 // TO-DO: For start screens, implement email address change?
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
         ),
         Provider(
           create: (_) => FirestoreService(),
+        ),
+         ChangeNotifierProvider(
+          create: (_) => SortFilterViewModel(),
         ),
       ],
       child: MaterialApp(

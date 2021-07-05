@@ -8,6 +8,7 @@ part 'task.g.dart';
 class Task {
   static const uuid = Uuid();
   final String title;
+  final String description;
 
   @JsonKey(toJson: _dateTimeToJson, fromJson: _dateTimeFromJson)
   final DateTime date;
@@ -22,6 +23,7 @@ class Task {
 
   Task({
     this.title = '',
+    this.description = '',
     required this.date,
     required this.priority,
     required this.notifID,
@@ -40,6 +42,7 @@ class Task {
       priority: another.priority,
       completionStatus: another.completionStatus,
       date: another.date,
+      description: another.description,
       notifID: another.notifID,
     );
   }
@@ -61,6 +64,7 @@ class Task {
     String? notifID,
     bool? completionStatus,
     String? documentIDFireStore,
+    String? description
   }) {
     return Task(
       date: date ?? this.date,
@@ -69,6 +73,7 @@ class Task {
       completionStatus: completionStatus ?? this.completionStatus,
       documentIDFireStore: documentIDFireStore ?? this.documentIDFireStore,
       title: title ?? this.title,
+      description: description ?? this.description,
     );
   }
 
