@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Hard coded separators in case we can't use SizedBox.
-// TODO: Nivi, could you change up the hardcoded values to your preference and henceforth attempt to use these constants. If that's not possible, then just delete these SizedBox widgets
+
 
 const Widget horizontalSpaceTiny = SizedBox(width: 5.0);
 const Widget horizontalSpaceSmall = SizedBox(width: 10.0);

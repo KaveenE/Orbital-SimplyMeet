@@ -72,7 +72,7 @@ class ToDoViewModel extends LoadableModel {
       ),
     );
   }
-
+  
   static TextDecoration _finishTaskDecoration(Task someTask) {
     return someTask.completionStatus
         ? TextDecoration.lineThrough

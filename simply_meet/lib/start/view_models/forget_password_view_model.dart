@@ -42,8 +42,7 @@ class ForgetPasswordViewModel {
       );
       Timer(Duration(seconds: 1), () => Navigator.of(_context).pop());
     }
-    //TODO: Implement confirmPasswordReset?
-    //_fireBaseAuth.confirmPasswordReset(code: code, newPassword: newPassword)
+
   }
 
   bool _validateAllFieldsNonEmpty(
