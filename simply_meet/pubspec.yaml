@@ -71,6 +71,8 @@ dependencies:
   cupertino_icons: ^1.0.3
   #Expand widgets
   expandable: ^5.0.1
+  #Save local data to user's device
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:

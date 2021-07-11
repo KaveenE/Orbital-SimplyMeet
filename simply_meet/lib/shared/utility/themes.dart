@@ -13,7 +13,7 @@ class ThemeProvider extends ChangeNotifier {
 
 class MyThemes {
   static const MINIMAL_PURPLE = Color(0xff584191);
-  static const ACCENT_PURPLE = Color(0xffd696d0);
+  static const ACCENT_PURPLE = Color(0xffd1c2f2);
 
   static final lightTheme = ThemeData(
     primarySwatch: Colors.purple,

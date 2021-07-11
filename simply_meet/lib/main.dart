@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         Provider(
           create: (_) => FirestoreService(),
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (_) => SortFilterViewModel(),
         ),
       ],

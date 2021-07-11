@@ -9,7 +9,6 @@ class FormBuilderEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     return FormBuilderTextField(
       name: "email",
       keyboardType: TextInputType.emailAddress,
@@ -22,19 +21,22 @@ class FormBuilderEmail extends StatelessWidget {
       // ]),
       autofillHints: [AutofillHints.email],
       textInputAction: TextInputAction.next,
-      
+
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(screenWidth(context) * 0.06),
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: const Color(0xffCDC6DE),
+        fillColor: theme(context).accentColor,
         hintText: "Email Address",
+        hintStyle: TextStyle(
+          color: theme(context).primaryColor.withOpacity(0.7),
+        ),
         contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
         prefixIcon: Icon(
           Icons.alternate_email,
-          color: Colors.grey.shade700,
+          color: theme(context).primaryColor,
         ),
       ),
     );

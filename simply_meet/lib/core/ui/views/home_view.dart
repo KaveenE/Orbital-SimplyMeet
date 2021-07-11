@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/view_models/home_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class HomeView extends StatefulWidget {
@@ -19,13 +22,55 @@ class _HomeViewState extends State<HomeView> {
     final eventList = Provider.of<List<Event>>(context, listen: true);
 
     return SfCalendar(
-      // Aesthetics baby
       view: CalendarView.month,
       headerStyle: CalendarHeaderStyle(
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.right,
       ),
-      monthViewSettings: MonthViewSettings(showAgenda: true),
-      // Aesthetics, date specific
+      firstDayOfWeek: 1,
+      headerHeight: 45,
+      viewHeaderHeight: 30,
+      todayHighlightColor: theme(context).accentColor,
+      todayTextStyle: TextStyle(fontStyle: FontStyle.italic),
+      cellBorderColor: Colors.transparent,
+      selectionDecoration: BoxDecoration(
+        border: Border.all(color: theme(context).primaryColor),
+        borderRadius: BorderRadius.all(
+          Radius.circular(13),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: theme(context).accentColor.withOpacity(0.2),
+            spreadRadius: 4,
+            blurRadius: 4,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      monthViewSettings: MonthViewSettings(
+        showAgenda: true,
+        navigationDirection: MonthNavigationDirection.vertical,
+        dayFormat: 'EEE',
+        agendaItemHeight: 45,
+        agendaViewHeight: 150,
+        monthCellStyle: MonthCellStyle(
+          backgroundColor: theme(context).accentColor.withOpacity(0.1),
+          todayBackgroundColor: theme(context).accentColor.withOpacity(0.4),
+        ),
+        agendaStyle: AgendaStyle(
+          appointmentTextStyle: TextStyle(
+            fontSize: 13.5,
+            fontStyle: FontStyle.italic,
+          ),
+          dayTextStyle: TextStyle(
+            fontSize: 14.0,
+            fontStyle: FontStyle.italic,
+          ),
+          dateTextStyle: TextStyle(
+            fontSize: 13.5,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+      ),
       initialSelectedDate: DateTime.now(),
       showCurrentTimeIndicator: true,
       timeZone: "Singapore Standard Time",
@@ -33,7 +78,6 @@ class _HomeViewState extends State<HomeView> {
       controller: homeViewModel.controller,
       showNavigationArrow: true,
       showDatePickerButton: true,
-      // Callbacks. Too expensive, whatsapp yo
       onTap: (onTapDetails) =>
           homeViewModel.tapCalenderElement(onTapDetails, context),
     );

@@ -9,7 +9,6 @@ class FormBuilderUserName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return FormBuilderTextField(
       name: "username",
       keyboardType: TextInputType.emailAddress,
@@ -26,12 +25,15 @@ class FormBuilderUserName extends StatelessWidget {
         ),
         errorMaxLines: 3,
         filled: true,
-        fillColor: const Color(0xffCDC6DE),
+        fillColor: theme(context).accentColor,
         hintText: "Username",
+        hintStyle: TextStyle(
+          color: theme(context).primaryColor.withOpacity(0.7),
+        ),
         contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
         prefixIcon: Icon(
           Icons.account_circle_outlined,
-          color: Colors.grey.shade700,
+          color: theme(context).primaryColor,
         ),
       ),
     );

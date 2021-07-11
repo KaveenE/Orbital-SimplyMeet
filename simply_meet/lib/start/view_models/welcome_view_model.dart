@@ -73,8 +73,6 @@ class _GetStartedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return InkWell(
       splashColor: theme(context).primaryColor,
       onTap: () => Navigator.pushNamed(context, LoginSignupView.routeName),
@@ -83,11 +81,11 @@ class _GetStartedButton extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 10),
           child: Text(
             'Get started',
-            style: TextStyle(
-              color: theme(context).primaryColor,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.button!.copyWith(
+                  color: theme(context).primaryColor,
+                  fontSize: 22.5,
+                  fontWeight: FontWeight.w800,
+                ),
           ),
         ),
       ),

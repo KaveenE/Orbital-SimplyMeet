@@ -37,7 +37,9 @@ class FormBuilderPassword extends StatelessWidget {
       //     return null;
       //   }
       // ]),
-      textInputAction: this.hintText.compareTo("Password") == 0 ? TextInputAction.next : TextInputAction.done,
+      textInputAction: this.hintText.compareTo("Password") == 0
+          ? TextInputAction.next
+          : TextInputAction.done,
       obscureText: loginSignUpViewModel.hidePassword,
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -45,17 +47,20 @@ class FormBuilderPassword extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: const Color(0xffCDC6DE),
+        fillColor: theme(context).accentColor,
         hintText: this.hintText,
+        hintStyle: TextStyle(
+          color: theme(context).primaryColor.withOpacity(0.7),
+        ),
         contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
         errorMaxLines: 3,
         prefixIcon: Icon(
           Icons.lock_outlined,
-          color: Colors.grey.shade700,
+          color: theme(context).primaryColor,
         ),
         suffixIcon: IconButton(
           onPressed: () => loginSignUpViewModel.toggleVisibility(),
-          color: Colors.grey.shade700,
+          color: theme(context).primaryColor,
           icon: Icon(
             loginSignUpViewModel.hidePassword
                 ? Icons.visibility_off
