@@ -12,14 +12,38 @@ class TimetableView extends StatelessWidget {
     final timetableViewModel =
         Provider.of<TimetableViewModel>(context, listen: false);
     final eventList = Provider.of<List<Event>>(context, listen: true);
-    
+
     return SfCalendar(
-      //Aesthetics baby
       view: CalendarView.week,
       headerStyle: CalendarHeaderStyle(
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.right,
       ),
-      //Aesthetics, date specific
+      firstDayOfWeek: 1,
+      headerHeight: 45,
+      viewHeaderHeight: 50,
+      todayHighlightColor: Theme.of(context).accentColor,
+      todayTextStyle: TextStyle(fontStyle: FontStyle.italic),
+      cellBorderColor: Colors.grey.shade300,
+      selectionDecoration: BoxDecoration(
+        border:
+            Border.all(color: Theme.of(context).primaryColor.withOpacity(0.5)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).accentColor.withOpacity(0.2),
+            spreadRadius: 4,
+            blurRadius: 4,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      timeSlotViewSettings: TimeSlotViewSettings(
+        timeIntervalHeight: 35,
+        minimumAppointmentDuration: Duration(minutes: 30),
+        dayFormat: 'EEE',
+      ),
       allowedViews: TimetableViewModel.ALLOWEDVIEWS,
       initialSelectedDate: DateTime.now(),
       showCurrentTimeIndicator: true,
@@ -28,9 +52,8 @@ class TimetableView extends StatelessWidget {
       controller: timetableViewModel.controller,
       showNavigationArrow: true,
       showDatePickerButton: true,
-      //Callbacks. Too expensive, whatsapp yo
-      onTap: (onTapDetails) => timetableViewModel
-          .tapCalenderElement(onTapDetails, context),
+      onTap: (onTapDetails) =>
+          timetableViewModel.tapCalenderElement(onTapDetails, context),
     );
   }
 }

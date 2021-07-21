@@ -109,19 +109,21 @@ class WelcomeView extends StatelessWidget {
 
 List<Map<String, String>> listOfMapsToPass = [
   {
-    "imageURL": "assets/animations/BoyWithLaptop.json",
-    "title1": "Generate timings",
-    "title2": "Find optimal time for project meetings without a hassle",
-  },
-  {
-    "imageURL": "assets/animations/GirlWorking.json",
+    "imageURL": "assets/animations/GirlWithCalendar.json",
     "title1": "Schedule events",
-    "title2": "Keep track of your timetable as well as events in your calendar",
+    "title2":
+        "Organize your timetable and events throughout the week to facilitate proper management of your day.",
   },
   {
-    "imageURL": "assets/animations/TwoPeopleTalking.json",
+    "imageURL": "assets/animations/Checklist.json",
+    "title1": "Track your progress",
+    "title2":
+        "Keep track of project progress through the use of a nifty to-do list.",
+  },
+  {
+    "imageURL": "assets/animations/PasswordPrivacy.json",
     "title1": "Privacy guaranteed",
     "title2":
-        "You can choose to keep certain events private so you can keep your private life seperate from school life!",
+        "SimplyMeet protects your privacy, ensuring that your data in the cloud is safe, secure and 100% private.",
   },
 ];

@@ -33,9 +33,9 @@ class _HomeViewState extends State<HomeView> {
       todayTextStyle: TextStyle(fontStyle: FontStyle.italic),
       cellBorderColor: Colors.transparent,
       selectionDecoration: BoxDecoration(
-        border: Border.all(color: theme(context).primaryColor),
+        border: Border.all(color: theme(context).primaryColor.withOpacity(0.5)),
         borderRadius: BorderRadius.all(
-          Radius.circular(13),
+          Radius.circular(5),
         ),
         boxShadow: [
           BoxShadow(
