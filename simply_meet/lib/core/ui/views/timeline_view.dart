@@ -22,7 +22,7 @@ class TimelineView extends StatelessWidget {
       firstDayOfWeek: 1,
       headerHeight: 45,
       viewHeaderHeight: 50,
-      todayHighlightColor: theme(context).accentColor,
+      todayHighlightColor: theme(context).primaryColor,
       todayTextStyle: TextStyle(fontStyle: FontStyle.italic),
       cellBorderColor: Colors.grey.shade300,
       selectionDecoration: BoxDecoration(

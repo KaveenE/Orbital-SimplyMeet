@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/ui/widgets/DrawerItem.dart';
 import 'package:simply_meet/core/view_models/drawer_viewmodel.dart';
+import 'package:simply_meet/shared/services/flutterfire/authentication_service.dart';
 import 'package:simply_meet/shared/utility/themes.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
@@ -10,18 +11,19 @@ class DrawerView extends StatelessWidget {
   Widget build(BuildContext context) {
     final drawerViewModel = Provider.of<DrawerViewModel>(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final auth = Provider.of<AuthenticationService>(context, listen: false);
     return Theme(
       data: themeProvider.themeType,
       child: Drawer(
         child: ListView(
           children: <Widget>[
             Container(
-              height: screenHeight(context) * 0.25,
               width: double.infinity,
+              height: screenHeight(context) * 0.1,
               color: theme(context).accentColor,
               child: Center(
                 child: Text(
-                  "User profile. Directs to profile page. Showcase email,username, function to update e-mail/password",
+                  "Hi ${auth.currentUser()!.displayName}",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                 ),
               ),

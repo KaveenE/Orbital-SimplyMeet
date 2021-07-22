@@ -51,6 +51,7 @@ class LocalNotification {
       playSound: true,
       priority: Priority.high,
       importance: Importance.high,
+      icon: "revamped_logo_1",
       largeIcon: DrawableResourceAndroidBitmap("revamped_logo_1"),
       styleInformation: MediaStyleInformation(
         htmlFormatContent: true,

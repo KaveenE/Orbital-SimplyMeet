@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/start/ui/widgets/welcome_view_body.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/view_models/welcome_view_model.dart';
@@ -40,24 +41,25 @@ class WelcomeView extends StatelessWidget {
                           height: 60,
                           width: 60,
                         ),
-                        Align(
+                         Align(
                           alignment: Alignment.topRight,
-                          child: _currentPage == _numPages - 1
-                              ? Text('')
-                              : TextButton(
-                                  child: Text(
-                                    'Skip',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 21.5,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    _pageController.animateToPage(2,
-                                        duration: Duration(milliseconds: 700),
-                                        curve: Curves.decelerate);
-                                  },
-                                ),
+                          // child: _currentPage == _numPages - 1
+                          //     ? Text('')
+                          //     : TextButton(
+                          //         child: Text(
+                          //           'Skip',
+                          //           style: TextStyle(
+                          //             color: Colors.white,
+                          //             fontSize: 21.5,
+                          //           ),
+                          //         ),
+                          //         onPressed: () {
+                          //           _pageController.animateToPage(2,
+                          //               duration: Duration(milliseconds: 700),
+                          //               curve: Curves.decelerate);
+                          //         },
+                          //       ),
+                          child: SkipButton()
                         ),
                       ],
                     ),
@@ -102,6 +104,26 @@ class WelcomeView extends StatelessWidget {
           bottomSheet: welcomeViewModel.buildBottomSheet(),
         ),
       ),
+    );
+  }
+}
+
+class SkipButton extends StatelessWidget {
+  const SkipButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(
+        'Skip',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 21.5,
+        ),
+      ),
+      onPressed: () => Navigator.pushNamed(context, LoginSignupView.routeName),
     );
   }
 }

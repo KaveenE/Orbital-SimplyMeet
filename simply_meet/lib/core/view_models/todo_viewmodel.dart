@@ -82,7 +82,7 @@ class ToDoViewModel extends LoadableModel {
                 final response = await firestore
                     .updateTask(someTask.copyWith(completionStatus: newBool));
 
-                if (!newBool!) {
+                if (!newBool! && someTask.date!=null) {
                   _scheduleNotification(someTask, context);
                 }
 

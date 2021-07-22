@@ -29,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
       firstDayOfWeek: 1,
       headerHeight: 45,
       viewHeaderHeight: 30,
-      todayHighlightColor: theme(context).accentColor,
+      todayHighlightColor: theme(context).primaryColor,
       todayTextStyle: TextStyle(fontStyle: FontStyle.italic),
       cellBorderColor: Colors.transparent,
       selectionDecoration: BoxDecoration(
