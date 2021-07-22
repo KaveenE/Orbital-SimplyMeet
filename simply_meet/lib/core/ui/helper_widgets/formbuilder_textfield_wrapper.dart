@@ -42,14 +42,20 @@ class FormBuilderTextFieldWrapper extends StatelessWidget {
           InputDecoration(
             border: InputBorder.none,
             hintText: this.hintText,
-            hintStyle: TextStyle(height: 2.2),
-            contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.06),
+            hintStyle: TextStyle(
+              height: 2.2,
+              fontStyle: isShortField ? FontStyle.normal : FontStyle.italic,
+            ),
+            contentPadding: EdgeInsets.only(left: screenWidth(context) * 0.2),
             prefixIcon: Icon(
               isShortField ? Icons.short_text_rounded : Icons.subject_rounded,
-              color: Colors.grey.shade700,
+              color: theme(context).primaryColor,
             ),
           ),
-      maxLines: isShortField ? 2 : 5,
+      maxLines: isShortField ? 1 : 2,
+      textCapitalization: TextCapitalization.sentences,
+      cursorColor: theme(context).primaryColor,
+      textAlignVertical: TextAlignVertical.top,
     );
   }
 }

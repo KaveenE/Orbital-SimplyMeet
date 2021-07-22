@@ -14,11 +14,11 @@ class DrawerView extends StatelessWidget {
       data: themeProvider.themeType,
       child: Drawer(
         child: ListView(
-          children: [
+          children: <Widget>[
             Container(
               height: screenHeight(context) * 0.25,
               width: double.infinity,
-              color: Theme.of(context).accentColor,
+              color: theme(context).accentColor,
               child: Center(
                 child: Text(
                   "User profile. Directs to profile page. Showcase email,username, function to update e-mail/password",
@@ -26,7 +26,7 @@ class DrawerView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+            SizedBox(height: screenHeight(context) * 0.025),
             DrawerItem(
               icon: drawerViewModel.iconBasedOnMode,
               heading: drawerViewModel.headingBasedOnMode,

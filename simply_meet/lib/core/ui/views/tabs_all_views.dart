@@ -4,7 +4,7 @@ import 'package:simply_meet/core/ui/views/drawer_view.dart';
 import 'package:simply_meet/core/view_models/drawer_viewmodel.dart';
 import 'package:simply_meet/core/view_models/home_viewmodel.dart';
 import 'package:simply_meet/core/view_models/tabs_all_viewmodel.dart';
-import 'package:simply_meet/core/view_models/timetable_viewmodel.dart';
+import 'package:simply_meet/core/view_models/timeline_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
 import 'package:simply_meet/shared/models/task.dart';
 import 'package:simply_meet/shared/services/flutterfire/firestore_service.dart';
@@ -25,7 +25,7 @@ class TabsAllViews extends StatelessWidget {
           create: (_) => HomeViewModel(controller: CalendarController()),
         ),
         ChangeNotifierProvider(
-          create: (_) => TimetableViewModel(controller: CalendarController()),
+          create: (_) => TimelineViewModel(controller: CalendarController()),
         ),
         ChangeNotifierProvider(
           create: (_) => DrawerViewModel(),
@@ -41,7 +41,6 @@ class TabsAllViews extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
         ),
-       
       ],
       child: Consumer<TabsAllViewModel>(
         builder: (ctx, tabsAllViewModel, __) {

@@ -2,14 +2,12 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'calendar_viewmodel.dart';
 
-class TimetableViewModel extends CalendarViewModel {
+class TimelineViewModel extends CalendarViewModel {
   static const ALLOWEDVIEWS = [
     CalendarView.day,
     CalendarView.week,
   ];
 
-  TimetableViewModel({required CalendarController controller})
+  TimelineViewModel({required CalendarController controller})
       : super(controller: controller);
-
-
 }

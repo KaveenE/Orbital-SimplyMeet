@@ -16,10 +16,11 @@ class ToDoView extends StatelessWidget {
     final sortFilterViewModel = Provider.of<SortFilterViewModel>(context);
 
     final todoViewModel = ToDoViewModel();
-    final modifiedTaskList = todoViewModel.modifyTaskList(taskList, context, sortFilterViewModel);
+    final modifiedTaskList =
+        todoViewModel.modifyTaskList(taskList, context, sortFilterViewModel);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme(context).backgroundColor,
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme(context).accentColor,
         child: Icon(
@@ -48,7 +49,7 @@ class ToDoView extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 35),
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                SizedBox(height: screenHeight(context) * 0.02),
                 Text(
                   "${ToDoViewModel.completedTasks(taskList)} of ${taskList.length}",
                   style: theme(context).textTheme.subtitle1!.copyWith(
@@ -57,7 +58,7 @@ class ToDoView extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.005),
+                SizedBox(height: screenHeight(context) * 0.005),
               ],
             ),
           ),
@@ -66,7 +67,8 @@ class ToDoView extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 15),
               itemCount: modifiedTaskList.length,
               itemBuilder: (BuildContext context, int index) {
-                return todoViewModel.buildTask(modifiedTaskList[index], context);
+                return todoViewModel.buildTask(
+                    modifiedTaskList[index], context);
               },
             ),
           )

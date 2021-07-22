@@ -27,10 +27,7 @@ class DrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final headingWidget = Text(
       heading,
-      style: theme(context)
-          .textTheme
-          .subtitle1!
-          .copyWith(fontSize: fontSizeForHeader ?? 20),
+      style: theme(context).textTheme.subtitle1!.copyWith(fontSize: 17),
     );
 
     return currBoolean == null

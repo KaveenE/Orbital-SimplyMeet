@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/start/ui/widgets/welcome_view_body.dart';
-import 'package:simply_meet/start/ui/views/login_signup_view.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:simply_meet/start/view_models/welcome_view_model.dart';
 

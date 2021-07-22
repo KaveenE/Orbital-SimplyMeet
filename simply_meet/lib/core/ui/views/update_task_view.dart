@@ -18,13 +18,13 @@ class UpdateTaskView extends StatelessWidget {
       padding: EdgeInsets.all(screenWidth(context) * 0.01),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           DrawerItem(
-            icon: Icon(Icons.edit),
+            icon: Icon(Icons.edit_rounded),
             heading: "Edit",
             tapHandler: () => showFloatingModalBottomSheet(
               context: context,
-              builder: (_)  {
+              builder: (_) {
                 return AddTaskView(task: task);
               },
             ),
@@ -33,7 +33,7 @@ class UpdateTaskView extends StatelessWidget {
           ),
           Divider(),
           DrawerItem(
-            icon: Icon(Icons.delete),
+            icon: Icon(Icons.delete_forever_rounded),
             heading: "Delete",
             tapHandler: () => UpdateTaskViewModel.showConfirmationDialog(
               context,

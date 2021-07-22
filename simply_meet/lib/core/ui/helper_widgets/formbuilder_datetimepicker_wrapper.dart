@@ -28,7 +28,7 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
       height: 60,
       child: FormBuilderDateTimePicker(
         name: this.name,
-        format: DateFormat("d/M/y").add_jm(),
+        format: DateFormat('MMM dd yyyy, hh:mm a'),
         initialValue: this.initialValue,
         maxLines: 2,
         validator: this.validator,
@@ -43,14 +43,23 @@ class FormBuilderDateTimePickerWrapper extends StatelessWidget {
               hintText: "Choose Date",
               hintStyle: TextStyle(height: 2),
               contentPadding:
-                  EdgeInsets.only(left: screenWidth(context) * 0.06),
+                  EdgeInsets.only(left: screenWidth(context) * 0.06, top: 3.0),
               prefixIcon: Column(
-                children: [
-                  Icon(
-                    Icons.calendar_today_rounded,
-                    color: Colors.grey.shade700,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Icon(
+                      Icons.date_range,
+                      color: theme(context).primaryColor,
+                    ),
                   ),
-                  Text(this.wordBelowIcon),
+                  Text(
+                    this.wordBelowIcon,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: theme(context).primaryColor,
+                    ),
+                  ),
                 ],
               ),
             ),

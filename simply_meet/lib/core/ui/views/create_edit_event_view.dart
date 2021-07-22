@@ -5,10 +5,10 @@ import 'package:simply_meet/core/ui/helper_widgets/formbuilder_colorpicker.dart'
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_datetimepicker_wrapper.dart';
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_dropdown_wrapper.dart';
 import 'package:simply_meet/core/ui/helper_widgets/formbuilder_textfield_wrapper.dart';
+import 'package:simply_meet/core/ui/widgets/custom_divider.dart';
 import 'package:simply_meet/core/view_models/create_edit_event_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
 import 'package:simply_meet/shared/services/local_notif.dart';
-import 'package:simply_meet/shared/utility/loader.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class CreateEditEventView extends StatefulWidget {
@@ -46,7 +46,7 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
         formKey: _formKey,
         initialColor: event?.color ?? theme(context).primaryColor,
       ),
-      child: SingleChildScrollView(
+      child: Padding(
         padding: EdgeInsets.all(screenWidth(context) * 0.04),
         child: Consumer<CreateEditEventViewModel>(
           builder: (_, myModel, __) {
@@ -59,21 +59,25 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                 children: <Widget>[
                   FormBuilderTextFieldWrapper(
                     name: "subject",
-                    hintText: "Subject",
+                    hintText: "Title",
                     keyboardType: TextInputType.text,
                     initialValue: event?.subject ?? '',
-                    context: context,
-                  ),
-                  Divider(),
-                  FormBuilderTextFieldWrapper(
-                    name: "description",
-                    hintText: "Description",
-                    keyboardType: TextInputType.text,
-                    initialValue: event?.description ?? '',
                     textInputAction: TextInputAction.done,
                     context: context,
                   ),
-                  Divider(),
+                  CustomDivider(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: FormBuilderTextFieldWrapper(
+                      name: "description",
+                      hintText: "Description (optional)",
+                      keyboardType: TextInputType.text,
+                      initialValue: event?.description ?? '',
+                      textInputAction: TextInputAction.done,
+                      context: context,
+                    ),
+                  ),
+                  CustomDivider(),
                   FormBuilderDateTimePickerWrapper(
                     name: "startDate",
                     wordBelowIcon: "Start",
@@ -82,7 +86,7 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                     validator: FormBuilderValidators.required(context,
                         errorText: "Field cannot be empty"),
                   ),
-                  Divider(),
+                  CustomDivider(),
                   FormBuilderDateTimePickerWrapper(
                     name: "endDate",
                     wordBelowIcon: "End",
@@ -91,12 +95,12 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                     validator: FormBuilderValidators.required(context,
                         errorText: "Field cannot be empty"),
                   ),
-                  Divider(),
+                  CustomDivider(),
                   FormBuilderColorPicker(
                     initialColor: myModel.initialColor,
                     changeColor: myModel.changeColor,
                   ),
-                  Divider(),
+                  // CustomDivider(),
                   FormBuilderSwitchExtract(
                     formKey: _formKey,
                     initialValue: event?.isAllDay ?? false,
@@ -166,17 +170,23 @@ class ButtonsAtBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+      children: <Widget>[
         IconButton(
           onPressed: () => Navigator.pop(context),
           icon: Icon(Icons.clear_rounded),
         ),
-        ElevatedButton.icon(
+        ElevatedButton(
           onPressed: addEventAction,
-          icon: Icon(Icons.save_alt_rounded),
-          label: busy
-              ? Loaders.singleton.wave(screenHeight(context) * 0.03)
-              : Text("Save"),
+          child: Text("Save"),
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all(theme(context).primaryColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(17.0),
+              ),
+            ),
+          ),
         ),
       ],
     );

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:simply_meet/core/view_models/timetable_viewmodel.dart';
+import 'package:simply_meet/core/view_models/timeline_viewmodel.dart';
 import 'package:simply_meet/shared/models/event.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class TimetableView extends StatelessWidget {
-  TimetableView();
+class TimelineView extends StatelessWidget {
+  TimelineView();
 
   @override
   Widget build(BuildContext context) {
-    final timetableViewModel =
-        Provider.of<TimetableViewModel>(context, listen: false);
+    final timelineViewModel =
+        Provider.of<TimelineViewModel>(context, listen: false);
     final eventList = Provider.of<List<Event>>(context, listen: true);
 
     return SfCalendar(
@@ -21,18 +22,17 @@ class TimetableView extends StatelessWidget {
       firstDayOfWeek: 1,
       headerHeight: 45,
       viewHeaderHeight: 50,
-      todayHighlightColor: Theme.of(context).accentColor,
+      todayHighlightColor: theme(context).accentColor,
       todayTextStyle: TextStyle(fontStyle: FontStyle.italic),
       cellBorderColor: Colors.grey.shade300,
       selectionDecoration: BoxDecoration(
-        border:
-            Border.all(color: Theme.of(context).primaryColor.withOpacity(0.5)),
+        border: Border.all(color: theme(context).primaryColor.withOpacity(0.5)),
         borderRadius: BorderRadius.all(
           Radius.circular(5),
         ),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: theme(context).accentColor.withOpacity(0.2),
             spreadRadius: 4,
             blurRadius: 4,
             offset: Offset(0, 3), // changes position of shadow
@@ -44,16 +44,16 @@ class TimetableView extends StatelessWidget {
         minimumAppointmentDuration: Duration(minutes: 30),
         dayFormat: 'EEE',
       ),
-      allowedViews: TimetableViewModel.ALLOWEDVIEWS,
+      allowedViews: TimelineViewModel.ALLOWEDVIEWS,
       initialSelectedDate: DateTime.now(),
       showCurrentTimeIndicator: true,
       timeZone: "Singapore Standard Time",
-      dataSource: timetableViewModel.dataSource(eventList),
-      controller: timetableViewModel.controller,
+      dataSource: timelineViewModel.dataSource(eventList),
+      controller: timelineViewModel.controller,
       showNavigationArrow: true,
       showDatePickerButton: true,
       onTap: (onTapDetails) =>
-          timetableViewModel.tapCalenderElement(onTapDetails, context),
+          timelineViewModel.tapCalenderElement(onTapDetails, context),
     );
   }
 }

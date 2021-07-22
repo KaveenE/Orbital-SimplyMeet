@@ -6,7 +6,7 @@ import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 import '../ui/views/create_edit_event_view.dart';
 import '../ui/views/home_view.dart';
-import '../ui/views/timetable_view.dart';
+import '../ui/views/timeline_view.dart';
 
 import 'package:flutter/material.dart';
 
@@ -34,15 +34,15 @@ class TabsAllViewModel extends ChangeNotifier {
       },
       {
         appBar: AppBar(
-          title: Text("Timetable"),
+          title: Text("Timeline"),
           actions: _appBarActionsForEvents,
         ),
-        widget: TimetableView(),
+        widget: TimelineView(),
         icon: Icon(
           Icons.calendar_today_rounded,
           size: 21,
         ),
-        label: "Timetable",
+        label: "Timeline",
       },
       {
         appBar: AppBar(
@@ -77,17 +77,17 @@ class TabsAllViewModel extends ChangeNotifier {
       ),
     ];
   }
-List<Widget> get _appBarActionsForReminders {
-    return [
+
+  List<Widget> get _appBarActionsForReminders {
+    return <Widget>[
       IconButton(
         onPressed: () async => await showFloatingModalBottomSheet(
           context: _context,
           builder: (_) => SortFilterView(),
         ),
-        icon: const Icon(Icons.filter_alt_rounded),
+        icon: const Icon(Icons.filter_alt_outlined),
         highlightColor: theme(_context).accentColor,
       ),
     ];
   }
-  
 }

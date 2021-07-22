@@ -81,7 +81,7 @@ class _GetStartedButton extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 10),
           child: Text(
             'Get started',
-            style: Theme.of(context).textTheme.button!.copyWith(
+            style: theme(context).textTheme.button!.copyWith(
                   color: theme(context).primaryColor,
                   fontSize: 22.5,
                   fontWeight: FontWeight.w800,

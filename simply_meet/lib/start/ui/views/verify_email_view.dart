@@ -6,7 +6,6 @@ import 'package:simply_meet/core/ui/views/tabs_all_views.dart';
 import 'package:simply_meet/shared/utility/loader.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
-
 class VerifyEmailView extends StatefulWidget {
   static const routeName = '/verifyEmailView';
 
@@ -48,12 +47,11 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Text(
               "'Hey ${user.displayName}! An email has been sent to ${user.email}. Please verify'",
               textAlign: TextAlign.center,

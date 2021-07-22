@@ -36,7 +36,7 @@ class _AddTaskViewState extends State<AddTaskView> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 80),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height,
+                height: screenHeight(context),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -53,7 +53,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                       padding: EdgeInsets.only(left: 8.0, bottom: 20.0),
                       child: Text(
                         "Add Task",
-                        style: Theme.of(context)
+                        style: theme(context)
                             .textTheme
                             .headline2!
                             .copyWith(fontSize: 36),
@@ -81,8 +81,10 @@ class _AddTaskViewState extends State<AddTaskView> {
                                     labelStyle: TextStyle(color: Colors.white),
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 20),
-                                    border: OutlineInputBorder(
+                                    enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(50),
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
                                     ),
                                   ),
                                   textStyle: TextStyle(
@@ -102,8 +104,10 @@ class _AddTaskViewState extends State<AddTaskView> {
                                     labelStyle: TextStyle(color: Colors.white),
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 20),
-                                    border: OutlineInputBorder(
+                                    enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(50),
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
                                     ),
                                   ),
                                   textStyle: TextStyle(
@@ -119,10 +123,15 @@ class _AddTaskViewState extends State<AddTaskView> {
                                   textStyle: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                   decoration: InputDecoration(
-                                    labelText: "Date(Optional)",
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    border: OutlineInputBorder(
+                                    labelText: "Date (Optional)",
+                                    labelStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(50),
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
                                     ),
                                     contentPadding: EdgeInsets.all(20),
                                   ),
@@ -139,8 +148,10 @@ class _AddTaskViewState extends State<AddTaskView> {
                                   decoration: InputDecoration(
                                     labelText: "Priority",
                                     labelStyle: TextStyle(color: Colors.white),
-                                    border: OutlineInputBorder(
+                                    enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(50),
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
                                     ),
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 17, horizontal: 20),
@@ -153,15 +164,13 @@ class _AddTaskViewState extends State<AddTaskView> {
                                   iconEnabledColor: Colors.white,
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.02),
+                              SizedBox(height: screenHeight(context) * 0.02),
                               Container(
                                 margin: EdgeInsets.symmetric(vertical: 20),
                                 height: 50,
-                                width: double.infinity,
+                                width: screenWidth(context) * 0.4,
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).accentColor,
+                                  color: theme(context).accentColor,
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Button(
@@ -178,7 +187,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                         );
                       },
                     ),
-                    Spacer(flex: 5),
+                    Spacer(flex: 6),
                   ],
                 ),
               ),
@@ -198,10 +207,6 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-      icon: Icon(
-        Icons.save_alt_rounded,
-        color: Colors.white,
-      ),
       label: busy
           ? Loaders.singleton.wave(screenHeight(context) * 0.03)
           : Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simply_meet/core/ui/widgets/DrawerItem.dart';
+import 'package:simply_meet/core/ui/widgets/custom_divider.dart';
 import 'package:simply_meet/core/view_models/sortfilter_viewmodel.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
@@ -15,7 +16,7 @@ class SortFilterView extends StatelessWidget {
       padding: EdgeInsets.all(screenWidth(context) * 0.01),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           DrawerItem(
             icon: sortFilterViewModel.iconForCompletion(context),
             heading: "Hide completed tasks",
@@ -24,6 +25,7 @@ class SortFilterView extends StatelessWidget {
             context: context,
             fontSizeForHeader: 20,
           ),
+          CustomDivider(),
           DrawerItem(
             icon: sortFilterViewModel.iconForDate(context),
             heading: "By Date",
@@ -32,7 +34,7 @@ class SortFilterView extends StatelessWidget {
             context: context,
             fontSizeForHeader: 20,
           ),
-          Divider(),
+          CustomDivider(),
           DrawerItem(
             icon: sortFilterViewModel.iconForPriority(context),
             heading: "By Priority Level",

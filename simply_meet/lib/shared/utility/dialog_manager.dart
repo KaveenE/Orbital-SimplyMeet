@@ -58,7 +58,7 @@ class DialogManager {
       animType: AnimType.BOTTOMSLIDE,
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             Text(
               "Pick a color to highlight cell",
               softWrap: true,
