@@ -27,6 +27,9 @@ class TabsAllViewModel extends ChangeNotifier {
         appBar: AppBar(
           title: Text("Home"),
           actions: _appBarActionsForEvents,
+          elevation: 0,
+          centerTitle: true,
+          toolbarHeight: 46.5,
         ),
         widget: HomeView(),
         icon: Icon(Icons.home_filled),
@@ -36,11 +39,14 @@ class TabsAllViewModel extends ChangeNotifier {
         appBar: AppBar(
           title: Text("Timeline"),
           actions: _appBarActionsForEvents,
+          elevation: 0,
+          centerTitle: true,
+          toolbarHeight: 46.5,
         ),
         widget: TimelineView(),
         icon: Icon(
           Icons.calendar_today_rounded,
-          size: 21,
+          size: 20,
         ),
         label: "Timeline",
       },
@@ -48,11 +54,14 @@ class TabsAllViewModel extends ChangeNotifier {
         appBar: AppBar(
           title: Text("My To-Do List"),
           actions: _appBarActionsForReminders,
+          elevation: 0,
+          centerTitle: true,
+          toolbarHeight: 46.5,
         ),
         widget: ToDoView(),
         icon: Icon(
           Icons.checklist_rounded,
-          size: 25,
+          size: 24,
         ),
         label: "To-Do"
       }

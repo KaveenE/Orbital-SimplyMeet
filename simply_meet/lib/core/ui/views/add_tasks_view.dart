@@ -43,7 +43,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: Icon(
-                        Icons.arrow_back_rounded,
+                        Icons.arrow_back_ios_new_rounded,
                         size: 30,
                         color: Colors.white,
                       ),

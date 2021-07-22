@@ -55,11 +55,15 @@ class TabsAllViews extends StatelessWidget {
                 drawer: DrawerView(),
                 body: viewMappings[currIdx][TabsAllViewModel.widget],
                 bottomNavigationBar: BottomNavigationBar(
+                  iconSize: 22,
+                  selectedLabelStyle: TextStyle(fontSize: 12),
                   currentIndex: currIdx,
                   onTap: tabsAllViewModel.setIndex,
                   backgroundColor: themeProvider.themeType.backgroundColor,
                   showUnselectedLabels: false,
-                  selectedItemColor: theme(ctx).accentColor,
+                  selectedItemColor: Colors.grey.shade900,
+                  // selectedIconTheme:
+                  //     IconThemeData(color: theme(ctx).accentColor),
                   //unselectedItemColor: Colors.white,
                   items: viewMappings
                       .map(
