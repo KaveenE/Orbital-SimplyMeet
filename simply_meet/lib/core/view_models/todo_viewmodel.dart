@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'package:simply_meet/core/ui/views/update_task_view.dart';
+import 'package:simply_meet/core/ui/widgets/custom_divider.dart';
 import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
 import 'package:simply_meet/core/view_models/sortfilter_viewmodel.dart';
 import 'package:simply_meet/shared/models/task.dart';
@@ -52,7 +53,7 @@ class ToDoViewModel extends LoadableModel {
         },
       );
     }
-    
+
     return modifiedTaskList;
   }
 
@@ -82,7 +83,7 @@ class ToDoViewModel extends LoadableModel {
                 final response = await firestore
                     .updateTask(someTask.copyWith(completionStatus: newBool));
 
-                if (!newBool! && someTask.date!=null) {
+                if (!newBool! && someTask.date != null) {
                   _scheduleNotification(someTask, context);
                 }
 
@@ -106,7 +107,7 @@ class ToDoViewModel extends LoadableModel {
               ),
             ),
           ),
-          Divider(),
+          CustomDivider(),
         ],
       ),
     );

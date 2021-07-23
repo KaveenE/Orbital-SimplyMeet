@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simply_meet/core/ui/views/add_tasks_view.dart';
 import 'package:simply_meet/core/ui/widgets/DrawerItem.dart';
+import 'package:simply_meet/core/ui/widgets/custom_divider.dart';
 import 'package:simply_meet/core/ui/widgets/floating_bottom_modal.dart';
 import 'package:simply_meet/core/view_models/update_task_viewmodel.dart';
 
@@ -31,7 +32,7 @@ class UpdateTaskView extends StatelessWidget {
             context: context,
             fontSizeForHeader: 20,
           ),
-          Divider(),
+          CustomDivider(),
           DrawerItem(
             icon: Icon(Icons.delete_forever_rounded),
             heading: "Delete",

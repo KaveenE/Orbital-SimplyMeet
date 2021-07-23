@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class DialogManager {
   static final DialogManager _singleton = DialogManager._();
@@ -59,14 +60,18 @@ class DialogManager {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Text(
-              "Pick a color to highlight cell",
-              softWrap: true,
-              style: TextStyle(
-                fontSize: 20,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: Text(
+                "Pick a color to highlight cell",
+                softWrap: true,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: theme(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            Divider(),
             BlockPicker(
               pickerColor: initialColor,
               onColorChanged: (currColor) {
