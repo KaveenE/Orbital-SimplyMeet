@@ -100,8 +100,11 @@ class _AddTaskViewState extends State<AddTaskView> {
                                   keyboardType: TextInputType.multiline,
                                   name: "description",
                                   decoration: InputDecoration(
-                                    labelText: "Description",
-                                    labelStyle: TextStyle(color: Colors.white),
+                                    labelText: "Description (optional)",
+                                    labelStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 20),
                                     enabledBorder: OutlineInputBorder(
@@ -123,7 +126,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                                   textStyle: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                   decoration: InputDecoration(
-                                    labelText: "Date (Optional)",
+                                    labelText: "Date (optional)",
                                     labelStyle: TextStyle(
                                       color: Colors.white,
                                       fontStyle: FontStyle.italic,
