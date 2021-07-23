@@ -13,6 +13,7 @@ class DrawerItem extends StatelessWidget {
   final double? fontSizeForHeader;
   final Color? activeColor;
   final Color? inactiveThumbColor;
+  final ThemeData? currTheme;
 
   const DrawerItem({
     this.currBoolean,
@@ -20,6 +21,7 @@ class DrawerItem extends StatelessWidget {
     required this.heading,
     required this.tapHandler,
     required this.context,
+    this.currTheme,
     this.fontSizeForHeader,
     this.activeColor,
     this.inactiveThumbColor,
@@ -27,14 +29,20 @@ class DrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currTheme = Provider.of<ThemeProvider>(context).themeType;
     final textTheme = theme(context).textTheme.subtitle1!;
-    final headingWidget = Text(
-      heading,
-      style: currTheme == MyThemes.darkTheme
-          ? textTheme.copyWith(fontSize: 19, color: Colors.white)
-          : textTheme.copyWith(fontSize: 19),
-    );
+    Text headingWidget;
+
+    currTheme == null
+        ? headingWidget = Text(
+            heading,
+            style: textTheme.copyWith(fontSize: 19),
+          )
+        : headingWidget = Text(
+            heading,
+            style: currTheme == MyThemes.darkTheme
+                ? textTheme.copyWith(fontSize: 19, color: Colors.white)
+                : textTheme.copyWith(fontSize: 19),
+          );
 
     return currBoolean == null
         ? ListTile(
