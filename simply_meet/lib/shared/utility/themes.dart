@@ -35,6 +35,7 @@ class MyThemes {
           ),
           bodyText2: GoogleFonts.raleway(
             fontSize: 15,
+            color: Colors.red,
           ),
           button: GoogleFonts.raleway(
             color: Colors.white,
@@ -48,6 +49,7 @@ class MyThemes {
             color: Colors.grey.shade800,
             decoration: TextDecoration.underline,
           ),
+          
         ),
   );
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simply_meet/shared/utility/themes.dart';
 import 'package:simply_meet/shared/utility/ui_helpers.dart';
 
 class DrawerItem extends StatelessWidget {
@@ -25,9 +27,13 @@ class DrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currTheme = Provider.of<ThemeProvider>(context).themeType;
+    final textTheme = theme(context).textTheme.subtitle1!;
     final headingWidget = Text(
       heading,
-      style: theme(context).textTheme.subtitle1!.copyWith(fontSize: 17),
+      style: currTheme == MyThemes.darkTheme
+          ? textTheme.copyWith(fontSize: 19, color: Colors.white)
+          : textTheme.copyWith(fontSize: 19),
     );
 
     return currBoolean == null
