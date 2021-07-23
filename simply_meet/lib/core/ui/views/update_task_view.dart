@@ -21,7 +21,10 @@ class UpdateTaskView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           DrawerItem(
-            icon: Icon(Icons.edit_rounded),
+            icon: Icon(
+              Icons.edit_rounded,
+              color: theme(context).primaryColor,
+            ),
             heading: "Edit",
             tapHandler: () => showFloatingModalBottomSheet(
               context: context,
@@ -34,7 +37,10 @@ class UpdateTaskView extends StatelessWidget {
           ),
           CustomDivider(),
           DrawerItem(
-            icon: Icon(Icons.delete_forever_rounded),
+            icon: Icon(
+              Icons.delete_forever_rounded,
+              color: theme(context).primaryColor,
+            ),
             heading: "Delete",
             tapHandler: () => UpdateTaskViewModel.showConfirmationDialog(
               context,
