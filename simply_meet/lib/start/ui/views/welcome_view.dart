@@ -41,25 +41,24 @@ class WelcomeView extends StatelessWidget {
                           height: 60,
                           width: 60,
                         ),
-                         Align(
+                        Align(
                           alignment: Alignment.topRight,
-                          // child: _currentPage == _numPages - 1
-                          //     ? Text('')
-                          //     : TextButton(
-                          //         child: Text(
-                          //           'Skip',
-                          //           style: TextStyle(
-                          //             color: Colors.white,
-                          //             fontSize: 21.5,
-                          //           ),
-                          //         ),
-                          //         onPressed: () {
-                          //           _pageController.animateToPage(2,
-                          //               duration: Duration(milliseconds: 700),
-                          //               curve: Curves.decelerate);
-                          //         },
-                          //       ),
-                          child: SkipButton()
+                          child: _currentPage == _numPages - 1
+                              ? Text('')
+                              : TextButton(
+                                  child: Text(
+                                    'Skip',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 21.5,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    _pageController.animateToPage(2,
+                                        duration: Duration(milliseconds: 700),
+                                        curve: Curves.decelerate);
+                                  },
+                                ),
                         ),
                       ],
                     ),

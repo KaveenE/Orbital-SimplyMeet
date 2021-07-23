@@ -24,7 +24,7 @@ class TimelineView extends StatelessWidget {
       viewHeaderHeight: 50,
       todayHighlightColor: theme(context).primaryColor,
       todayTextStyle: TextStyle(fontStyle: FontStyle.italic),
-      cellBorderColor: Colors.grey.shade300,
+      cellBorderColor: Colors.grey.shade300.withOpacity(0.75),
       selectionDecoration: BoxDecoration(
         border: Border.all(color: theme(context).primaryColor.withOpacity(0.5)),
         borderRadius: BorderRadius.all(
