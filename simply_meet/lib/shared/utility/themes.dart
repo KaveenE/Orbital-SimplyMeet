@@ -16,7 +16,7 @@ class MyThemes {
   static const ACCENT_PURPLE = Color(0xffd1c2f2);
 
   static final lightTheme = ThemeData(
-    primarySwatch: Colors.purple,
+    primarySwatch: Colors.deepPurple,
     primaryColor: MINIMAL_PURPLE,
     scaffoldBackgroundColor: MINIMAL_PURPLE,
     backgroundColor: Colors.white,
@@ -49,14 +49,13 @@ class MyThemes {
             color: Colors.grey.shade800,
             decoration: TextDecoration.underline,
           ),
-          
         ),
   );
 
   static final darkTheme = lightTheme.copyWith(
     brightness: Brightness.dark,
-    scaffoldBackgroundColor: Colors.grey[900],
-    backgroundColor: Colors.grey[900],
-    canvasColor: Colors.grey[900],
+    scaffoldBackgroundColor: Colors.grey.shade900,
+    backgroundColor: Colors.grey.shade900,
+    canvasColor: Colors.grey.shade900,
   );
 }

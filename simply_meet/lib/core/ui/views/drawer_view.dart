@@ -23,8 +23,12 @@ class DrawerView extends StatelessWidget {
               color: theme(context).accentColor,
               child: Center(
                 child: Text(
-                  "Hi ${auth.currentUser()!.displayName}",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                  "Welcome, ${auth.currentUser()!.displayName}!",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: theme(context).primaryColor,
+                  ),
                 ),
               ),
             ),
