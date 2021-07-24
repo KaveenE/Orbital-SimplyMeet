@@ -59,15 +59,14 @@ class _HomeViewState extends State<HomeView> {
         agendaStyle: AgendaStyle(
           appointmentTextStyle: TextStyle(
             fontSize: 13.5,
-            fontStyle: FontStyle.italic,
           ),
           dayTextStyle: TextStyle(
-            fontSize: 14.0,
-            fontStyle: FontStyle.italic,
+            fontSize: 14.5,
+            color: theme(context).primaryColor,
           ),
           dateTextStyle: TextStyle(
             fontSize: 13.5,
-            fontStyle: FontStyle.italic,
+            color: theme(context).primaryColor,
           ),
         ),
       ),
