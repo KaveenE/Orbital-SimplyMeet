@@ -51,7 +51,7 @@ class ToDoView extends StatelessWidget {
                 ),
                 SizedBox(height: screenHeight(context) * 0.02),
                 Text(
-                  "${ToDoViewModel.completedTasks(taskList)} of ${taskList.length}",
+                  "${ToDoViewModel.completedTasks(taskList)} of ${taskList.length} completed",
                   style: theme(context).textTheme.subtitle1!.copyWith(
                         fontSize: 20,
                         color: Colors.grey,
