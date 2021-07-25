@@ -52,9 +52,17 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "'Hey ${user.displayName}! An email has been sent to ${user.email}. Please verify'",
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "Hey ${user.displayName}! An email has been sent to ${user.email}. Please verify to continue!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
             verticalSpaceMedium,
             Loaders.singleton.cubeGrid(screenHeight(context) * 0.1),
