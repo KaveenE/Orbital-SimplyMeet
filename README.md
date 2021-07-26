@@ -1,6 +1,6 @@
 # Orbital-SimplyMeet
 ## CP2106
-## Independent Software Development Project (Orbital)**
+## Independent Software Development Project (Orbital)
 ###### Members: Kaveen Elavarasan & Niveytha Madheswaran
 
 ###### Motivation
