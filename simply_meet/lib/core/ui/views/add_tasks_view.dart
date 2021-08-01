@@ -59,7 +59,6 @@ class _AddTaskViewState extends State<AddTaskView> {
                             .copyWith(fontSize: 36),
                       ),
                     ),
-                    // Spacer(),
                     Consumer<AddTasksViewModel>(
                       builder: (_, myModel, __) {
                         final currTime = myModel.currTime;

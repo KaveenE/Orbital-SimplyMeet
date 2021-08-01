@@ -19,7 +19,6 @@ import 'core/ui/views/create_edit_event_view.dart';
 import 'core/view_models/sortfilter_viewmodel.dart';
 import 'shared/services/flutterfire/authentication_service.dart';
 
-// TO-DO: For start screens, implement email address change?
 
 const MINIMAL_PURPLE = Color(0xff584191);
 const ACCENT_PURPLE = Color(0xffd696d0);

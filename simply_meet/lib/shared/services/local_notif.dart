@@ -86,10 +86,5 @@ class LocalNotification {
   tz.TZDateTime convertToSGTZ(DateTime dateTime) {
     return tz.TZDateTime.from(dateTime, tz.getLocation("Asia/Singapore"));
   }
-  /*
-  Future<String> get _getLocalTimeZone async {
-    final timezone = await FlutterNativeTimezone.getLocalTimezone();
 
-    return timezone == "GMT" ? "Etc/GMT" : timezone;
-  }*/
 }

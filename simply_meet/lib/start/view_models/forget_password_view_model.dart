@@ -20,7 +20,7 @@ class ForgetPasswordViewModel {
         titleForDialog: "Unable to change password")) return;
 
     final email = _formKey.currentState!.fields["email"]!.value as String;
-    //final password = _formKey.currentState!.fields["password"]!.value as String;
+
 
     final response =
         await Provider.of<AuthenticationService>(_context, listen: false)

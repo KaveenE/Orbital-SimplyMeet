@@ -17,26 +17,10 @@ class FormBuilderPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginSignUpViewModel = Provider.of<LoginSignUpViewModel>(context);
 
-    // final FormFieldValidator<String> passwordRequirement =
-    //     FormBuilderValidators.match(context,
-    //         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
-    //         errorText:
-    //             "Password must be at least 8 characters with mixture of\n1) Uppercase and lowercase letters\n2) Numbers\n3) Special case symbols except < and >");
-
     return FormBuilderTextField(
       name: identifierForField,
       keyboardType: TextInputType.text,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      // validator: FormBuilderValidators.compose([
-      //   passwordRequirement,
-      //   (reenteredPassword) {
-      //     if (globalFormKey!= null && reenteredPassword !=
-      //     loginSignUpViewModel.globalFormKeyList[1].currentState!.fields[identifierForField]!.value) {
-      //       return "Password entries are not the same";
-      //     }
-      //     return null;
-      //   }
-      // ]),
       textInputAction: this.hintText.compareTo("Password") == 0
           ? TextInputAction.next
           : TextInputAction.done,

@@ -12,7 +12,7 @@ class ForgetPasswordArea extends StatelessWidget {
     return Expanded(
       child: Column(
         children: <Widget>[
-          // Spacer(),
+        
           Text(
             "Enter your email address",
             style: theme(context).textTheme.headline2!.copyWith(

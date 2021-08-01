@@ -32,7 +32,7 @@ class LoginArea extends StatelessWidget {
           FormBuilderPassword(
             identifierForField: "password",
           ),
-          // const Spacer(),
+
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
@@ -45,7 +45,7 @@ class LoginArea extends StatelessWidget {
               ),
             ),
           ),
-          //const Spacer(),
+
           SignUpLoginButton(
             title: "Login",
             loginSignupAction: () => loginSignUpViewModel.logIn(

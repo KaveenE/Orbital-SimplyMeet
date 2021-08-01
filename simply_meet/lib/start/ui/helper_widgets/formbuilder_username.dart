@@ -13,10 +13,6 @@ class FormBuilderUserName extends StatelessWidget {
       name: "username",
       keyboardType: TextInputType.emailAddress,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      // validator: FormBuilderValidators.match(context,
-      //     r'^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$',
-      //     errorText:
-      //         "1) Username must contain 8 - 20 characters\n2) No _ or . next to each other, start, end\n3) No _ or .  multiple times in a row"),
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         border: OutlineInputBorder(

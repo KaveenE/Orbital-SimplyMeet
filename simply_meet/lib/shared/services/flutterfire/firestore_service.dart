@@ -17,23 +17,6 @@ class FirestoreService {
   final StreamController<List<Task>> _tasksController =
       StreamController<List<Task>>.broadcast();
 
-  // //User related methods. Not getting user is a 1-time read. No point using real-time read.
-  // Future<String?> createUser(User user) async {
-  //   try {
-  //     await _usersCollectionReference.doc(user.uid).set(user.toJson());
-  //   } catch (e) {
-  //     return (e is PlatformException) ? e.message : e.toString();
-  //   }
-  // }
-
-  // Future getUser(String uid) async {
-  //   try {
-  //     final userDocSnapShot = await _usersCollectionReference.doc(uid).get();
-  //     return User.fromJson(userDocSnapShot.data() as Map<String, dynamic>);
-  //   } catch (e) {
-  //     return (e is PlatformException) ? e.message : e.toString();
-  //   }
-  // }
 
   //Event related methods
   Future<String?> addEvent(Event event) async {

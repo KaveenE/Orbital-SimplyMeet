@@ -16,14 +16,7 @@ class VerifyEmailView extends StatefulWidget {
 }
 
 class _VerifyEmailViewState extends State<VerifyEmailView> {
-  /*final user = FirebaseAuth.instance.currentUser!;
-
-  
-  @override
-  void initState() {
-    super.initState();
-    VerifyEmailViewModel(context).checkEmailVerified();
-  }*/
+ 
   final auth = FirebaseAuth.instance;
   late User user;
   late Timer timer;

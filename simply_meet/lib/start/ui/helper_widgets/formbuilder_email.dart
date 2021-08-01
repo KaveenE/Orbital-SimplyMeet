@@ -12,13 +12,6 @@ class FormBuilderEmail extends StatelessWidget {
     return FormBuilderTextField(
       name: "email",
       keyboardType: TextInputType.emailAddress,
-      // autovalidateMode: AutovalidateMode.onUserInteraction,
-      // validator: FormBuilderValidators.compose([
-      //   FormBuilderValidators.required(context,
-      //       errorText: "Email Address cannot be empty"),
-      //   FormBuilderValidators.email(context,
-      //       errorText: "Not a valid email address")
-      // ]),
       autofillHints: [AutofillHints.email],
       textInputAction: TextInputAction.next,
 
