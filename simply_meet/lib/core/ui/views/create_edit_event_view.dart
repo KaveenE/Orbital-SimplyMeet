@@ -100,7 +100,6 @@ class _CreateEditEventViewState extends State<CreateEditEventView> {
                     initialColor: myModel.initialColor,
                     changeColor: myModel.changeColor,
                   ),
-                  // CustomDivider(),
                   FormBuilderSwitchExtract(
                     formKey: _formKey,
                     initialValue: event?.isAllDay ?? false,
